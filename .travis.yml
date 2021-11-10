@@ -1,0 +1,14 @@
+language: node_js
+
+ node_js:
+   - 10.15.3
+
+ cache:
+   directories:
+     - ./path-to-your-frontend-folder/node_modules
+
+ before_script:
+   - npm install --prefix path-to-your-frontend-folder
+
+ script:
+    - npm run test --prefix path-to-your-frontend-folder
