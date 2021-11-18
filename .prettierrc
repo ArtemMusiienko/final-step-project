@@ -1,7 +1,7 @@
 {
      "singleQutote":true,
-     "semi":false
-     "trailingComma": "es5",
+     "semi":false,
+     "trailingComma": es5,
      "tabWidth": 4,
      "endOfLine": auto
 }
