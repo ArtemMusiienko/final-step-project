@@ -5,7 +5,6 @@ commonHelpers
 models
 config
 controllers
-node_modules
 routes
 static
 validation
