@@ -1,0 +1,15 @@
+node_modules
+client/build/
+client/node_modules
+commonHelpers
+models
+config
+controllers
+node_modules
+routes
+static
+validation
+server.js
+reportWebVitals.js
+setupTests.js
+App.test.js
