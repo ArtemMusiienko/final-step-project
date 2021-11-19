@@ -5,6 +5,10 @@ import "./App.css"
 const App = function () {
     return (
         <div className="App">
+            <div>
+                Сделал: Eslint Stylelint Pre-commit hook Eslint-config-airbnb
+                Husky MUI
+            </div>
             <Button variant="contained">Default</Button>
             <Button variant="contained" color="primary">
                 Primary
