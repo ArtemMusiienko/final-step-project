@@ -23,6 +23,7 @@
         "react"
     ],
     "rules": {
+        "react/prop-types": "off",
         "no-unused-expressions": 0,
         "class-methods-use-this": 0,
         "default-case": 0,
