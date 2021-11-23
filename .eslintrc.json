@@ -5,24 +5,30 @@
         "node": true
     },
     "extends": [
+        "airbnb",
+        "airbnb/hooks",
         "plugin:react/recommended",
-         "airbnb",
-         "airbnb/hooks",
-        "standard",
-        "prettier"
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "standard"
 
     ],
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 8,
-        "sourceType": "module"
+        "ecmaVersion": 12
     },
     "plugins": [
         "react"
     ],
     "rules": {
+        "prettier/prettier": [
+            "error",{
+                "singleQuote":true,
+                "semi":false,
+                "trailingComma": "es5",
+                "tabWidth": 2,
+                "endOfLine": "auto"
+            }
+        ],
         "no-unused-expressions": 0,
         "class-methods-use-this": 0,
         "default-case": 0,
@@ -37,6 +43,17 @@
                 "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
                 "message": "Unexpected property on console object was called"
             }
-        ]
+        ],
+        "no-plusplus": "off",
+        "eol-last": "off",
+        "no-unused-vars":"warn",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "react/function-component-definition": [2, {
+            "namedComponents": "arrow-function",
+            "unnamedComponents": "arrow-function"
+          }],
+        "arrow-body-style": ["error", "always"],
+        "react/prop-types": "off"
     }
 }
