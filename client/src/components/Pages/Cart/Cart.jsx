@@ -1,8 +1,6 @@
 import React from 'react'
 import './Cart.scss'
 
-const Cart = () => {
-  return <div>Cart</div>
-}
+const Cart = () => <div>Cart</div>
 
 export default Cart

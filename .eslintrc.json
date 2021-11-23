@@ -24,8 +24,9 @@
             "error",{
                 "singleQuote":true,
                 "semi":false,
-                "trailingComma": "es5",
+                "trailingComma": "none",
                 "tabWidth": 2,
+                "arrowParens": "avoid",
                 "endOfLine": "auto"
             }
         ],
@@ -34,9 +35,10 @@
         "default-case": 0,
         "import/no-unresolved": 0,
         "react/prefer-stateless-function": 0,
+        "import/prefer-default-export": "off",
         "import/no-named-as-default": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "no-console": "error",
+        "no-console": "warn",
         "no-restricted-syntax": [
             "error",
             {
@@ -53,7 +55,9 @@
             "namedComponents": "arrow-function",
             "unnamedComponents": "arrow-function"
           }],
-        "arrow-body-style": ["error", "always"],
-        "react/prop-types": "off"
+        "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": true }],
+        "react/prop-types": "off",
+        "space-before-function-paren": ["error", "never"],
+        "no-param-reassign": ["error", { "props": false }]
     }
 }

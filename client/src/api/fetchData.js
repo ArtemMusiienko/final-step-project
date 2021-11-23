@@ -1,3 +1,1 @@
-const fetchData = () => {
-  return null
-}
+const fetchData = () => null
