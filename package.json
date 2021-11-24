@@ -10,7 +10,7 @@
     "_lint": "eslint --config ./.eslintrc.json --ext js --ext jsx --ext tsx --ext ts",
     "lint": "npm run _lint -- ./client/src/",
     "lint:fix": "npm run _lint -- --fix ./client/src/",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,scss,md,json}' --config ./.prettierrc",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,scss,md,json}'",
     "stylelint": "stylelint '**/*{.css,.scss}'",
     "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
   },
@@ -66,11 +66,11 @@
     "sugarss": "^4.0.1"
   },
   "lint-staged": {
-    "./client/src/**/*.{js,ts,jsx,tsx}": [
-      "npm run lint:fix"
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
     ],
     
-    "./client/src/**/*.{css,scss}": [
+    "*.{css,scss}": [
       "stylelint --fix"
     ]
   }
