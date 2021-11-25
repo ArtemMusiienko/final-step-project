@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Button from '@mui/material/Button'
 import { asyncIncrement } from '../../../store/counterExample/actions'
 import { counterSlice } from '../../../store/counterExample/reducer'
 import './Main.scss'
@@ -11,15 +12,15 @@ const Main = () => {
   return (
     <div>
       <div>{count}</div>
-      <button type="button" onClick={() => dispatch(increment())}>
+      <Button variant="contained" color="primary" onClick={() => dispatch(increment())}>
         increment counter
-      </button>
-      <button type="button" onClick={() => dispatch(decrement())}>
+      </Button>
+      <Button variant="contained" color="primary" onClick={() => dispatch(decrement())}>
         decrement counter
-      </button>
-      <button type="button" onClick={() => dispatch(asyncIncrement())}>
+      </Button>
+      <Button variant="contained" color="secondary" onClick={() => dispatch(asyncIncrement())}>
         Async increment counter
-      </button>
+      </Button>
     </div>
   )
 }
