@@ -11,7 +11,7 @@ const Main = () => {
   const dispatch = useDispatch()
   return (
     <div>
-      <div>{count}</div>
+      {/* <div>{count}</div>
       <Button variant="contained" color="primary" onClick={() => dispatch(increment())}>
         increment counter
       </Button>
@@ -20,7 +20,7 @@ const Main = () => {
       </Button>
       <Button variant="contained" color="secondary" onClick={() => dispatch(asyncIncrement())}>
         Async increment counter
-      </Button>
+      </Button> */}
     </div>
   )
 }
