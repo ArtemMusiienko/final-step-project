@@ -52,6 +52,10 @@ const Header = () => {
                 {' '}
                 Login{' '}
               </Button>
+              <Button variant="contained" style={{ backgroundColor: '#46A358', color: '#ffffff' }}>
+                {' '}
+                logout{' '}
+              </Button>
             </Box>
             {auth && (
               <div>
