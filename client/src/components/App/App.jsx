@@ -8,13 +8,13 @@ import './App.scss'
 import Main from '../Pages/Main'
 
 const App = () => (
-  <Layout>
-    <Routes>
-      <Route exact path="/" element={<Main />} />
-      <Route exact path="/favorites" element={<Favorites />} />
-      <Route exact path="/cart" element={<Cart />} />
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route exact path="" element={<Main />} />
+      <Route exact path="favorites" element={<Favorites />} />
+      <Route exact path="cart" element={<Cart />} />
       <Route exact path="*" element={<NotFound />} />
-    </Routes>
-  </Layout>
+    </Route>
+  </Routes>
 )
 export default App
