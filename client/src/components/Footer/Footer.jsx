@@ -11,6 +11,11 @@ import location from '../Image/location.png'
 import mail from '../Image/4213413-email-envelope-gmail-google-latter-mail-message_115415.png'
 import phone from '../Image/phone-handset_icon-icons.com_48252.png'
 import payment from '../../assets/payment.svg'
+import faceBook from '../../assets/Facebook.svg'
+import instagram from '../../assets/Instagram.svg'
+import twitter from '../../assets/Twitter.svg'
+import linkid from '../../assets/Linkedin.svg'
+import union from '../../assets/Union.svg'
 
 const useSizes = makeStyles(theme => {
   return {
@@ -38,7 +43,8 @@ const useSizes = makeStyles(theme => {
       fontSize: 18
     },
     forDetails: {
-      fontSize: 14
+      fontSize: 14,
+      marginTop: 16
     },
     forFirsBox: {
       marginLeft: 23
@@ -99,11 +105,11 @@ const Footer = () => {
           <Typography variant="h6">
             <b>My Account</b>
           </Typography>
-          <Typography className={sizes.menuFooter}>My Acaunt</Typography>
-          <Typography className={sizes.menuFooter}>Our Stories</Typography>
-          <Typography className={sizes.menuFooter}>Contact us</Typography>
-          <Typography className={sizes.menuFooter}>Career</Typography>
-          <Typography className={sizes.menuFooter}>Specials</Typography>
+          <Typography className={sizes.forDetails}>My Acaunt</Typography>
+          <Typography className={sizes.forDetails}>Our Stories</Typography>
+          <Typography className={sizes.forDetails}>Contact us</Typography>
+          <Typography className={sizes.forDetails}>Career</Typography>
+          <Typography className={sizes.forDetails}>Specials</Typography>
         </Box>
         <Box className={sizes.forLastBoxes}>
           <Typography variant="h6">
@@ -111,30 +117,136 @@ const Footer = () => {
             <b>Help & Guide </b>
           </Typography>
           <Typography className={sizes.forDetails}>Help Center</Typography>
-          <Typography className={sizes.menuFooter}>How to Buy</Typography>
-          <Typography className={sizes.menuFooter}>Shoping & Deliver</Typography>
-          <Typography className={sizes.menuFooter}>Product Policy</Typography>
-          <Typography className={sizes.menuFooter}>How to Return</Typography>
+          <Typography className={sizes.forDetails}>How to Buy</Typography>
+          <Typography className={sizes.forDetails}>Shoping & Deliver</Typography>
+          <Typography className={sizes.forDetails}>Product Policy</Typography>
+          <Typography className={sizes.forDetails}>How to Return</Typography>
         </Box>
         <Box className={sizes.forLastBoxes}>
           <Typography variant="h6">
             <b> Categories </b>
           </Typography>
-          <Typography className={sizes.menuFooter}>House Plants</Typography>
-          <Typography className={sizes.menuFooter}>Potter Plants</Typography>
-          <Typography className={sizes.menuFooter}>Seeds</Typography>
-          <Typography className={sizes.menuFooter}>Small Plants</Typography>
-          <Typography className={sizes.menuFooter}>Accessories</Typography>
+          <Typography className={sizes.forDetails}>House Plants</Typography>
+          <Typography className={sizes.forDetails}>Potter Plants</Typography>
+          <Typography className={sizes.forDetails}>Seeds</Typography>
+          <Typography className={sizes.forDetails}>Small Plants</Typography>
+          <Typography className={sizes.forDetails}>Accessories</Typography>
         </Box>
         <Box className={sizes.forLastBoxes}>
           <Typography variant="h6">
             {' '}
             <b>Social Media </b>
           </Typography>
-          <Typography variant="h6">
+          <Box style={{ display: 'flex', marginTop: 20 }}>
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                height: 30,
+                width: 30,
+                borderWidth: 1,
+                borderColor: 'green',
+                borderRadius: 5,
+                borderStyle: 'solid'
+              }}
+            >
+              <Avatar
+                variant="square"
+                src={faceBook}
+                style={{
+                  marginLeft: 11,
+                  height: 16,
+                  width: 8
+                }}
+              />
+            </Box>
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: 10,
+                height: 30,
+                width: 30,
+                borderWidth: 1,
+                borderColor: 'green',
+                borderRadius: 5,
+                borderStyle: 'solid'
+              }}
+            >
+              <Avatar
+                variant="square"
+                src={instagram}
+                style={{ height: 16, width: 16, marginLeft: 7 }}
+              />
+            </Box>
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: 10,
+                height: 30,
+                width: 30,
+                borderWidth: 1,
+                borderColor: 'green',
+                borderRadius: 5,
+                borderStyle: 'solid'
+              }}
+            >
+              <Avatar
+                variant="square"
+                src={twitter}
+                style={{ height: 13, width: 16, marginLeft: 7 }}
+              />
+            </Box>
+
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: 10,
+                height: 30,
+                width: 30,
+                borderWidth: 1,
+                borderColor: 'green',
+                borderRadius: 5,
+                borderStyle: 'solid'
+              }}
+            >
+              {' '}
+              <Avatar
+                variant="square"
+                src={linkid}
+                style={{ height: 16, width: 16, marginLeft: 7 }}
+              />
+            </Box>
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: 10,
+                height: 30,
+                width: 30,
+                borderWidth: 1,
+                borderColor: 'green',
+                borderRadius: 5,
+                borderStyle: 'solid'
+              }}
+            >
+              <Avatar
+                variant="square"
+                src={union}
+                style={{ height: 14, width: 19, marginLeft: 7 }}
+              />
+            </Box>
+          </Box>
+          <Typography variant="h6" style={{ marginTop: 20 }}>
             <b>We accept</b>
           </Typography>
-          <Avatar variant="square" src={payment} style={{ height: 26, width: 226, zIndex: 1 }} />
+          <Avatar
+            variant="square"
+            src={payment}
+            style={{ height: 26, width: 226, marginTop: 20 }}
+          />
         </Box>
       </Box>
     </>
