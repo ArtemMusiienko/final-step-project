@@ -5,6 +5,9 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { display } from '@mui/system'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import { flexbox, fontSize, padding, textAlign } from '@mui/system'
 import logo from '../Image/sss.jpg'
 import './Footer.scss'
 import location from '../Image/location.png'
@@ -15,7 +18,7 @@ import faceBook from '../../assets/Facebook.svg'
 import instagram from '../../assets/Instagram.svg'
 import twitter from '../../assets/Twitter.svg'
 import linkid from '../../assets/Linkedin.svg'
-import union from '../../assets/Union.svg'
+import union from '../../assets/Union.svg
 
 const useSizes = makeStyles(theme => {
   return {
@@ -33,6 +36,7 @@ const useSizes = makeStyles(theme => {
       marginLeft: 60,
       display: 'flex',
       alignItems: 'center'
+
     },
     forLastSectio: {
       zIndex: 100,
@@ -250,6 +254,47 @@ const Footer = () => {
         </Box>
       </Box>
     </>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Box
+          className={sizes.menuFooter}
+          style={{ backgroundColor: 'rgba(70, 163, 88, 0.1)', height: 88 }}
+        >
+          <Box className={sizes.menuFooter}>
+            <Avatar src={logo} style={{ width: 35, height: 35 }} className={sizes.forIco} />
+            <Typography variant="h6" style={{ color: '#46A358', marginLeft: 6, marginTop: 3 }}>
+              {' '}
+              GREENSHOP{' '}
+            </Typography>
+          </Box>
+          <Typography variant="h6" className={sizes.forContent}>
+            <Avatar
+              src={location}
+              variant="square"
+              style={{ width: 30, height: 30, marginRight: 10 }}
+            />
+            70 West Buckingham Ave.
+            <br /> Farmingdale, NY 11735{' '}
+          </Typography>
+          <Typography variant="h6" className={sizes.forContent}>
+            <Avatar
+              src={mail}
+              variant="square"
+              style={{ width: 20, height: 20, marginRight: 10 }}
+            />{' '}
+            contact@greenshop.com{' '}
+          </Typography>
+          <Typography variant="h6" className={sizes.forContent}>
+            <Avatar
+              src={phone}
+              variant="square"
+              style={{ width: 20, height: 20, marginRight: 10 }}
+            />{' '}
+            +88 01911 717 490{' '}
+          </Typography>
+        </Box>
+      </AppBar>
+    </Box>
   )
 }
 
