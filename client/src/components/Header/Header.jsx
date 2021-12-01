@@ -71,7 +71,7 @@ const Header = () => {
                 </NavLink>
               </Typography>
               <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/cart">
+                <NavLink className={classes.linkStyle} to="/plant-care">
                   {' '}
                   Plant Care
                 </NavLink>
