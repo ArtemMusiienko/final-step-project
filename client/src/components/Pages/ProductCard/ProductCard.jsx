@@ -224,7 +224,7 @@ const ProductCard = props => {
         <Grid item container spacing={2} mt={1} mb={3}>
           <Grid item>
             <Fab
-              color="secondary"
+              color="primary"
               size="small"
               aria-label="add"
               sx={{ boxShadow: 'none' }}
@@ -236,7 +236,7 @@ const ProductCard = props => {
               {quantity}
             </Typography>
             <Fab
-              color="secondary"
+              color="primary"
               size="small"
               aria-label="add"
               sx={{ boxShadow: 'none' }}
@@ -248,21 +248,21 @@ const ProductCard = props => {
           <Grid item>
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               sx={{ boxShadow: 'none', fontWeight: 'bold' }}
             >
               Buy Now
             </Button>
             <Button
               variant="outlined"
-              color="secondary"
+              color="primary"
               sx={{ marginLeft: '5px', boxShadow: 'none', fontWeight: 'bold' }}
             >
               Add to cart
             </Button>
             <Button
               variant="outlined"
-              color="secondary"
+              color="primary"
               sx={{
                 marginLeft: '5px',
                 boxShadow: 'none',
@@ -302,31 +302,31 @@ const ProductCard = props => {
           <Grid item>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ padding: 0, minWidth: 0, boxShadow: 'none' }}
             >
-              <FacebookIcon color="secondary" />
+              <FacebookIcon color="primary" />
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ padding: 0, minWidth: 0, boxShadow: 'none' }}
             >
-              <TwitterIcon color="secondary" />
+              <TwitterIcon color="primary" />
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ padding: 0, minWidth: 0, boxShadow: 'none' }}
             >
-              <InstagramIcon color="secondary" />
+              <InstagramIcon color="primary" />
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ padding: 0, minWidth: 0, boxShadow: 'none' }}
             >
-              <MailOutlineIcon color="secondary" />
+              <MailOutlineIcon color="primary" />
             </Button>
           </Grid>
         </Grid>
@@ -340,7 +340,7 @@ const ProductCard = props => {
                 <StyledTab label="Reviews(19)" value="2" />
               </TabList>
             </Box>
-            <TabPanel value="1">Product Description</TabPanel>
+            <TabPanel value="1">{productData.fullDescription}</TabPanel>
             <TabPanel value="2">Reviews</TabPanel>
           </TabContext>
         </Box>
