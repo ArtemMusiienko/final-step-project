@@ -5,7 +5,7 @@ import Footer from '../Footer'
 import './Layout.scss'
 
 const Layout = ({ children }) => (
-  <Container maxWidth="xl">
+  <Container maxWidth="lg">
     <Header />
     {children}
     <Footer />

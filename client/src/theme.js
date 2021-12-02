@@ -6,7 +6,19 @@ const theme = createTheme({
       main: '#ffffff'
     },
     secondary: {
-      main: '#01579B'
+      main: '#46A358'
+    }
+  },
+  typography: {
+    fontFamily: 'Nunito'
+  },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body1: 'span'
+        }
+      }
     }
   }
 })
