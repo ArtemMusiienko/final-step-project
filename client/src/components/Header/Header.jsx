@@ -1,151 +1,132 @@
 import React, { useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import AccountCircle from '@mui/icons-material/AccountCircle'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
-import './Header.scss'
-import { borders } from '@mui/system'
-import { Avatar, Button, ImageList, Paper } from '@mui/material'
-import Container from '@mui/material/Container'
-import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
-import Logo from '../Image/sss.jpg'
-import ico from '../Image/clipart3366677.png'
-import bascet from '../Image/shopping-cart.png'
+import {
+  Divider,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import Logo from '../Logo'
+import HeaderTabs from './HeaderTabs'
+import CartBage from '../CartBage'
 
-const useStyle = makeStyles(theme => {
-  return {
-    root: { flexGrow: 1 },
-    menuButtons: {
-      marginRight: theme.spacing(1)
-    },
-    title: {
-      flexGrow: 1
-    },
-    menuLink: {
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    linkStyle: {
-      textDecoration: 'none',
-      color: '#3D3D3D'
-    }
-  }
-})
+const pages = ['Home', 'Shop', 'Plant Care', 'Blogs']
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+
 const Header = () => {
-  const classes = useStyle()
-  const [auth, setAuth] = useState(true)
-  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget)
+  const handleOpenNavMenu = event => {
+    setAnchorElNav(event.currentTarget)
+  }
+  const handleOpenUserMenu = event => {
+    setAnchorElUser(event.currentTarget)
   }
 
-  const handleClose = () => {
-    setAnchorEl(null)
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
+  }
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary" elevation={0}>
-        <Container position="static">
-          <Toolbar>
-            <Avatar src={Logo} style={{ width: 35, height: 35 }} className={classes.menuButtons} />
-            <Typography variant="h6" style={{ color: '#46A358' }} className={classes.title}>
-              {' '}
-              GREENSHOP{' '}
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} className={classes.menuLink}>
-              <Typography component="div" sx={{ flexGrow: 1 }} className={classes.menuLink}>
-                <NavLink className={classes.linkStyle} to="/">
-                  Home
-                </NavLink>
-              </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/cart">
-                  Shop
-                </NavLink>
-              </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/plant-care">
-                  {' '}
-                  Plant Care
-                </NavLink>
-              </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/cart">
-                  Blogs
-                </NavLink>
-              </Typography>
-            </Box>
-            <Box className={classes.menuLink}>
-              <Avatar
-                variant="square"
-                style={{ height: 24, width: 24, marginRight: 33, marginTop: 5 }}
-                src={bascet}
-              />
-              <Button variant="contained" style={{ backgroundColor: '#46A358', color: '#ffffff' }}>
-                {' '}
-                <Avatar
-                  variant="square"
-                  src={ico}
-                  style={{ width: 20, height: 20, marginRight: 5 }}
-                />
-                Login{' '}
-              </Button>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: '#46A358', color: '#ffffff', marginLeft: 5 }}
-              >
-                {' '}
-                <Avatar
-                  variant="square"
-                  style={{ width: 30, height: 30, marginRight: 5, backgroundColor: '#46A358' }}
-                />
-                Sign Ap{' '}
-              </Button>
-            </Box>
-            {/* {auth && (
-              <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )} */}
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+    <AppBar position="static" color="secondary" sx={{ boxShadow: 'none' }}>
+      <Toolbar disableGutters>
+        <Logo />
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="primary"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left'
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' }
+            }}
+          >
+            {pages.map(page => (
+              <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">{page}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+        >
+          LOGO
+        </Typography>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
+          <HeaderTabs />
+        </Box>
+        <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'space-between' }}>
+          <CartBage />
+          <Button variant="contained" startIcon={<ExitToAppIcon />}>
+            Login
+          </Button>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map(setting => (
+              <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </Toolbar>
+      <Divider />
+    </AppBar>
   )
 }
-
 export default Header
