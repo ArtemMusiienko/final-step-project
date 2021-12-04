@@ -1,10 +1,10 @@
 /* eslint-disable */
 h1 {
-  font-weight: normal;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 16px;
   color: #3d3d3d;
+  font-weight: normal;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 16px;
 }
 
 .product-container {
@@ -16,47 +16,47 @@ h1 {
 }
 
 .prev-price {
-  font-style: normal;
+  margin-left: 16px;
+  color: #a5a5a5;
   font-weight: normal;
   font-size: 18px;
+  font-style: normal;
   line-height: 16px;
-  color: #a5a5a5;
-  margin-left: 16px;
   text-decoration: line-through;
 }
 
 .cur-price {
-  font-style: normal;
+  color: #46a358;
   font-weight: bold;
   font-size: 18px;
+  font-style: normal;
   line-height: 16px;
-  color: #46a358;
 }
 
 .discount-container {
   position: absolute;
+  top: 14px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 80px;
   height: 29px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 14px;
   background-color: #46a358;
-  left: 0;
 }
 
 .discount-count {
   color: white;
-  font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  font-style: normal;
   line-height: 16px;
 }
 
 .products-section {
-  margin-top: 40px;
-  max-width: 840px;
   display: grid;
-  grid-template-columns: repeat(3, 2fr);
   grid-row-gap: 90px;
+  grid-template-columns: repeat(3, 2fr);
+  max-width: 840px;
+  margin-top: 40px;
 }

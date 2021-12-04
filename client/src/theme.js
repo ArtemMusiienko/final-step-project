@@ -3,10 +3,22 @@ import { createTheme } from '@mui/material/styles'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ffffff'
+      main: '#46A358'
     },
     secondary: {
-      main: '#01579B'
+      main: '#ffffff'
+    }
+  },
+  typography: {
+    fontFamily: 'Nunito'
+  },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body1: 'span'
+        }
+      }
     }
   }
 })

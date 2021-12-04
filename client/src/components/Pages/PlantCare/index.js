@@ -1,2 +1,3 @@
-import PlantCare from "./PlantCare";
+import PlantCare from './PlantCare'
+
 export default PlantCare

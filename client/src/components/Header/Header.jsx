@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="secondary" elevation={0}>
         <Container position="static">
           <Toolbar>
             <Avatar src={Logo} style={{ width: 35, height: 35 }} className={classes.menuButtons} />
