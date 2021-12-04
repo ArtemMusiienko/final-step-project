@@ -59,6 +59,7 @@
         "react/prop-types": "off",
         "space-before-function-paren": ["error", "never"],
         "no-param-reassign": ["error", { "props": false }],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react/display-name": "off"
     }
 }

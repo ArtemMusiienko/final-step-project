@@ -12,12 +12,12 @@ import PlantCare from '../Pages/PlantCare'
 const App = () => (
   <Routes>
     <Route path="/" element={<Layout />}>
-      <Route exact path="" element={<Main />} />
-      <Route exact path="favorites" element={<Favorites />} />
-      <Route exact path="productcard" element={<ProductCard />} />
-      <Route exact path="cart" element={<Cart />} />
-      <Route exact path="*" element={<NotFound />} />
-      <Route exact path="plant-care" element={<PlantCare />} />
+      <Route path="" element={<Main />} />
+      <Route path="favorites" element={<Favorites />} />
+      <Route path="productcard" element={<ProductCard />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="*" element={<NotFound />} />
+      <Route path="plant-care" element={<PlantCare />} />
     </Route>
   </Routes>
 )
