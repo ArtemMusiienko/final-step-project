@@ -9,6 +9,9 @@ const theme = createTheme({
       main: '#ffffff'
     }
   },
+  text: {
+    primary: '#3D3D3D'
+  },
   typography: {
     fontFamily: 'Nunito'
   },

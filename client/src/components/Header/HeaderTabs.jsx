@@ -1,40 +1,61 @@
 import React from 'react'
-import Box from '@mui/material/Box'
+import { styled, useTheme } from '@mui/material/styles'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import Typography from '@mui/material/Typography'
-import { Link, useLocation, useMatch, matchPath } from 'react-router-dom'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Link, useLocation, useMatch } from 'react-router-dom'
+import { Box } from '@mui/system'
 
-const HeaderTabs = () => {
+const DefaultTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    height: '3px'
+  }
+})
+
+const DefaultTab = styled(props => <Tab disableRipple {...props} />)(({ theme }) => {
+  return {
+    textTransform: 'capitalize',
+    fontWeight: theme.typography.fontWeightRegular,
+    color: theme.palette.text.primary,
+    '&:hover': {
+      color: '#46A358',
+      opacity: 1
+    },
+    '&.Mui-selected': {
+      fontWeight: theme.typography.fontWeightBold
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: '#d1eaff'
+    }
+  }
+})
+
+const HeaderTabs = ({ pages }) => {
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('md'))
   const useCheackPath = () => {
     const path = useLocation().pathname.split('/')
-    let location = ''
-    if (path[1] === '') {
-      location = '/*'
-    }
-    if (path[1] === 'shop') {
-      location = '/shop/*'
-    }
-    if (path[1] === 'plant-care') {
-      location = '/plant-care/*'
-    }
-    if (path[1] === 'blogs') {
-      location = '/blogs/*'
-    }
-    return location
+    return `/${path[1]}/*`
   }
   const match = useMatch(useCheackPath())
-  let currentTab = ''
-  if (match) {
-    currentTab = match.pathnameBase
-  } else currentTab = false
+  let currentTab = false
+  if (match && matches) {
+    currentTab = match?.pathnameBase
+  }
   return (
-    <Tabs value={currentTab}>
-      <Tab label="Home" value="/" to="/" component={Link} />
-      <Tab label="Shop" value="/shop" to="/shop" component={Link} />
-      <Tab label="Plant Care" value="/plant-care" to="/plant-care" component={Link} />
-      <Tab label="Blogs" value="/blogs" to="/blogs" component={Link} />
-    </Tabs>
+    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
+      <DefaultTabs value={currentTab}>
+        {pages.map(page => (
+          <DefaultTab
+            key={page.path}
+            label={page.linkName}
+            value={page.path}
+            to={page.path}
+            component={Link}
+          />
+        ))}
+      </DefaultTabs>
+    </Box>
   )
 }
 
