@@ -1,49 +1,49 @@
 import React, { useState } from 'react'
-import {
-  Divider,
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem
-} from '@mui/material'
+import { Link } from 'react-router-dom'
+import { Divider, AppBar, Box, Toolbar, IconButton, Menu, Button, MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
+import SearchButton from '../SearchButton'
 
-const pages = ['Home', 'Shop', 'Plant Care', 'Blogs']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const pages = [
+  {
+    linkName: 'Home',
+    path: '/'
+  },
+  {
+    linkName: 'Shop',
+    path: '/shop'
+  },
+  {
+    linkName: 'Plant Care',
+    path: '/plant-care'
+  },
+  {
+    linkName: 'Blogs',
+    path: '/blogs'
+  }
+]
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
-  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget)
-  }
-  const handleOpenUserMenu = event => {
-    setAnchorElUser(event.currentTarget)
   }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
-
   return (
     <AppBar position="static" color="secondary" sx={{ boxShadow: 'none' }}>
       <Toolbar disableGutters>
-        <Logo />
+        <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+          <Logo />
+        </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
@@ -74,55 +74,26 @@ const Header = () => {
             }}
           >
             {pages.map(page => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem key={page.path} onClick={handleCloseNavMenu}>
+                <Button component={Link} to={page.path} sx={{ color: 'text.primary' }}>
+                  {page.linkName}
+                </Button>
               </MenuItem>
             ))}
           </Menu>
         </Box>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-        >
-          LOGO
-        </Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
-          <HeaderTabs />
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
+          <Logo />
         </Box>
-        <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'space-between' }}>
+        <HeaderTabs pages={pages} />
+        <Box
+          sx={{ flexGrow: 0, display: 'flex', justifyContent: 'space-between', minWidth: '220px' }}
+        >
+          <SearchButton />
           <CartBage />
           <Button variant="contained" startIcon={<ExitToAppIcon />}>
             Login
           </Button>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map(setting => (
-              <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
         </Box>
       </Toolbar>
       <Divider />
