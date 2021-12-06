@@ -1,22 +1,11 @@
 import React from 'react'
 import { Avatar, TextField, Button } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Box } from '@mui/system'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
-import logo from '../Image/sss.jpg'
-import './Footer.scss'
-import location from '../Image/location.png'
-import mail from '../Image/4213413-email-envelope-gmail-google-latter-mail-message_115415.png'
-import phone from '../Image/phone-handset_icon-icons.com_48252.png'
-import payment from '../../assets/payment.svg'
-import faceBook from '../../assets/Facebook.svg'
-import instagram from '../../assets/Instagram.svg'
-import twitter from '../../assets/Twitter.svg'
-import linkid from '../../assets/Linkedin.svg'
-import union from '../../assets/Union.svg'
-import cactusFirst from '../../assets/cactusfirst.svg'
-import cactusSecond from '../../assets/cactussecond.svg'
-import cactusThird from '../../assets/cactusthird.svg'
+import FooterTop from './FooterTop'
+import FooterMiddle from './FooterMiddle'
+import FooterBottom from './FooterBottom'
 
 const useSizes = makeStyles(theme => {
   return {
@@ -61,8 +50,14 @@ const useSizes = makeStyles(theme => {
 const Footer = () => {
   const sizes = useSizes()
   return (
-    <>
-      <Box
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <FooterTop />
+      <FooterMiddle />
+      <FooterBottom />
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+        <Typography>© 2021 GreenShop. All Rights Reserved.</Typography>
+      </Box>
+      {/* <Box
         style={{
           height: 250,
           backgroundColor: '#FBFBFB',
@@ -318,8 +313,8 @@ const Footer = () => {
       </Box>
       <Box style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
         <Typography>© 2021 GreenShop. All Rights Reserved.</Typography>
-      </Box>
-    </>
+      </Box> */}
+    </Box>
   )
 }
 
