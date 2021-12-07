@@ -165,11 +165,11 @@ const ProductCard = props => {
         </Grid>
         <Grid item container sx={{ justifyContent: 'space-between' }}>
           <Grid item>
-            <Typography variant="body1" className={classes.priceSection}>
+            <Typography variant="body2" className={classes.priceSection}>
               {`$${productData.currentPrice.toFixed(2)}`}
             </Typography>
             {productData.previousPrice && (
-              <Typography variant="body1" className={classes.prevPriceSection} ml={1}>
+              <Typography variant="body2" className={classes.prevPriceSection} ml={1}>
                 {`$${productData.previousPrice.toFixed(2)}`}
               </Typography>
             )}
@@ -232,7 +232,7 @@ const ProductCard = props => {
             >
               <RemoveIcon />
             </Fab>
-            <Typography variant="body1" color="initial" sx={{ fontSize: '20px', margin: '0 15px' }}>
+            <Typography variant="body2" color="initial" sx={{ fontSize: '20px', margin: '0 15px' }}>
               {quantity}
             </Typography>
             <Fab
@@ -276,26 +276,26 @@ const ProductCard = props => {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography variant="body1" sx={{ color: '#A5A5A5' }}>
+          <Typography variant="body2" sx={{ color: '#A5A5A5' }}>
             {'SKU: '}
           </Typography>
           <Typography>{productData.itemNo}</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="body1" sx={{ color: '#A5A5A5' }}>
+          <Typography variant="body2" sx={{ color: '#A5A5A5' }}>
             {'Categories: '}
           </Typography>
           <Typography>{productData.categories}</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="body1" sx={{ color: '#A5A5A5' }}>
+          <Typography variant="body2" sx={{ color: '#A5A5A5' }}>
             {'Tags: '}
           </Typography>
           <Typography>{productData.tags}</Typography>
         </Grid>
         <Grid item container mt={1} sx={{ alignItems: 'center' }} columnSpacing={1}>
           <Grid item>
-            <Typography variant="body2" sx={{ fontSize: '1.1rem', fontWeight: '600' }}>
+            <Typography sx={{ fontSize: '1.1rem', fontWeight: '600' }}>
               {'Share this products: '}
             </Typography>
           </Grid>
@@ -332,7 +332,7 @@ const ProductCard = props => {
         </Grid>
       </Grid>
       <Grid item xs={16}>
-        <Box sx={{ width: '100%', typography: 'body2' }}>
+        <Box sx={{ width: '100%', typography: 'body1' }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handleChange} aria-label="lab API tabs example">

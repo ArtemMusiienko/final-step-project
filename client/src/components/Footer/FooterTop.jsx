@@ -44,7 +44,7 @@ const FooterTop = () => (
         >
           Garden Care
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: '#727272' }}>
+        <Typography sx={{ fontSize: '14px', color: '#727272' }}>
           We are an online plant shop offering a wide range of cheap and trendy plants.
         </Typography>
       </Box>
@@ -72,7 +72,7 @@ const FooterTop = () => (
         >
           Plant Renovation
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: '#727272' }}>
+        <Typography sx={{ fontSize: '14px', color: '#727272' }}>
           We are an online plant shop offering a wide range of cheap and trendy plants.
         </Typography>
       </Box>
@@ -100,7 +100,7 @@ const FooterTop = () => (
         >
           Watering Graden
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: '#727272' }}>
+        <Typography sx={{ fontSize: '14px', color: '#727272' }}>
           We are an online plant shop offering a wide range of cheap and trendy plants.
         </Typography>
       </Box>

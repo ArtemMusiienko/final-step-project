@@ -10,15 +10,16 @@ import {
   Button,
   MenuItem,
   Tooltip,
-  Typography
+  Typography,
+  SvgIcon
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
+import LoginModal from '../LoginModal/LoginModal'
 
 const pages = [
   {
@@ -119,9 +120,7 @@ const Header = () => {
         >
           <SearchButton />
           <CartBage />
-          <Button variant="contained" startIcon={<ExitToAppIcon />}>
-            Login
-          </Button>
+          <LoginModal />
         </Box>
         <Box sx={{ display: { sm: 'none' } }}>
           <Tooltip title="Options">

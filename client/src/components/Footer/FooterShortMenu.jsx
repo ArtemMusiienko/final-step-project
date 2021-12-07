@@ -70,11 +70,11 @@ const FooterShortMenu = () => {
           <Typography>My Account</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="body2">My Account</Typography>
-          <Typography variant="body2">Our stores</Typography>
-          <Typography variant="body2">Contact us</Typography>
-          <Typography variant="body2">Career</Typography>
-          <Typography variant="body2">Specials</Typography>
+          <Typography>My Account</Typography>
+          <Typography>Our stores</Typography>
+          <Typography>Contact us</Typography>
+          <Typography>Career</Typography>
+          <Typography>Specials</Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -82,11 +82,11 @@ const FooterShortMenu = () => {
           <Typography>Help & Guide</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="body2">Help Center</Typography>
-          <Typography variant="body2">How to Buy</Typography>
-          <Typography variant="body2">Shipping & Delivery</Typography>
-          <Typography variant="body2">Product Policy</Typography>
-          <Typography variant="body2">How to Return</Typography>
+          <Typography>Help Center</Typography>
+          <Typography>How to Buy</Typography>
+          <Typography>Shipping & Delivery</Typography>
+          <Typography>Product Policy</Typography>
+          <Typography>How to Return</Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -94,11 +94,11 @@ const FooterShortMenu = () => {
           <Typography>Categories</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="body2">House Plants</Typography>
-          <Typography variant="body2">Potter Plants</Typography>
-          <Typography variant="body2">Seeds</Typography>
-          <Typography variant="body2">Small Plants</Typography>
-          <Typography variant="body2">Accessories</Typography>
+          <Typography>House Plants</Typography>
+          <Typography>Potter Plants</Typography>
+          <Typography>Seeds</Typography>
+          <Typography>Small Plants</Typography>
+          <Typography>Accessories</Typography>
         </AccordionDetails>
       </Accordion>
     </div>
