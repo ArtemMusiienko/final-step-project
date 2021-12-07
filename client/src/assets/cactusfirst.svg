@@ -1,4 +1,4 @@
-<svg width="84" height="98" xmlns="http://www.w3.org/2000/svg">
+<svg width="93" height="100" xmlns="http://www.w3.org/2000/svg">
  <defs>
   <clipPath id="clip0_10_475">
    <rect id="svg_1" x="19" y="45" fill="white" height="48" width="55"/>
@@ -9,7 +9,7 @@
  </defs>
  <g>
   <title>background</title>
-  <rect fill="none" id="canvas_background" height="100" width="86" y="-1" x="-1"/>
+  <rect fill="none" id="canvas_background" height="102" width="95" y="-1" x="-1"/>
  </g>
  <g>
   <title>Layer 1</title>
