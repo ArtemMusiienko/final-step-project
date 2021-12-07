@@ -159,6 +159,43 @@ const Header = () => {
             ))}
           </Menu>
         </Box>
+        <Box sx={{ display: { sm: 'none' } }}>
+          <Tooltip title="Options">
+            <Button
+              variant="contained"
+              aria-label="more-options"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenUserMenu}
+              color="primary"
+              sx={{ padding: '5px', minWidth: '35px' }}
+            >
+              <MoreHorizIcon />
+            </Button>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map(setting => (
+              <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
       </Toolbar>
       <Divider />
     </AppBar>
