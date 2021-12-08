@@ -29,27 +29,14 @@ const FooterBottom = () => {
           flexDirection: 'column'
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}
-        >
+        <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           My Account
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          My Account
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Our stores
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Contact us
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Career
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Specials
-        </Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>My Account</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Our stores</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Contact us</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Career</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Specials</Typography>
       </Box>
       <Box
         sx={{
@@ -57,27 +44,16 @@ const FooterBottom = () => {
           flexDirection: 'column'
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}
-        >
+        <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           Help & Guide
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Help Center
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          How to Buy
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Help Center</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>How to Buy</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>
           Shipping & Delivery
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Product Policy
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          How to Return
-        </Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Product Policy</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>How to Return</Typography>
       </Box>
       <Box
         sx={{
@@ -85,27 +61,14 @@ const FooterBottom = () => {
           flexDirection: 'column'
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}
-        >
+        <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           Categories
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          House Plants
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Potter Plants
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Seeds
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Small Plants
-        </Typography>
-        <Typography variant="body2" sx={{ fontSize: '14px', color: 'text.primary' }}>
-          Accessories
-        </Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>House Plants</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Potter Plants</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Seeds</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Small Plants</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Accessories</Typography>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
         <FooterShortMenu />
@@ -117,10 +80,7 @@ const FooterBottom = () => {
           flexDirection: 'column'
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}
-        >
+        <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           Social Media
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -165,10 +125,7 @@ const FooterBottom = () => {
             <SvgIcon component={Union} viewBox="0 0 19 14" />
           </Button>
         </Box>
-        <Typography
-          variant="body2"
-          sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}
-        >
+        <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           We accept
         </Typography>
         <Box>

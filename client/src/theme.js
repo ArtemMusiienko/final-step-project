@@ -19,7 +19,7 @@ const theme = createTheme({
     MuiTypography: {
       defaultProps: {
         variantMapping: {
-          body1: 'span'
+          body2: 'span'
         }
       }
     }

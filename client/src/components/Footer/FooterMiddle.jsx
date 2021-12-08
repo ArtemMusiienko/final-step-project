@@ -30,7 +30,6 @@ const FooterMiddle = () => (
               />
             </Box>
             <Typography
-              variant="body2"
               color="initial"
               sx={{
                 fontSize: '14px',
