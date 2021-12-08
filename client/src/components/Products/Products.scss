@@ -53,10 +53,41 @@ h1 {
   line-height: 16px;
 }
 
-.products-section {
-  display: grid;
-  grid-row-gap: 90px;
-  grid-template-columns: repeat(3, 2fr);
+.products-grid {
   max-width: 840px;
   margin-top: 40px;
+}
+
+.categories {
+  max-width: 310px;
+  padding-top: 14px;
+  padding-bottom: 19px;
+  padding-left: 18px;
+  background: hsl(0deg 0% 98%);
+}
+
+.category-container {
+  padding-left: 12px;
+  padding-right: 24px;
+}
+
+.categories-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.categories-item:hover {
+  color: #46a358;
+}
+
+.categories-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.category-header {
+  font-size: 18px;
+  line-height: 16px;
+  color: #3d3d3d;
 }
