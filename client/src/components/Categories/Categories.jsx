@@ -6,11 +6,13 @@ import 'rc-slider/assets/index.css'
 const { createSliderWithTooltip } = Slider
 const Range = createSliderWithTooltip(Slider.Range)
 const { Handle } = Slider
-export const Categories = ({ data, handleChange }) => {
-  const [currentValue, setValue] = useState([0, 100])
-  const handleSlider = value => {
-    setValue(value)
-  }
+export const Categories = ({
+  data,
+  handleChange,
+  priceValue,
+  handleSlider,
+  handleFilterButton
+}) => {
   const categoriesFiltered = data.filter(item => item.level === 0)
   return (
     <div className="categories">
@@ -34,10 +36,10 @@ export const Categories = ({ data, handleChange }) => {
         />
         <h3 className="category-price-subheader">
           {/* eslint-disable */}
-          <span className="price-span">Price:</span> {`$${currentValue[0]}-$${currentValue[1]}`}
+          <span className="price-span">Price:</span> {`$${priceValue[0]}-$${priceValue[1]}`}
         </h3>
       </div>
-      <button className="filter">Filter</button>
+      <button onClick={(()=>handleFilterButton(priceValue))} className="filter">Filter</button>
     </div>
   );
 };
