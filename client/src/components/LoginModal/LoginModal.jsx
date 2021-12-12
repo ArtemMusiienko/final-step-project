@@ -20,7 +20,7 @@ const style = {
   bgcolor: 'background.paper',
   borderBottom: '10px solid #46A358',
   boxShadow: 24,
-  padding: '5px 10px'
+  padding: '50px 100px'
 }
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => {
@@ -61,7 +61,10 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => {
 const LoginModal = () => {
   const [open, setOpen] = useState(false)
   const [alignment, setAlignment] = useState('login')
-  const handleOpen = () => setOpen(true)
+  const handleOpen = () => {
+    setAlignment('login')
+    setOpen(true)
+  }
   const handleClose = () => setOpen(false)
   const handleAlignment = (event, newAlignment) => {
     if (!newAlignment) {
@@ -74,7 +77,7 @@ const LoginModal = () => {
     <div>
       <Button
         variant="contained"
-        sx={{ textTransform: 'capitalize' }}
+        sx={{ textTransform: 'capitalize', display: { xs: 'none', md: 'flex' } }}
         startIcon={
           <SvgIcon
             sx={{ width: '100%', height: '100%', fill: 'none', minWidth: 18, minHeight: 18 }}
