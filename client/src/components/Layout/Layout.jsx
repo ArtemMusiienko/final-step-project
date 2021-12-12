@@ -5,11 +5,13 @@ import Header from '../Header'
 import Footer from '../Footer'
 import './Layout.scss'
 import ScrollTop from '../ScrollTop'
+import Main from '../Pages/Main'
 
 const Layout = () => (
   <Container maxWidth="xl">
     <Header />
     <Outlet />
+    <Main />
     <Footer />
     <ScrollTop />
   </Container>
