@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, TextField, Button } from '@mui/material'
+import { Avatar, TextField, Button, Toolbar } from '@mui/material'
 import { Box } from '@mui/system'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
@@ -51,6 +51,7 @@ const Footer = () => {
   const sizes = useSizes()
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Toolbar sx={{ display: { md: 'none' } }} />
       <FooterTop />
       <FooterMiddle />
       <FooterBottom />

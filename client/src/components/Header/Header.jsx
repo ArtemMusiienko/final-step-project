@@ -11,7 +11,7 @@ import {
   MenuItem,
   Tooltip,
   Typography,
-  SvgIcon
+  Drawer
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -40,46 +40,76 @@ const pages = [
   }
 ]
 
-const settings = ['Login', 'Search', 'Dashboard', 'Cart']
-
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget)
-  }
-
-  const handleOpenUserMenu = event => {
-    setAnchorElUser(event.currentTarget)
   }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
-
   return (
-    <AppBar position="static" color="secondary" sx={{ boxShadow: 'none' }}>
+    <AppBar
+      color="secondary"
+      sx={{
+        boxShadow: 'none',
+        zIndex: theme => theme.zIndex.drawer + 1,
+        position: { xs: 'fixed', md: 'static' }
+      }}
+    >
       <Toolbar disableGutters>
-        <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+        <Box sx={{ flex: '0 0 20%', display: { xs: 'none', md: 'flex' } }}>
           <Logo />
         </Box>
-        <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ flex: '0 0 15%', display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
-            aria-label="account of current user"
+            aria-label="menu-navigation"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={handleOpenNavMenu}
+            onClick={handleDrawerToggle}
             color="primary"
           >
             <MenuIcon />
           </IconButton>
-          <Menu
+          <Box component="nav" sx={{ width: '100%', flexShrink: { sm: 0 } }} aria-label="nav-menu">
+            <Drawer
+              component="div"
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+              sx={{
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
+              }}
+            >
+              <Toolbar />
+              <Typography variant="body1" color="initial">
+                Categories
+              </Typography>
+              <Divider />
+              <Typography variant="body1" color="initial">
+                Login
+              </Typography>
+              <Typography variant="body1" color="initial">
+                Plant Care
+              </Typography>
+              <Typography variant="body1" color="initial">
+                Blogs
+              </Typography>
+            </Drawer>
+          </Box>
+          {/* <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}
             anchorOrigin={{
@@ -94,7 +124,8 @@ const Header = () => {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' }
+              display: { xs: 'block', md: 'none' },
+              minWidth: '30%'
             }}
           >
             {pages.map(page => (
@@ -104,7 +135,7 @@ const Header = () => {
                 </Button>
               </MenuItem>
             ))}
-          </Menu>
+          </Menu> */}
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
           <Logo />
@@ -112,89 +143,14 @@ const Header = () => {
         <HeaderTabs pages={pages} />
         <Box
           sx={{
-            flexGrow: 0,
-            justifyContent: 'space-between',
-            minWidth: '220px',
-            display: { xs: 'none', sm: 'flex' }
+            flex: { xs: '0 0 30%', md: '0 0 22%' },
+            justifyContent: { xs: 'space-evenly', md: 'space-between' },
+            display: 'flex'
           }}
         >
           <SearchButton />
           <CartBage />
           <LoginModal />
-        </Box>
-        <Box sx={{ display: { sm: 'none' } }}>
-          <Tooltip title="Options">
-            <Button
-              variant="contained"
-              aria-label="more-options"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenUserMenu}
-              color="primary"
-              sx={{ padding: '5px', minWidth: '35px' }}
-            >
-              <MoreHorizIcon />
-            </Button>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map(setting => (
-              <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-        <Box sx={{ display: { sm: 'none' } }}>
-          <Tooltip title="Options">
-            <Button
-              variant="contained"
-              aria-label="more-options"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenUserMenu}
-              color="primary"
-              sx={{ padding: '5px', minWidth: '35px' }}
-            >
-              <MoreHorizIcon />
-            </Button>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map(setting => (
-              <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
         </Box>
       </Toolbar>
       <Divider />
