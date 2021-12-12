@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+
 /* eslint-disable */
+
 const SubCategory = ({ item, data, handleChange }) => {
   const [hidden, setHidden] = useState(true);       
   const filter = (main, dataId) => {
@@ -14,14 +16,19 @@ const SubCategory = ({ item, data, handleChange }) => {
   };
 
   return (
-      <li>
+    <li>
+      
       <h2 className="categories-item" onClick={() => handleClick(item.id)}>
         {item.name}
       </h2>
       {hidden ? null : (
         <ul className="subcategories-list">
           {filter(item.id, data).map((subItem) => (
-            <li className="subcategories-item" key={subItem.id} onClick={() => handleClickFilter(subItem.id)}>
+            <li
+              className="subcategories-item"
+              key={subItem.id}
+              onClick={() => handleClickFilter(subItem.id)}
+            >
               {subItem.name}
             </li>
           ))}

@@ -10,7 +10,7 @@ const Product = ({ name, currentPrice, previousPrice = currentPrice, categories,
         return `$${previousPrice}.00`
       }
       else {
-        return previousPrice
+        return `$${previousPrice}`
       }
     }
   }
