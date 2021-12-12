@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import { asyncIncrement } from '../../../store/counterExample/actions'
 import { counterSlice } from '../../../store/counterExample/reducer'
 import './Main.scss'
+import { ProductsAll } from '../Products/ProductsAll'
 
 const Main = () => {
   const { count } = useSelector(state => state.counter)
@@ -21,6 +22,7 @@ const Main = () => {
       <Button variant="contained" color="secondary" onClick={() => dispatch(asyncIncrement())}>
         Async increment counter
       </Button> */}
+      <ProductsAll />
     </div>
   )
 }
