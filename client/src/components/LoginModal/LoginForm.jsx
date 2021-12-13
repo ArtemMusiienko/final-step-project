@@ -89,7 +89,7 @@ const LoginForm = ({ onClose, props }) => {
               component={TextField}
               name="email"
               type="email"
-              label="Email"
+              label="Email or Login"
               size="small"
               color="primary"
             />

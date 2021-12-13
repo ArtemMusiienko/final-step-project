@@ -14,9 +14,19 @@ import { Box } from '@mui/system'
 
 YupPassword(Yup)
 const LoginSchema = Yup.object().shape({
-  userName: Yup.string().required(),
-  email: Yup.string().email().required('Required'),
-  password: Yup.string().password().required(),
+  firstName: Yup.string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field ')
+    .min(2, 'Must be not less than 2 characters')
+    .required('First Name is required field'),
+  lastName: Yup.string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field ')
+    .min(2, 'Must be not less than 2 characters')
+    .required('Last Name is required field'),
+  login: Yup.string()
+    .min(3, 'Must be not less than 3 characters')
+    .required('Login is required field'),
+  email: Yup.string().email().required('Email is required field'),
+  password: Yup.string().password().required('Password is required field'),
   confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
 })
 
@@ -68,7 +78,9 @@ const RegisterForm = ({ onClose, props }) => {
       </Typography>
       <Formik
         initialValues={{
-          userName: '',
+          firstName: '',
+          lastName: '',
+          login: '',
           email: '',
           password: '',
           confirmPassword: ''
@@ -80,9 +92,25 @@ const RegisterForm = ({ onClose, props }) => {
           <Form className={classes.loginForm}>
             <Field
               component={TextField}
-              name="userName"
-              type="userName"
-              label="Username"
+              name="firstName"
+              type="firstName"
+              label="First Name"
+              size="small"
+              color="primary"
+            />
+            <Field
+              component={TextField}
+              name="lastName"
+              type="lastName"
+              label="Last Name"
+              size="small"
+              color="primary"
+            />
+            <Field
+              component={TextField}
+              name="login"
+              type="login"
+              label="Login"
               size="small"
               color="primary"
             />
