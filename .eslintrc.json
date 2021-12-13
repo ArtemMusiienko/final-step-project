@@ -5,38 +5,61 @@
         "node": true
     },
     "extends": [
+        "airbnb",
+        "airbnb/hooks",
         "plugin:react/recommended",
-         "airbnb",
-         "airbnb/hooks",
-        "standard",
-        "prettier"
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "standard"
 
     ],
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 8,
-        "sourceType": "module"
+        "ecmaVersion": 12
     },
     "plugins": [
         "react"
     ],
     "rules": {
+        "prettier/prettier": [
+            "error",{
+                "singleQuote":true,
+                "semi":false,
+                "trailingComma": "none",
+                "tabWidth": 2,
+                "arrowParens": "avoid",
+                "endOfLine": "auto"
+            }
+        ],
         "no-unused-expressions": 0,
         "class-methods-use-this": 0,
         "default-case": 0,
         "import/no-unresolved": 0,
         "react/prefer-stateless-function": 0,
+        "import/prefer-default-export": "off",
         "import/no-named-as-default": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "no-console": "error",
+        "no-console": "warn",
         "no-restricted-syntax": [
             "error",
             {
                 "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
                 "message": "Unexpected property on console object was called"
             }
-        ]
+        ],
+        "no-plusplus": "off",
+        "eol-last": "off",
+        "no-unused-vars":"warn",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "react/function-component-definition": [2, {
+            "namedComponents": "arrow-function",
+            "unnamedComponents": "arrow-function"
+          }],
+        "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": true }],
+        "react/prop-types": "off",
+        "space-before-function-paren": ["error", "never"],
+        "no-param-reassign": ["error", { "props": false }],
+        "react/jsx-props-no-spreading": "off",
+        "react/display-name": "off"
     }
 }

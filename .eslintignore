@@ -1,6 +1,7 @@
 node_modules
 client/build/
 client/node_modules
+client/src/components/Image
 commonHelpers
 models
 config
@@ -12,4 +13,3 @@ server.js
 reportWebVitals.js
 setupTests.js
 App.test.js
-index.js

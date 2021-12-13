@@ -1,8 +1,14 @@
 {
-    "extends": ["stylelint-config-standard"],
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-standard-scss",
+      "stylelint-config-rational-order",
+      "stylelint-prettier/recommended"
+    ],
+    "plugins": ["stylelint-order", "stylelint-scss"],
     "overrides": [
       {
-        "files": ["**/*.sss"],
+        "files": ["**/*.css"],
         "customSyntax": "sugarss",
         "rules": {
           "block-closing-brace-empty-line-before": null,
