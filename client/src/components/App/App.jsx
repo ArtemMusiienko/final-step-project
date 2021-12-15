@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Layout from '../Layout/Layout'
+import Layout from '../Layout'
 import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
 import ProductCard from '../Pages/ProductCard/ProductCard'
