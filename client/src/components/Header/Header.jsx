@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Divider, AppBar, Box, Toolbar, IconButton, Typography, Drawer } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import Logo from '../Logo'
@@ -6,6 +7,7 @@ import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
 import LoginModal from '../LoginModal/LoginModal'
+import LogoutModal from '../LogoutModal'
 
 const pages = [
   {
@@ -28,7 +30,7 @@ const pages = [
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
-
+  const { isLoggedIn } = useSelector(state => state.auth)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -100,7 +102,7 @@ const Header = () => {
         >
           <SearchButton />
           <CartBage />
-          <LoginModal />
+          {isLoggedIn ? <LogoutModal /> : <LoginModal />}
         </Box>
       </Toolbar>
       <Divider />

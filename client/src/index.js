@@ -3,12 +3,27 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import { Provider } from 'react-redux'
+import axios from 'axios'
 import reportWebVitals from './reportWebVitals'
 import './index.scss'
 import App from './components/App'
-
 import store from './store/store'
 import theme from './theme'
+
+axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT
+axios.interceptors.request.use(
+  config => {
+    if (!config.headers.Authorization) {
+      const token = store.getState().auth.user || ''
+      if (token) {
+        config.headers.Authorization = token
+      }
+    }
+
+    return config
+  },
+  error => Promise.reject(error)
+)
 
 ReactDOM.render(
   <React.StrictMode>

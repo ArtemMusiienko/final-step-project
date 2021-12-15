@@ -11,24 +11,22 @@ export const ProductsAll = () => {
   const [category, setCategory] = useState()
   const useGetProducts = () => {
     useEffect(() => {
-      axios.get('http://localhost:5000/api/products').then(products => {
+      axios.get('/products').then(products => {
         setData(products.data)
       })
     }, [])
   }
   const useGetCatalog = () => {
     useEffect(() => {
-      axios.get('http://localhost:5000/api/catalog').then(catalogItem => {
+      axios.get('/catalog').then(catalogItem => {
         setCatalog(catalogItem.data)
       })
     }, [])
   }
   const handleChange = (categoryName, price) => {
-    axios
-      .get(`http://localhost:5000/api/products/filter?categories=${categoryName}`)
-      .then(categoryItem => {
-        setData(categoryItem.data.products)
-      })
+    axios.get(`/products/filter?categories=${categoryName}`).then(categoryItem => {
+      setData(categoryItem.data.products)
+    })
   }
   return (
     <div className="catalog-wrapper">
