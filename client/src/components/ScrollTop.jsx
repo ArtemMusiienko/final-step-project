@@ -6,7 +6,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import Zoom from '@mui/material/Zoom'
 
 const ScrollTop = () => {
-  const trigger = useScrollTrigger()
+  const trigger = useScrollTrigger({
+    disableHysteresis: true
+  })
 
   const handleClick = event => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
