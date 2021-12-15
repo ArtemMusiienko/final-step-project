@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import { Provider } from 'react-redux'
 import axios from 'axios'
-import reportWebVitals from './reportWebVitals'
+// import reportWebVitals from './reportWebVitals'
 import './index.scss'
 import App from './components/App'
 import store from './store/store'
@@ -41,4 +41,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+// reportWebVitals()

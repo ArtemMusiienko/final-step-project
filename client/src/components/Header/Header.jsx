@@ -6,7 +6,7 @@ import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
-import LoginModal from '../LoginModal/LoginModal'
+import LoginModal from '../LoginModal'
 import LogoutModal from '../LogoutModal'
 
 const pages = [
