@@ -7,7 +7,7 @@ import Carousel from 'react-material-ui-carousel'
 const Slider = () => {
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get('/slides').then(slides => {
+    axios.get('http://localhost:5000/api/slides').then(slides => {
       setData(slides.data)
     })
   }, [])

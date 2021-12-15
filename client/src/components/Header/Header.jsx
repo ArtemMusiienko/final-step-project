@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Divider, AppBar, Box, Toolbar, IconButton, Typography, Drawer } from '@mui/material'
+import { Link } from 'react-router-dom'
+import {
+  Divider,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Menu,
+  Button,
+  MenuItem,
+  Tooltip,
+  Typography,
+  Drawer
+} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
-import LoginModal from '../LoginModal'
-import LogoutModal from '../LogoutModal'
+import LoginModal from '../LoginModal/LoginModal'
 
 const pages = [
   {
@@ -29,10 +41,19 @@ const pages = [
 ]
 
 const Header = () => {
+  const [anchorElNav, setAnchorElNav] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { isLoggedIn } = useSelector(state => state.auth)
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+
+  const handleOpenNavMenu = event => {
+    setAnchorElNav(event.currentTarget)
+  }
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
   }
 
   return (
@@ -88,6 +109,33 @@ const Header = () => {
               </Typography>
             </Drawer>
           </Box>
+          {/* <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left'
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+              minWidth: '30%'
+            }}
+          >
+            {pages.map(page => (
+              <MenuItem key={page.path} onClick={handleCloseNavMenu}>
+                <Button component={Link} to={page.path} sx={{ color: 'text.primary' }}>
+                  {page.linkName}
+                </Button>
+              </MenuItem>
+            ))}
+          </Menu> */}
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
           <Logo />
@@ -102,7 +150,7 @@ const Header = () => {
         >
           <SearchButton />
           <CartBage />
-          {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+          <LoginModal />
         </Box>
       </Toolbar>
       <Divider />

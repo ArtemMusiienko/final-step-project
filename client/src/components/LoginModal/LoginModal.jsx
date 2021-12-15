@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
@@ -11,7 +10,6 @@ import CloseIcon from '@mui/icons-material/Close'
 import { ReactComponent as Login } from '../../assets/Login.svg'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import { clearMessage } from '../../store/message/reducer'
 
 const style = {
   position: 'absolute',
@@ -63,14 +61,6 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => {
 const LoginModal = () => {
   const [open, setOpen] = useState(false)
   const [alignment, setAlignment] = useState('login')
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(clearMessage())
-    return () => {
-      dispatch(clearMessage())
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, alignment])
   const handleOpen = () => {
     setAlignment('login')
     setOpen(true)
@@ -145,11 +135,7 @@ const LoginModal = () => {
                 </StyledToggleButton>
               </StyledToggleButtonGroup>
             </Box>
-            {alignment === 'login' ? (
-              <LoginForm onClose={handleClose} />
-            ) : (
-              <RegisterForm onClose={handleClose} />
-            )}
+            {alignment === 'login' ? <LoginForm onClose={handleClose} /> : <RegisterForm />}
           </Box>
         </Fade>
       </Modal>

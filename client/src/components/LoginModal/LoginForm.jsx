@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@mui/styles'
 import Typography from '@mui/material/Typography'
 import { Button, IconButton, LinearProgress, Link } from '@mui/material'
@@ -12,12 +11,11 @@ import { TextField } from 'formik-mui'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { Box } from '@mui/system'
-import { userLogin } from '../../store/auth/actions'
 
 YupPassword(Yup)
 const LoginSchema = Yup.object().shape({
-  loginOrEmail: Yup.string().email().required('Required'),
-  password: Yup.string().required()
+  email: Yup.string().email().required('Required'),
+  password: Yup.string().password().required()
 })
 
 const useStyles = makeStyles({
@@ -31,8 +29,6 @@ const useStyles = makeStyles({
 
 const LoginForm = ({ onClose, props }) => {
   const classes = useStyles(props)
-  const dispatch = useDispatch()
-  const { message } = useSelector(state => state.message)
   // const onSubmit = async (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
   //   try {
   //     await auth.passwordUpdate(values.oldPassword, values.passwordOne)
@@ -54,16 +50,12 @@ const LoginForm = ({ onClose, props }) => {
     event.preventDefault()
   }
   const handleFormSubmit = (values, { setSubmitting, resetForm }) => {
-    const { loginOrEmail, password } = values
-    dispatch(userLogin({ loginOrEmail, password })).then(data => {
-      if (data.error) {
-        setSubmitting(false)
-        return
-      }
+    setTimeout(() => {
+      console.log(values)
       setSubmitting(false)
       resetForm({})
       onClose()
-    })
+    }, 1500)
   }
   return (
     <Box
@@ -85,7 +77,7 @@ const LoginForm = ({ onClose, props }) => {
       </Typography>
       <Formik
         initialValues={{
-          loginOrEmail: '',
+          email: '',
           password: ''
         }}
         validationSchema={LoginSchema}
@@ -95,9 +87,9 @@ const LoginForm = ({ onClose, props }) => {
           <Form className={classes.loginForm}>
             <Field
               component={TextField}
-              name="loginOrEmail"
-              type="loginOrEmail"
-              label="Email or Login"
+              name="email"
+              type="email"
+              label="Email"
               size="small"
               color="primary"
             />
@@ -139,14 +131,6 @@ const LoginForm = ({ onClose, props }) => {
           </Form>
         )}
       </Formik>
-      <Typography
-        id="transition-modal-title"
-        variant="h6"
-        component="h5"
-        sx={{ fontSize: 14, fontWeight: 800, color: 'red', textAlign: 'center' }}
-      >
-        {message}
-      </Typography>
     </Box>
   )
 }
