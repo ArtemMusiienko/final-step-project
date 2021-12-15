@@ -6,11 +6,13 @@ import Header from '../Header'
 import Footer from '../Footer'
 import './Layout.scss'
 import ScrollTop from '../ScrollTop'
+import Slider from '../Slider'
 
 const Layout = () => (
   <Container maxWidth="xl">
     <Header />
     <Toolbar sx={{ display: { md: 'none' } }} />
+    <Slider />
     <Outlet />
     <Footer />
     <ScrollTop />
