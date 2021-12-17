@@ -8,6 +8,7 @@ import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
 import LoginModal from '../LoginModal'
 import LogoutModal from '../LogoutModal'
+import HeaderNavigationMobile from './HeaderNavigationMobile'
 
 const pages = [
   {
@@ -72,20 +73,7 @@ const Header = () => {
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
               }}
             >
-              <Toolbar />
-              <Typography variant="body1" color="initial">
-                Categories
-              </Typography>
-              <Divider />
-              <Typography variant="body1" color="initial">
-                Login
-              </Typography>
-              <Typography variant="body1" color="initial">
-                Plant Care
-              </Typography>
-              <Typography variant="body1" color="initial">
-                Blogs
-              </Typography>
+              <HeaderNavigationMobile />
             </Drawer>
           </Box>
         </Box>
