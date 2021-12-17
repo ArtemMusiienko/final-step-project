@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authLogin, authLogout, authRegister } from '../../api/auth'
+import { authLogin, authRegister } from '../../api/auth'
 import { setMessage } from '../message/reducer'
 
 export const userLogin = createAsyncThunk(
@@ -22,7 +22,7 @@ export const userLogin = createAsyncThunk(
 )
 
 export const userLogout = createAsyncThunk('auth/logout', async () => {
-  await authLogout()
+  // await authLogout()
 })
 
 export const userRegister = createAsyncThunk(

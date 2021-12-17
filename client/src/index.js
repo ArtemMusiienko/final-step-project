@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import axios from 'axios'
-// import reportWebVitals from './reportWebVitals'
 import './index.scss'
 import App from './components/App'
-import store from './store/store'
+import { store, persistor } from './store/store'
 import theme from './theme'
 
 axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT
@@ -28,11 +28,13 @@ axios.interceptors.request.use(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

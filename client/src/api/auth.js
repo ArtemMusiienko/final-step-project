@@ -6,16 +6,7 @@ export const authLogin = (loginOrEmail, password) =>
       loginOrEmail,
       password
     })
-    .then(response => {
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data.token))
-      }
-      return response.data.token
-    })
-
-export const authLogout = () => {
-  localStorage.removeItem('user')
-}
+    .then(response => response.data.token)
 
 export const authRegister = (firstName, lastName, login, email, password) =>
   axios.post('/customers', {

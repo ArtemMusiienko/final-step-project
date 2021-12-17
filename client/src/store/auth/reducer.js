@@ -1,18 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin, userRegister, userLogout } from './actions'
-import checkTerminationToken from '../../services/checkTerminationToken'
 
-const userToken = () => {
-  let user = JSON.parse(localStorage.getItem('user'))
-  if (user && checkTerminationToken(user)) {
-    localStorage.removeItem('user')
-    user = JSON.parse(localStorage.getItem('user'))
-  }
-  return user
-}
-const user = userToken()
-
-const initialState = user ? { isLoggedIn: true, user } : { isLoggedIn: false, user: null }
+const initialState = { isLoggedIn: false, user: null }
 
 const authSlice = createSlice({
   name: 'auth',
