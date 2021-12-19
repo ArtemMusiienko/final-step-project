@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Layout from '../Layout'
@@ -11,18 +11,23 @@ import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
+import { setCatalog } from '../../store/catalog/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
+
 const App = () => {
-  const [path, setPath] = useState(useLocation())
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.auth)
   const { pathname } = useLocation()
-  if (pathname !== path) {
+  useEffect(() => {
     if (user && checkTerminationToken(user)) {
       dispatch(userLogout())
     }
-    setPath(pathname)
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+  useEffect(() => {
+    dispatch(setCatalog())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

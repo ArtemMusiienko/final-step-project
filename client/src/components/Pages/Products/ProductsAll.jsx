@@ -32,14 +32,11 @@ export const ProductsAll = () => {
   }
 
   const handleChangeCategory = (categoryName, price) => {
-    axios
-      .get(`/products/filter?categories=${categoryName}`)
-      .then(categoryItem => {
-        setData(categoryItem.data.products)
-        setDataFull(categoryItem.data.products)
-        setValue([0, 100])
-      })
-
+    axios.get(`/products/filter?categories=${categoryName}`).then(categoryItem => {
+      setData(categoryItem.data.products)
+      setDataFull(categoryItem.data.products)
+      setValue([0, 100])
+    })
   }
 
   const PER_PAGE = 9
