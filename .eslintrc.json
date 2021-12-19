@@ -57,9 +57,10 @@
           }],
         "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": true }],
         "react/prop-types": "off",
-        "space-before-function-paren": ["error", "never"],
+        "space-before-function-paren": "off",
         "no-param-reassign": ["error", { "props": false }],
         "react/jsx-props-no-spreading": "off",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "multiline-ternary": "off"
     }
 }

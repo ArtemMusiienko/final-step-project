@@ -1,8 +1,4 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@mui/material/Button'
-import { asyncIncrement } from '../../../store/counterExample/actions'
-import { counterSlice } from '../../../store/counterExample/reducer'
 import './Main.scss'
 
 const Main = () => {
@@ -24,5 +20,6 @@ const Main = () => {
     </div>
   )
 }
+
 
 export default Main

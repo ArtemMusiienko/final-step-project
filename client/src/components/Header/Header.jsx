@@ -1,25 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import {
-  Divider,
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Menu,
-  Button,
-  MenuItem,
-  Tooltip,
-  Typography,
-  Drawer
-} from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Divider, AppBar, Box, Toolbar, IconButton, Typography, Drawer } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
 import SearchButton from '../SearchButton'
-import LoginModal from '../LoginModal/LoginModal'
+import LoginModal from '../LoginModal'
+import LogoutModal from '../LogoutModal'
+import HeaderNavigationMobile from './HeaderNavigationMobile'
 
 const pages = [
   {
@@ -41,19 +30,10 @@ const pages = [
 ]
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
-
+  const { isLoggedIn } = useSelector(state => state.auth)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
-  }
-
-  const handleOpenNavMenu = event => {
-    setAnchorElNav(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
   }
 
   return (
@@ -93,49 +73,9 @@ const Header = () => {
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
               }}
             >
-              <Toolbar />
-              <Typography variant="body1" color="initial">
-                Categories
-              </Typography>
-              <Divider />
-              <Typography variant="body1" color="initial">
-                Login
-              </Typography>
-              <Typography variant="body1" color="initial">
-                Plant Care
-              </Typography>
-              <Typography variant="body1" color="initial">
-                Blogs
-              </Typography>
+              <HeaderNavigationMobile />
             </Drawer>
           </Box>
-          {/* <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left'
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: 'block', md: 'none' },
-              minWidth: '30%'
-            }}
-          >
-            {pages.map(page => (
-              <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-                <Button component={Link} to={page.path} sx={{ color: 'text.primary' }}>
-                  {page.linkName}
-                </Button>
-              </MenuItem>
-            ))}
-          </Menu> */}
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
           <Logo />
@@ -150,7 +90,7 @@ const Header = () => {
         >
           <SearchButton />
           <CartBage />
-          <LoginModal />
+          {isLoggedIn ? <LogoutModal /> : <LoginModal />}
         </Box>
       </Toolbar>
       <Divider />

@@ -1,1 +1,0 @@
-const fetchData = () => null

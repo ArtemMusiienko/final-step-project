@@ -60,25 +60,25 @@ h1 {
 
 .categories {
   min-width: 310px;
+  max-height: fit-content;
   padding-top: 14px;
   padding-bottom: 19px;
   padding-left: 18px;
   background: #fbfbfb;
-  max-height: fit-content;
 }
 
 .category-container {
-  padding-left: 12px;
   padding-right: 24px;
+  padding-left: 12px;
 }
 
 .categories-item {
   display: flex;
   justify-content: space-between;
   margin-top: 18px;
-  font-style: normal;
   font-weight: bold;
   font-size: 15px;
+  font-style: normal;
   line-height: 40px;
 }
 
@@ -87,14 +87,14 @@ h1 {
 }
 
 .categories-list {
-  list-style: none;
   padding-left: 0;
+  list-style: none;
 }
 
 .category-header {
+  color: #3d3d3d;
   font-size: 18px;
   line-height: 16px;
-  color: #3d3d3d;
 }
 
 .subcategories-list {
@@ -112,22 +112,21 @@ h1 {
 }
 
 .category-price-header {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 16px;
-
   /* identical to box height, or 89% */
 
   color: #3d3d3d;
+  font-weight: bold;
+  font-size: 18px;
+  font-style: normal;
+  line-height: 16px;
 }
 
 .category-price-subheader {
-  font-style: normal;
+  color: #46a358;
   font-weight: normal;
   font-size: 15px;
+  font-style: normal;
   line-height: 16px;
-  color: #46a358;
 }
 
 .rc-slider-track-1,
@@ -136,36 +135,35 @@ h1 {
 }
 
 .price-span {
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 16px;
-
   /* identical to box height, or 107% */
 
   color: #3d3d3d;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 16px;
 }
 
 .filter {
+  top: 1117px;
+  left: 150px;
   width: 90px;
   height: 35px;
-  left: 150px;
-  top: 1117px;
-  background: #46a358;
-  border: 1px solid #46a358;
-  cursor: pointer;
-  border-radius: 6px;
   color: white;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
+  font-style: normal;
   line-height: 20px;
+  background: #46a358;
+  border: 1px solid #46a358;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .catalog-wrapper {
-  margin-top: 46px;
   display: flex;
   justify-content: space-between;
   max-width: 1200px;
+  margin-top: 46px;
 }
 
 .hover-container {

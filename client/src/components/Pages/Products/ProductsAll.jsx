@@ -16,7 +16,7 @@ export const ProductsAll = () => {
   const [page, setPage] = useState(1)
   const useGetProducts = () => {
     useEffect(() => {
-      axios.get('http://localhost:5000/api/products').then(products => {
+      axios.get('/products').then(products => {
         setData(products.data)
         setDataFull(products.data)
       })
@@ -25,19 +25,21 @@ export const ProductsAll = () => {
 
   const useGetCatalog = () => {
     useEffect(() => {
-      axios.get('http://localhost:5000/api/catalog').then(catalogItem => {
+      axios.get('/catalog').then(catalogItem => {
         setCatalog(catalogItem.data)
       })
     }, [])
   }
+
   const handleChangeCategory = (categoryName, price) => {
     axios
-      .get(`http://localhost:5000/api/products/filter?categories=${categoryName}`)
+      .get(`/products/filter?categories=${categoryName}`)
       .then(categoryItem => {
         setData(categoryItem.data.products)
         setDataFull(categoryItem.data.products)
         setValue([0, 100])
       })
+
   }
 
   const PER_PAGE = 9
