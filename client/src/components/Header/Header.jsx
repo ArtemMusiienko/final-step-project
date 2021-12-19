@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Divider, AppBar, Box, Toolbar, IconButton, Typography, Drawer } from '@mui/material'
+import { Divider, AppBar, Box, Toolbar, IconButton, Drawer, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
@@ -58,7 +59,7 @@ const Header = () => {
             onClick={handleDrawerToggle}
             color="primary"
           >
-            <MenuIcon />
+            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Box component="nav" sx={{ width: '100%', flexShrink: { sm: 0 } }} aria-label="nav-menu">
             <Drawer
@@ -69,11 +70,18 @@ const Header = () => {
               ModalProps={{
                 keepMounted: true // Better open performance on mobile.
               }}
+              SlideProps={{
+                timeout: 400
+              }}
               sx={{
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
               }}
             >
-              <HeaderNavigationMobile />
+              <HeaderNavigationMobile mobileOpen={mobileOpen} />
+              <Divider />
+              <Typography variant="body1" color="initial">
+                Sign In
+              </Typography>
             </Drawer>
           </Box>
         </Box>
