@@ -11,6 +11,7 @@ import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
+import Slider from '../Slider/Slider'
 
 const App = () => {
   const [path, setPath] = useState(useLocation())
@@ -29,8 +30,9 @@ const App = () => {
         <Route path="" element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="productcard" element={<ProductCard />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="/shop/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="slider" element={<Slider />} />
         <Route path="plant-care" element={<PlantCare />} />
       </Route>
     </Routes>

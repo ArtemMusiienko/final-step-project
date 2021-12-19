@@ -1,8 +1,8 @@
-import { current } from '@reduxjs/toolkit'
-import React from 'react'
+import React, { useState } from 'react'
 import './Products.scss'
+
 /* eslint-disable */
-const Product = ({ name, currentPrice, previousPrice = currentPrice, categories, imageUrls }) => {
+const Product = ({ name, currentPrice, previousPrice = currentPrice, categories, imageUrls,} )=> {
   const discount = Math.floor(((previousPrice - currentPrice) / previousPrice) * 100)
   const showPreviousPrice = () => {
     if (currentPrice !== previousPrice) {
@@ -29,6 +29,7 @@ const Product = ({ name, currentPrice, previousPrice = currentPrice, categories,
           <p className="discount-count">{discount}% OFF</p>
         </div>
       ) : null}
+      
     </div>
   );
 }
