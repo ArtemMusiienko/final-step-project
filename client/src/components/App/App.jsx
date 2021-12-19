@@ -8,12 +8,14 @@ import NotFound from '../Pages/NotFound'
 import './App.scss'
 import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
+import ProductsAll from '../Pages/Products/ProductsAll'
 
 const App = () => (
   <Routes>
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Main />} />
       <Route path="favorites" element={<Favorites />} />
+      <Route path="shop" element={<ProductsAll />} />
       <Route path="productcard" element={<ProductCard />} />
       <Route path="cart" element={<Cart />} />
       <Route path="*" element={<NotFound />} />
