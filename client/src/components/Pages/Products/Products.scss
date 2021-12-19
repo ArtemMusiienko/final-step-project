@@ -9,7 +9,7 @@ h1 {
 
 .product-container {
   :hover {
-    border-top: 1px solid #46a358;
+    // border-top: 1px solid #46a358;
   }
 
   position: relative;
@@ -164,4 +164,14 @@ h1 {
   justify-content: space-between;
   max-width: 1200px;
   margin-top: 46px;
+}
+
+.hover-container {
+  position: absolute;
+  top: 230px;
+  left: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }

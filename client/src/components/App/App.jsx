@@ -12,6 +12,7 @@ import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
+import ProductsAll from '../Pages/Products/ProductsAll'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="" element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="productcard" element={<ProductCard />} />
+        <Route path="shop" element={<ProductsAll />} />
         <Route path="cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
         <Route path="plant-care" element={<PlantCare />} />
@@ -40,5 +42,4 @@ const App = () => {
     </Routes>
   )
 }
-
 export default App

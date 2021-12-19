@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
+import Container from '@material-ui/core/Container'
 import Slider from 'rc-slider'
 import SubCategory from './SubCategories'
 import 'rc-slider/assets/index.css'
@@ -6,19 +7,27 @@ import 'rc-slider/assets/index.css'
 const { createSliderWithTooltip } = Slider
 const Range = createSliderWithTooltip(Slider.Range)
 const { Handle } = Slider
-export const Categories = ({ data, handleChange }) => {
-  const [currentValue, setValue] = useState([0, 100])
+export const Categories = ({ data, handleChange, currentValue, setValue, handleFilterButton }) => {
+  const [currentCategory, setCurrentCategory] = useState()
   const handleSlider = value => {
     setValue(value)
   }
   const categoriesFiltered = data.filter(item => item.level === 0)
+
   return (
-    <div className="categories">
-      <h3 className="category-header">Categories</h3>
+    <Container style={{ marginRight: '30px', maxWidth: '310px', marginLeft: '0' }}>
+      <h3 className="category-header">Categories </h3>
       <div className="category-container">
         <ul className="categories-list">
           {categoriesFiltered.map(item => (
-            <SubCategory key={item.id} handleChange={handleChange} item={item} data={data} />
+            <SubCategory
+              setCurrentCategory={setCurrentCategory}
+              currentCategory={currentCategory}
+              key={item.id}
+              handleChange={handleChange}
+              item={item}
+              data={data}
+            />
           ))}
         </ul>
       </div>
@@ -37,7 +46,7 @@ export const Categories = ({ data, handleChange }) => {
           <span className="price-span">Price:</span> {`$${currentValue[0]}-$${currentValue[1]}`}
         </h3>
       </div>
-      <button className="filter">Filter</button>
-    </div>
+      <button className="filter" onClick={(()=> handleFilterButton(currentValue[0],currentValue[1]))}>Filter</button>
+    </Container>
   );
 };

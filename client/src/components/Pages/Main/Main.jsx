@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { useSelector } from 'react'
 import './Main.scss'
-import { ProductsAll } from '../Products/ProductsAll'
 
-const Main = () => (
-  <div>
-    <ProductsAll />
-  </div>
-)
+const Main = () => {
+  const a = ''
+  return <div>Main</div>
+}
 
 export default Main
