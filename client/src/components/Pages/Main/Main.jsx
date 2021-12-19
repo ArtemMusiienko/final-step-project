@@ -1,11 +1,25 @@
 import React from 'react'
 import './Main.scss'
-import { ProductsAll } from '../Products/ProductsAll'
 
-const Main = () => (
-  <div>
-    <ProductsAll />
-  </div>
-)
+const Main = () => {
+  const { count } = useSelector(state => state.counter)
+  const { increment, decrement } = counterSlice.actions
+  const dispatch = useDispatch()
+  return (
+    <div>
+      {/* <div>{count}</div>
+      <Button variant="contained" color="primary" onClick={() => dispatch(increment())}>
+        increment counter
+      </Button>
+      <Button variant="contained" color="primary" onClick={() => dispatch(decrement())}>
+        decrement counter
+      </Button>
+      <Button variant="contained" color="secondary" onClick={() => dispatch(asyncIncrement())}>
+        Async increment counter
+      </Button> */}
+    </div>
+  )
+}
+
 
 export default Main
