@@ -12,6 +12,7 @@ import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
+import { setProducts } from '../../store/products/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
   }, [pathname])
   useEffect(() => {
     dispatch(setCatalog())
+    dispatch(setProducts())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (

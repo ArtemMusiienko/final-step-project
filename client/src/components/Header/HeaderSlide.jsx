@@ -1,30 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
-import Switch from '@mui/material/Switch'
 import Paper from '@mui/material/Paper'
 import Slide from '@mui/material/Slide'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import { Typography } from '@mui/material'
+import { Button } from '@mui/material'
 
-const icon = (
-  <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={4}>
-    <Box component="svg" sx={{ width: 100, height: 100 }}>
-      <Box
-        component="polygon"
-        sx={{
-          fill: theme => theme.palette.common.white,
-          stroke: theme => theme.palette.divider,
-          strokeWidth: 1
-        }}
-        points="0,100 50,00, 100,100"
-      />
-    </Box>
-  </Paper>
-)
-
-const HeaderSlide = ({ slideHeader, mobileOpen }) => {
+const HeaderSlide = ({ slideHeader, mobileOpen, slideBody, category }) => {
   const [checked, setChecked] = useState(false)
-
   const handleChange = () => {
     setChecked(prev => !prev)
   }
@@ -37,20 +18,43 @@ const HeaderSlide = ({ slideHeader, mobileOpen }) => {
 
   return (
     <>
-      <Typography
-        sx={{ fontWeight: 'bold' }}
-        variant="body1"
-        color="initial"
-        onClick={handleChange}
-      >
+      <Button sx={{ color: 'text.primary' }} onClick={handleChange}>
         {slideHeader}
-      </Typography>
+      </Button>
       <Slide
         direction="left"
         in={checked}
-        sx={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
+        sx={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: theme => theme.zIndex.mobileStepper + 1,
+          backgroundColor: 'white'
+        }}
       >
-        {icon}
+        <Paper sx={{ m: 1, width: '100%', height: '100%' }} elevation={0}>
+          <Box sx={{ width: '100%', height: '100%' }}>
+            {category.parentId === 'null' ? (
+              <Button
+                sx={{ textTransform: 'capitalize', color: 'text.primary' }}
+                onClick={handleChange}
+              >
+                {'<< Main Menu'}
+              </Button>
+            ) : (
+              <Button>{`<< ${category.name}`}</Button>
+            )}
+            <img
+              src={category.imgUrl}
+              alt="Plants"
+              loading="lazy"
+              style={{ width: '100%', display: 'block' }}
+            />
+            {slideBody}
+          </Box>
+        </Paper>
       </Slide>
     </>
   )
