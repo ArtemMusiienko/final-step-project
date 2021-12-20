@@ -9,6 +9,9 @@ import { addProduct, decrement, incriment, removeProduct } from '../../../store/
 const Cart = () => {
   const count = useSelector(state => state.basket.count)
   const product = useSelector(state => state.basket.product)
+  const { products } = useSelector(state => state.product)
+  const oneProduct = products[0]
+  console.log(oneProduct)
   const dispatch = useDispatch()
 
   return (
@@ -38,7 +41,7 @@ const Cart = () => {
         <Typography>Her will be total</Typography>
         <DeleteOutlineIcon style={{ marginLeft: 59 }} />
       </Box>
-      <Button onClick={() => dispatch(addProduct())}> addProduct</Button>
+      <Button onClick={() => dispatch(addProduct(oneProduct))}> addProduct</Button>
       <Button onClick={() => dispatch(removeProduct())}>removeProduct</Button>
     </Container>
   )
