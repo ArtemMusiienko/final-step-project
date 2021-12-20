@@ -7,6 +7,7 @@ import NotFound from '../Pages/NotFound'
 import './App.scss'
 import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
+import Checkout from '../Pages/Checkout'
 
 const App = () => (
   <Routes>
@@ -16,6 +17,7 @@ const App = () => (
       <Route exact path="cart" element={<Cart />} />
       <Route exact path="*" element={<NotFound />} />
       <Route exact path="plant-care" element={<PlantCare />} />
+      <Route exact path="checkout" element={<Checkout />} />
     </Route>
   </Routes>
 )
