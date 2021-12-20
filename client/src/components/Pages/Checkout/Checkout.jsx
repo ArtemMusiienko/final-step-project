@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Paper, SvgIcon, Typography, Grid } from '@mui/material'
-import './Checkout.scss'
 import { Formik, Form } from 'formik'
 import { makeStyles } from '@mui/styles'
 import * as Yup from 'yup'

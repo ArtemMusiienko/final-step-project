@@ -31,7 +31,8 @@
             }
         ],
         "no-unused-expressions": 0,
-        "class-methods-use-this": 0,
+      "react/no-unescaped-entities": 0,
+      "class-methods-use-this": 0,
         "default-case": 0,
         "import/no-unresolved": 0,
         "react/prefer-stateless-function": 0,
