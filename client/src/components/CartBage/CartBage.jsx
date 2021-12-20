@@ -18,7 +18,7 @@ const StyledBadge = styled(Badge)(({ theme }) => {
 
 const CartBage = () => (
   <IconButton aria-label="cart">
-    <Link to="cart">
+    <Link to="/shop/cart">
       {' '}
       <StyledBadge badgeContent={4} color="primary">
         <CartIcon viewBox="0 0 24 24" />
