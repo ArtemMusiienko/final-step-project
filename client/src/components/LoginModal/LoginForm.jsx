@@ -16,7 +16,7 @@ import { userLogin } from '../../store/auth/actions'
 
 YupPassword(Yup)
 const LoginSchema = Yup.object().shape({
-  loginOrEmail: Yup.string().email().required('Required'),
+  loginOrEmail: Yup.string().required('Required'),
   password: Yup.string().required()
 })
 
@@ -33,17 +33,6 @@ const LoginForm = ({ onClose, props }) => {
   const classes = useStyles(props)
   const dispatch = useDispatch()
   const { message } = useSelector(state => state.message)
-  // const onSubmit = async (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
-  //   try {
-  //     await auth.passwordUpdate(values.oldPassword, values.passwordOne)
-  //     resetForm({})
-  //     setStatus({success: true})
-  //   } catch (error) {
-  //     setStatus({success: false})
-  //     setSubmitting(false)
-  //     setErrors({submit: error.message})
-  //   }
-  // }
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   const handleClickShowPassword = () => {

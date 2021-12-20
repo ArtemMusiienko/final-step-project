@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Divider, AppBar, Box, Toolbar, IconButton, Drawer, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import { Divider, AppBar, Box, Toolbar, IconButton, Drawer, Container, Link } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
 import Logo from '../Logo'
@@ -77,11 +78,27 @@ const Header = () => {
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
               }}
             >
-              <HeaderNavigationMobile mobileOpen={mobileOpen} />
-              <Divider />
-              <Typography variant="body1" color="initial">
-                Sign In
-              </Typography>
+              <Container>
+                <HeaderNavigationMobile
+                  mobileOpen={mobileOpen}
+                  handleDrawerToggle={handleDrawerToggle}
+                />
+                <Divider sx={{ margin: '15px 0' }} />
+                {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  {pages.map(page => (
+                    <Link
+                      sx={{ textDecoration: 'none', padding: '6px 8px' }}
+                      key={page.linkName}
+                      component={RouterLink}
+                      to={page.path}
+                      onClick={handleDrawerToggle}
+                    >
+                      {page.linkName}
+                    </Link>
+                  ))}
+                </Box>
+              </Container>
             </Drawer>
           </Box>
         </Box>
@@ -98,7 +115,15 @@ const Header = () => {
         >
           <SearchButton />
           <CartBage />
-          {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+          {isLoggedIn ? (
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <LogoutModal />
+            </Box>
+          ) : (
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <LoginModal />
+            </Box>
+          )}
         </Box>
       </Toolbar>
       <Divider />

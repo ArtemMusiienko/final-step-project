@@ -36,7 +36,7 @@ const LogoutModal = () => {
     <div>
       <Button
         variant="contained"
-        sx={{ textTransform: 'capitalize', display: { xs: 'none', md: 'flex' } }}
+        sx={{ textTransform: 'capitalize', boxShadow: 'none' }}
         startIcon={
           <SvgIcon
             sx={{ width: '100%', height: '100%', fill: 'none', minWidth: 18, minHeight: 18 }}

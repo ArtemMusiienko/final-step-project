@@ -1,29 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '@mui/material/styles'
-import Backdrop from '@mui/material/Backdrop'
 import Box from '@mui/material/Box'
-import Modal from '@mui/material/Modal'
-import Fade from '@mui/material/Fade'
 import Button from '@mui/material/Button'
 import { Divider, SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
 import { ReactComponent as Login } from '../../assets/Login.svg'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import { clearMessage } from '../../store/message/reducer'
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: 300,
-  bgcolor: 'background.paper',
-  borderBottom: '10px solid #46A358',
-  boxShadow: 24,
-  padding: '50px 100px'
-}
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => {
   return {
@@ -71,6 +58,14 @@ const LoginModal = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, alignment])
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [open])
   const handleOpen = () => {
     setAlignment('login')
     setOpen(true)
@@ -82,12 +77,12 @@ const LoginModal = () => {
     }
     setAlignment(newAlignment)
   }
-
+  const descriptionElementRef = React.useRef(null)
   return (
     <div>
       <Button
         variant="contained"
-        sx={{ textTransform: 'capitalize', display: { xs: 'none', md: 'flex' } }}
+        sx={{ textTransform: 'capitalize', boxShadow: 'none' }}
         startIcon={
           <SvgIcon
             sx={{ width: '100%', height: '100%', fill: 'none', minWidth: 18, minHeight: 18 }}
@@ -99,60 +94,57 @@ const LoginModal = () => {
       >
         Login
       </Button>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+      <Dialog
         open={open}
         onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
+        scroll="body"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
       >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Button
-              onClick={handleClose}
+        <DialogContent
+          ref={descriptionElementRef}
+          sx={{ borderBottom: '10px solid #46A358', padding: '50px 50px' }}
+        >
+          <Button
+            onClick={handleClose}
+            size="small"
+            sx={{ position: 'absolute', top: 0, right: 0, paddingTop: '10px' }}
+          >
+            <CloseIcon />
+          </Button>
+          <Box
+            elevation={0}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}
+          >
+            <StyledToggleButtonGroup
               size="small"
-              sx={{ position: 'absolute', top: 0, right: 0, paddingTop: '10px' }}
+              value={alignment}
+              exclusive
+              onChange={handleAlignment}
+              aria-label="Login modal"
             >
-              <CloseIcon />
-            </Button>
-            <Box
-              elevation={0}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                flexWrap: 'wrap'
-              }}
-            >
-              <StyledToggleButtonGroup
-                size="small"
-                value={alignment}
-                exclusive
-                onChange={handleAlignment}
-                aria-label="Login modal"
-              >
-                <StyledToggleButton value="login" aria-label="Login">
-                  Login
-                </StyledToggleButton>
-                <ToggleButton disabled value="devider" aria-label="devider">
-                  <Divider orientation="vertical" />
-                </ToggleButton>
-                <StyledToggleButton value="register" aria-label="Register">
-                  Register
-                </StyledToggleButton>
-              </StyledToggleButtonGroup>
-            </Box>
-            {alignment === 'login' ? (
-              <LoginForm onClose={handleClose} />
-            ) : (
-              <RegisterForm onClose={handleClose} />
-            )}
+              <StyledToggleButton value="login" aria-label="Login">
+                Login
+              </StyledToggleButton>
+              <ToggleButton disabled value="devider" aria-label="devider">
+                <Divider orientation="vertical" />
+              </ToggleButton>
+              <StyledToggleButton value="register" aria-label="Register">
+                Register
+              </StyledToggleButton>
+            </StyledToggleButtonGroup>
           </Box>
-        </Fade>
-      </Modal>
+          {alignment === 'login' ? (
+            <LoginForm onClose={handleClose} />
+          ) : (
+            <RegisterForm onClose={handleClose} />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
