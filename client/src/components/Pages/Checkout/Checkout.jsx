@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { Button, Paper, SvgIcon, Typography, Grid } from '@mui/material'
-import { Formik, Form } from 'formik'
-import { makeStyles } from '@mui/styles'
+import React, {useState} from 'react'
+import {Button, Paper, SvgIcon, Typography, Grid} from '@mui/material'
+import {Formik, Form} from 'formik'
+import {makeStyles} from '@mui/styles'
 import * as Yup from 'yup'
 import Radio from '@material-ui/core/Radio'
-import { FormControl, FormControlLabel, RadioGroup } from '@material-ui/core'
+import {FormControl, FormControlLabel, RadioGroup} from '@material-ui/core'
 import Box from '@mui/material/Box'
-import { ReactComponent as Payments } from '../../../assets/image/payment-method.svg'
+import {ReactComponent as Payments} from '../../../assets/image/payment-method.svg'
 import TextField from '../../FormsUi/Textfield/index'
+// import {TextField} from "@mui/material";
 import CheckoutModal from './CheckoutModal'
 
 const INITIAL_FORM_STATE = {
@@ -40,7 +41,7 @@ const FORM_VALIDATION = Yup.object().shape({
 
 const useStyle = makeStyles(theme => {
   return {
-    root: { flexGrow: 1 },
+    root: {flexGrow: 1},
     gridPage: {
       backgroundColor: '#fffff',
       paddingTop: '36px'
@@ -70,164 +71,178 @@ const Checkout = () => {
   const classes = useStyle()
   const [modalActive, setModalActive] = useState(false)
   return (
-    <>
-      <Grid container spacing={2} className={classes.gridPage}>
-        <Grid item xs={12} md={8} className={classes.billingPart}>
-          <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
-            Billing Billing Address
-          </Typography>
-          <Paper style={{ boxShadow: 'unset' }}>
-            <Formik
-              initialValues={{ ...INITIAL_FORM_STATE }}
-              validationSchema={FORM_VALIDATION}
-              onSubmit={values => {
+    <Formik initialValues={{...INITIAL_FORM_STATE}}
+            validationSchema={FORM_VALIDATION}
+            onSubmit={async (values) => {
+              try {
+                setModalActive(true)
                 console.log(values)
-              }}
-            >
-              <Form className={classes.form}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      First Name<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="firstName" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Last Name<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="lastName" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Country / Region<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="country" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Town / City<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="city" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Street Address<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="street" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">Appartement,suite</Typography>
-                    <TextField name="appartement" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      State<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="state" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Zip<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="zip" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Email address<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="email" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6">
-                      Phone Number<span style={{ color: 'red' }}>*</span>
-                    </Typography>
-                    <TextField name="phone" />
-                  </Grid>
+                const newOrder = await fetch('http://localhost:5000/api/orders',
+                  {
+                    method: "POST",
+                    body: JSON.stringify({...values,}),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                  }).then(d=>d.json())
+                console.log(newOrder)
 
-                  <Grid item xs={12} md={6}>
-                    {' '}
-                    <FormControlLabel
-                      value="ship"
-                      control={<Radio style={{ color: '#46A358' }} />}
-                      label="Ship to a different address?"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <Typography
-                      variant="h6"
-                      style={{ marginTop: '54px', position: 'relative', left: '0' }}
-                    >
-                      Order notes(optional)
-                    </Typography>
-                    <TextField name="notes" multiline rows={6} />
-                  </Grid>
-                </Grid>
-              </Form>
-            </Formik>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} className={classes.OrderPart}>
-          <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
-            Your Your Order
-          </Typography>
-          <Paper style={{ boxShadow: 'unset' }}>
-            <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
-              Payment Payment Method
+              } catch (err) {
+                console.log(err)
+              }
+
+            }}>
+      <Form>
+        <Grid container spacing={2} className={classes.gridPage}>
+          <Grid item xs={12} md={8} className={classes.billingPart}>
+            <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
+              Billing Billing Address
             </Typography>
-            <FormControl component="fieldset" style={{ marginLeft: '11px' }}>
-              <RadioGroup defaultValue="paypal" name="radio-buttons-group">
-                <FormControlLabel
-                  value="paypal"
-                  control={<Radio style={{ color: '#46A358' }} />}
-                  label={
-                    <Box>
-                      <SvgIcon
-                        style={{ width: '100%', height: '100%' }}
-                        viewBox="0 0 224 26"
-                        component={Payments}
+            <Paper style={{boxShadow: 'unset'}}>
+              <Box>
+                <Box className={classes.form}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        First Name<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="firstName"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Last Name<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="lastName"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Country / Region<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="country"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Town / City<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="city"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Street Address<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="street"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">Appartement,suite</Typography>
+                      <TextField name="appartement"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        State<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="state"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Zip<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="zip"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Email address<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="email"/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6">
+                        Phone Number<span style={{color: 'red'}}>*</span>
+                      </Typography>
+                      <TextField name="phone"/>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <FormControlLabel
+                        value="ship"
+                        control={<Radio style={{color: '#46A358'}}/>}
+                        label="Ship to a different address?"
                       />
-                    </Box>
-                  }
-                  className={classes.formControl}
-                />
-                <FormControlLabel
-                  value="Direct bank transfer"
-                  control={<Radio style={{ color: '#46A358' }} />}
-                  label="Direct bank transfer"
-                  className={classes.formControl}
-                />
-                <FormControlLabel
-                  value="Cash on delivery"
-                  control={<Radio style={{ color: '#46A358' }} />}
-                  label="Cash on delivery"
-                  className={classes.formControl}
-                />
-              </RadioGroup>
-            </FormControl>
-            <Button
-              variant="contained"
-              onClick={() => setModalActive(true)}
-              style={{
-                backgroundColor: '#46A358',
-                color: '#ffffff',
-                width: '321px',
-                height: '50px',
-                fontWeight: 'bold',
-                textTransform: 'initial',
-                marginTop: '50px',
-                borderRadius: '3px'
-              }}
-            >
-              Place Order
-            </Button>
-          </Paper>
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                      <Typography
+                        variant="h6"
+                        style={{marginTop: '54px', position: 'relative', left: '0'}}
+                      >
+                        Order notes(optional)
+                      </Typography>
+                      <TextField name="notes" multiline rows={6}/>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4} className={classes.OrderPart}>
+            <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
+              Your Your Order
+            </Typography>
+            <Paper style={{boxShadow: 'unset'}}>
+              <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
+                Payment Payment Method
+              </Typography>
+              <FormControl component="fieldset" style={{marginLeft: '11px'}}>
+                <RadioGroup defaultValue="paypal" name="radio-buttons-group">
+                  <FormControlLabel
+                    value="paypal"
+                    control={<Radio style={{color: '#46A358'}}/>}
+                    label={
+                      <Box>
+                        <SvgIcon
+                          style={{width: '100%', height: '100%'}}
+                          viewBox="0 0 224 26"
+                          component={Payments}
+                        />
+                      </Box>
+                    }
+                    className={classes.formControl}
+                  />
+                  <FormControlLabel
+                    value="Direct bank transfer"
+                    control={<Radio style={{color: '#46A358'}}/>}
+                    label="Direct bank transfer"
+                    className={classes.formControl}
+                  />
+                  <FormControlLabel
+                    value="Cash on delivery"
+                    control={<Radio style={{color: '#46A358'}}/>}
+                    label="Cash on delivery"
+                    className={classes.formControl}
+                  />
+                </RadioGroup>
+              </FormControl>
+              <Button type='submit'
+                      variant="contained"
+                      style={{
+                        backgroundColor: '#46A358',
+                        color: '#ffffff',
+                        width: '321px',
+                        height: '50px',
+                        fontWeight: 'bold',
+                        textTransform: 'initial',
+                        marginTop: '50px',
+                        borderRadius: '3px'
+                      }}
+              >
+                Place Order
+              </Button>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-      <CheckoutModal active={modalActive} setActive={setModalActive} />
-    </>
+        <CheckoutModal active={modalActive} setActive={setModalActive}/>
+      </Form>
+    </Formik>
   )
 }
 

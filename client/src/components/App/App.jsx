@@ -1,5 +1,5 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import Layout from '../Layout/Layout'
 import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
@@ -13,6 +13,7 @@ import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
 import Checkout from '../Pages/Checkout'
+import {useDispatch, useSelector} from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch()
