@@ -16,7 +16,7 @@ import Box from '@mui/material/Box'
 import { ReactComponent as frame } from '../../../assets/frame.svg'
 import { ReactComponent as cart } from '../../../assets/shopping1.svg'
 import { ReactComponent as heart } from '../../../assets/heart1.svg'
-import { addProduct } from '../../../store/busket/busketSlise'
+import { addProduct } from '../../../store/basket/basketSlise'
 
 const Product = ({ productId }) => {
   const { products } = useSelector(state => state.products)
@@ -35,7 +35,6 @@ const Product = ({ productId }) => {
       product: product[0]._id,
       cartQuantity: 1
     }
-    console.log(data)
     dispatch(addProduct(data))
   }
   const discount = Math.floor(
@@ -69,7 +68,15 @@ const Product = ({ productId }) => {
           alt="green iguana"
         />
         {product[0].previousPrice && (
-          <Box sx={{ position: 'absolute', top: 0, width: 80, backgroundColor: '#46a358' }}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              width: 80,
+              backgroundColor: '#46a358',
+              padding: '3px 3px 3px 6px'
+            }}
+          >
             <Typography variant="body1" sx={{ color: 'white', fontSize: 16, fontWeight: 500 }}>
               {discount}% OFF
             </Typography>
