@@ -9,7 +9,7 @@ import { addProduct, decrement, incriment, removeProduct } from '../../../store/
 const Cart = () => {
   const count = useSelector(state => state.basket.count)
   const product = useSelector(state => state.basket.product)
-  const { products } = useSelector(state => state.product)
+  const { products } = useSelector(state => state.products)
   const oneProduct = products[0]
   console.log(oneProduct)
   const dispatch = useDispatch()

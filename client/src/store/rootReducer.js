@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   message: messageReducer,
   catalog: catalogReducer,
   basket: basketReducer,
-  product: productReducer
+  products: productReducer
 })
 
 export default rootReducer
