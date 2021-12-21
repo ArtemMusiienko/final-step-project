@@ -80,7 +80,7 @@ const Checkout = () => {
                 const newOrder = await fetch('http://localhost:5000/api/orders',
                   {
                     method: "POST",
-                    body: JSON.stringify({...values,}),
+                    body: JSON.stringify({...values}),
                     headers: {
                       'Content-Type': 'application/json'
                     },
