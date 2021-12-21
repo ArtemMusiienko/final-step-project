@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import authReducer from './auth/reducer'
 import messageReducer from './message/reducer'
 import catalogReducer from './catalog/reducer'
-import basketReducer from './buscet/buscetSlise'
+import basketReducer from './busket/busketSlise'
 import productReducer from './products/reducer'
 
 const rootReducer = combineReducers({
