@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react'
-import {Routes, Route, useLocation} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../Layout/Layout'
 import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
@@ -11,9 +12,9 @@ import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
+import { setProducts } from '../../store/products/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
 import Checkout from '../Pages/Checkout'
-import {useDispatch, useSelector} from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const App = () => {
   }, [pathname])
   useEffect(() => {
     dispatch(setCatalog())
+    dispatch(setProducts())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
@@ -34,9 +36,9 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route path="" element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="productcard" element={<ProductCard />} />
         <Route path="shop" element={<ProductsAll />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="shop/:productUrl" element={<ProductCard />} />
+        <Route path="shop/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
         <Route path="plant-care" element={<PlantCare />} />
         <Route exact path="checkout" element={<Checkout />} />

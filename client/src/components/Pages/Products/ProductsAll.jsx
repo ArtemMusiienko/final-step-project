@@ -80,13 +80,7 @@ export const ProductsAll = () => {
             {DATA.currentData().map((item) => (
          
               <Grid key={item._id} item xs={2} sm={4} md={4}>
-                <Product
-                  name={item.name}
-                  currentPrice={item.currentPrice}
-                  previousPrice={item.previousPrice}
-                  categories={item.categories}
-                  imageUrls={item.imageUrls}
-                />
+                <Product productId={item._id} />
               </Grid>
             ))}
           </Grid>
