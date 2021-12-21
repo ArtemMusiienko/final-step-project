@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Tabs, Tab, Box, Container, Typography, Avatar } from '@mui/material'
 import { Backdrop } from '@mui/material/Backdrop'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { addProduct, decrement, incriment, removeProduct } from '../../../store/buscet/buscetSlise'
+import { addProduct, decrement, incriment, removeProduct } from '../../../store/basket/basketSlise'
 
 const Cart = () => {
   const count = useSelector(state => state.basket.count)

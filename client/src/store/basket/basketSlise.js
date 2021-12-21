@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const busketSlice = createSlice({
+const basketSlice = createSlice({
   name: 'basket',
   initialState: [],
   reducers: {
@@ -18,5 +18,5 @@ const busketSlice = createSlice({
     }
   }
 })
-export const { addProduct, removeProduct, incriment, decrement } = busketSlice.actions
-export default busketSlice.reducer
+export const { addProduct, removeProduct, incriment, decrement } = basketSlice.actions
+export default basketSlice.reducer
