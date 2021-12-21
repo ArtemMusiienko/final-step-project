@@ -2,7 +2,8 @@ import React from 'react'
 import Badge from '@mui/material/Badge'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@mui/material'
 import CartIcon from './CartIcon'
 
 const StyledBadge = styled(Badge)(({ theme }) => {
@@ -18,8 +19,7 @@ const StyledBadge = styled(Badge)(({ theme }) => {
 
 const CartBage = () => (
   <IconButton aria-label="cart">
-    <Link to="/shop/cart">
-      {' '}
+    <Link sx={{ color: 'text.secondary' }} to="/shop/cart" component={RouterLink}>
       <StyledBadge badgeContent={4} color="primary">
         <CartIcon viewBox="0 0 24 24" />
       </StyledBadge>
