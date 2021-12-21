@@ -1,8 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import counterReducer from './counterExample/reducer'
+import authReducer from './auth/reducer'
+import messageReducer from './message/reducer'
+import catalogReducer from './catalog/reducer'
 
 const rootReducer = combineReducers({
-  counter: counterReducer
+  auth: authReducer,
+  message: messageReducer,
+  catalog: catalogReducer
 })
 
 export default rootReducer

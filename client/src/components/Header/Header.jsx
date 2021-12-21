@@ -1,151 +1,108 @@
 import React, { useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import AccountCircle from '@mui/icons-material/AccountCircle'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
-import './Header.scss'
-import { borders } from '@mui/system'
-import { Avatar, Button, ImageList, Paper } from '@mui/material'
-import Container from '@mui/material/Container'
-import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
-import Logo from '../Image/sss.jpg'
-import ico from '../Image/clipart3366677.png'
-import bascet from '../Image/shopping-cart.png'
+import { useSelector } from 'react-redux'
+import { Divider, AppBar, Box, Toolbar, IconButton, Drawer, Typography } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import Logo from '../Logo'
+import HeaderTabs from './HeaderTabs'
+import CartBage from '../CartBage'
+import SearchButton from '../SearchButton'
+import LoginModal from '../LoginModal'
+import LogoutModal from '../LogoutModal'
+import HeaderNavigationMobile from './HeaderNavigationMobile'
 
-const useStyle = makeStyles(theme => {
-  return {
-    root: { flexGrow: 1 },
-    menuButtons: {
-      marginRight: theme.spacing(1)
-    },
-    title: {
-      flexGrow: 1
-    },
-    menuLink: {
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    linkStyle: {
-      textDecoration: 'none',
-      color: '#3D3D3D'
-    }
+const pages = [
+  {
+    linkName: 'Home',
+    path: '/'
+  },
+  {
+    linkName: 'Shop',
+    path: '/shop'
+  },
+  {
+    linkName: 'Plant Care',
+    path: '/plant-care'
+  },
+  {
+    linkName: 'Blogs',
+    path: '/blogs'
   }
-})
+]
+
 const Header = () => {
-  const classes = useStyle()
-  const [auth, setAuth] = useState(true)
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { isLoggedIn } = useSelector(state => state.auth)
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
-        <Container position="static">
-          <Toolbar>
-            <Avatar src={Logo} style={{ width: 35, height: 35 }} className={classes.menuButtons} />
-            <Typography variant="h6" style={{ color: '#46A358' }} className={classes.title}>
-              {' '}
-              GREENSHOP{' '}
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} className={classes.menuLink}>
-              <Typography component="div" sx={{ flexGrow: 1 }} className={classes.menuLink}>
-                <NavLink className={classes.linkStyle} to="/">
-                  Home
-                </NavLink>
+    <AppBar
+      color="secondary"
+      sx={{
+        boxShadow: 'none',
+        zIndex: theme => theme.zIndex.drawer + 1,
+        position: { xs: 'fixed', md: 'static' }
+      }}
+    >
+      <Toolbar disableGutters>
+        <Box sx={{ flex: '0 0 20%', display: { xs: 'none', md: 'flex' } }}>
+          <Logo />
+        </Box>
+        <Box sx={{ flex: '0 0 15%', display: { xs: 'flex', md: 'none' } }}>
+          <IconButton
+            size="large"
+            aria-label="menu-navigation"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleDrawerToggle}
+            color="primary"
+          >
+            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
+          <Box component="nav" sx={{ width: '100%', flexShrink: { sm: 0 } }} aria-label="nav-menu">
+            <Drawer
+              component="div"
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+              SlideProps={{
+                timeout: 400
+              }}
+              sx={{
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
+              }}
+            >
+              <HeaderNavigationMobile mobileOpen={mobileOpen} />
+              <Divider />
+              <Typography variant="body1" color="initial">
+                Sign In
               </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/cart">
-                  Shop
-                </NavLink>
-              </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/plant-care">
-                  {' '}
-                  Plant Care
-                </NavLink>
-              </Typography>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={classes.linkStyle} to="/cart">
-                  Blogs
-                </NavLink>
-              </Typography>
-            </Box>
-            <Box className={classes.menuLink}>
-              <Avatar
-                variant="square"
-                style={{ height: 24, width: 24, marginRight: 33, marginTop: 5 }}
-                src={bascet}
-              />
-              <Button variant="contained" style={{ backgroundColor: '#46A358', color: '#ffffff' }}>
-                {' '}
-                <Avatar
-                  variant="square"
-                  src={ico}
-                  style={{ width: 20, height: 20, marginRight: 5 }}
-                />
-                Login{' '}
-              </Button>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: '#46A358', color: '#ffffff', marginLeft: 5 }}
-              >
-                {' '}
-                <Avatar
-                  variant="square"
-                  style={{ width: 30, height: 30, marginRight: 5, backgroundColor: '#46A358' }}
-                />
-                Sign Ap{' '}
-              </Button>
-            </Box>
-            {/* {auth && (
-              <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )} */}
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+            </Drawer>
+          </Box>
+        </Box>
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
+          <Logo />
+        </Box>
+        <HeaderTabs pages={pages} />
+        <Box
+          sx={{
+            flex: { xs: '0 0 30%', md: '0 0 22%' },
+            justifyContent: { xs: 'space-evenly', md: 'space-between' },
+            display: 'flex'
+          }}
+        >
+          <SearchButton />
+          <CartBage />
+          {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+        </Box>
+      </Toolbar>
+      <Divider />
+    </AppBar>
   )
 }
-
 export default Header

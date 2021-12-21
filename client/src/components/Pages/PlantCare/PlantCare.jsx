@@ -66,7 +66,7 @@ const PlantCare = () => {
         <Typography className={classes.articleText}>
           If the sun is intense through your windows, you may want to add a sheer curtain to diffuse
           the light. Cacti and some succulents like aloe can handle brighter, direct sunlight. You
-          don’t want to overexpose or underexpose any plant so keep an eye on them if they're in
+          don’t want to overexpose or underexpose any plant so keep an eye on them if they&aposs;re
           very bright or very low light.
         </Typography>
         <Typography variant="h5" className={classes.articleTitle}>
@@ -110,6 +110,10 @@ const PlantCare = () => {
         <Typography variant="h5" className={classes.articleTitle}>
           4.Raise humidity levels when needed{' '}
         </Typography>
+        <p className={classes.articleText}>
+          Staying true to your plant&aposs; natural environment will help your plant thrive indoors.
+          Most tropical plants prefer high humidity and bright to moderate, indirect light. During
+          the dry months of winter, grouping similar plants together helps to create a more humid
         <Typography className={classes.articleText}>
           Staying true to your plant's natural environment will help your plant thrive indoors. Most
           tropical plants prefer high humidity and bright to moderate, indirect light. During the
