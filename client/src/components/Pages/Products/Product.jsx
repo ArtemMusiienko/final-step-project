@@ -1,62 +1,110 @@
-import { current } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import './Products.scss'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import frame from '../../../assets/frame.svg'
-import shopping from '../../../assets/shopping1.svg'
-import heart from '../../../assets/heart1.svg'
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  SvgIcon,
+  Typography
+} from '@mui/material'
+import Box from '@mui/material/Box'
+import { ReactComponent as frame } from '../../../assets/frame.svg'
+import { ReactComponent as cart } from '../../../assets/shopping1.svg'
+import { ReactComponent as heart } from '../../../assets/heart1.svg'
 
-/* eslint-disable */
-const Product = ({ name, currentPrice, previousPrice = currentPrice, categories, imageUrls }) => {
-   const [hover, setHover] = useState(false);
-  const discount = Math.floor(((previousPrice - currentPrice) / previousPrice) * 100)
-  const showPreviousPrice = () => {
-    if (currentPrice !== previousPrice) {
-      if (Number.isInteger(previousPrice)) {
-        return `$${previousPrice}.00`
-      }
-      else {
-        return `$${previousPrice}`
-      }
-    }
+const Product = ({ productId }) => {
+  const { products } = useSelector(state => state.products)
+  const navigate = useNavigate()
+  const [product, setProduct] = useState(
+    // eslint-disable-next-line no-underscore-dangle
+    products.filter(productData => productData._id === productId)
+  )
+  const handleClick = () => {
+    navigate(`/shop${product[0].productUrl}`)
   }
-   
+  const discount = Math.floor(
+    ((product[0].previousPrice - product[0].currentPrice) / product[0].previousPrice) * 100
+  )
   return (
     <Card
-      sx={{ maxWidth: 250, maxHeight: 500, position: "relative" }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      sx={{
+        maxWidth: 250,
+        maxHeight: 500,
+        position: 'relative',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
     >
-      <CardMedia component="img" height="250" width="250" image={imageUrls[0]} />
-      {hover && (
-        <div className='hover-container'>
-          <img src={shopping} alt="" style={{marginRight:'10px'}} />
-          <img src={heart} alt="" style={{marginRight:'10px'}} />
-          <img src={frame} alt="" />
-        </div>
-      )}
-      <CardContent>
-        <Typography gutterBottom variant="h5">
-          {name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <span className="cur-price">
-            ${Number.isInteger(currentPrice) ? `${currentPrice}.00` : currentPrice}
-          </span>
-          <span className="prev-price">{showPreviousPrice()}</span>
-          {currentPrice !== previousPrice ? (
-            <div className="discount-container">
-              <p className="discount-count">{discount}% OFF</p>
-            </div>
-          ) : null}
-        </Typography>
-      </CardContent>
+      <CardActionArea
+        onClick={handleClick}
+        sx={{
+          display: 'flex',
+          flexGrow: 1,
+          justifyContent: 'flex-start',
+          flexDirection: 'column',
+          alignItems: 'flex-start'
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="140"
+          image={product[0].imageUrls[0]}
+          alt="green iguana"
+        />
+        {product[0].previousPrice && (
+          <Box sx={{ position: 'absolute', top: 0, width: 80, backgroundColor: '#46a358' }}>
+            <Typography variant="body1" sx={{ color: 'white', fontSize: 16, fontWeight: 500 }}>
+              {discount}% OFF
+            </Typography>
+          </Box>
+        )}
+        <CardContent>
+          <div>
+            <Typography variant="body2" sx={{ fontWeight: 'bold', fontSize: 16, color: '#46A358' }}>
+              {`$${product[0].currentPrice.toFixed(2)}`}
+            </Typography>
+            {product[0].previousPrice && (
+              <Typography
+                variant="body2"
+                ml={1}
+                sx={{
+                  fontSize: 16,
+                  textDecoration: 'line-through',
+                  color: '#CBCBCB'
+                }}
+              >
+                {`$${product[0].previousPrice.toFixed(2)}`}
+              </Typography>
+            )}
+          </div>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ fontSize: 16, textTransform: 'capitalize', fontWeight: 'bold' }}
+          >
+            {product[0].name}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions sx={{ justifyContent: 'center' }}>
+        <IconButton onClick={handleClick}>
+          <SvgIcon component={frame} viewBox="0 0 20 20" fontSize="small" />
+        </IconButton>
+        <IconButton>
+          <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
+        </IconButton>
+        <IconButton>
+          <SvgIcon component={heart} viewBox="0 0 20 20" fontSize="small" />
+        </IconButton>
+      </CardActions>
     </Card>
-  );
+  )
 }
 export default Product

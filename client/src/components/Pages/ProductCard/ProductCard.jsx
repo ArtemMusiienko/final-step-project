@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Grid from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
@@ -30,12 +31,13 @@ const StyledTab = styled(Tab)(({ theme }) => {
 
 const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
   const { products } = useSelector(state => state.products)
+  const params = useParams()
   const [product, setProduct] = useState(
     // eslint-disable-next-line no-underscore-dangle
-    products.filter(productData => productData._id === productId)
+    products.filter(productData => productData.productUrl === `/${params.productUrl}`)
   )
   const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.up('md'))
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
   const [quantity, setQuantity] = useState(1)
   const [value, setValue] = useState('1')
   const valueStars = 3.5
@@ -63,7 +65,7 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
   }
   return (
     <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }} columns={16} mt={2}>
-      <Grid item container xs={16} md={8} columnSpacing={{ xs: 0, md: 2 }}>
+      <Grid item container xs={16} md={8}>
         <ImageGallery
           items={images}
           thumbnailPosition={matches ? 'left' : 'bottom'}
