@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './Products.scss'
 import {
@@ -16,16 +16,27 @@ import Box from '@mui/material/Box'
 import { ReactComponent as frame } from '../../../assets/frame.svg'
 import { ReactComponent as cart } from '../../../assets/shopping1.svg'
 import { ReactComponent as heart } from '../../../assets/heart1.svg'
+import { addProduct } from '../../../store/busket/busketSlise'
 
 const Product = ({ productId }) => {
   const { products } = useSelector(state => state.products)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [product, setProduct] = useState(
     // eslint-disable-next-line no-underscore-dangle
     products.filter(productData => productData._id === productId)
   )
   const handleClick = () => {
     navigate(`/shop${product[0].productUrl}`)
+  }
+  const addProductToCartClick = () => {
+    const data = {
+      // eslint-disable-next-line no-underscore-dangle
+      product: product[0]._id,
+      cartQuantity: 1
+    }
+    console.log(data)
+    dispatch(addProduct(data))
   }
   const discount = Math.floor(
     ((product[0].previousPrice - product[0].currentPrice) / product[0].previousPrice) * 100
@@ -97,7 +108,7 @@ const Product = ({ productId }) => {
         <IconButton onClick={handleClick}>
           <SvgIcon component={frame} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={addProductToCartClick}>
           <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
         <IconButton>
