@@ -8,7 +8,6 @@ import {FormControl, FormControlLabel, RadioGroup} from '@material-ui/core'
 import Box from '@mui/material/Box'
 import {ReactComponent as Payments} from '../../../assets/image/payment-method.svg'
 import TextField from '../../FormsUi/Textfield/index'
-// import {TextField} from "@mui/material";
 import CheckoutModal from './CheckoutModal'
 
 const INITIAL_FORM_STATE = {
@@ -16,12 +15,12 @@ const INITIAL_FORM_STATE = {
   lastName: '',
   country: '',
   city: '',
-  street: '',
+  address: '',
   appartement: '',
   state: '',
-  zip: '',
+  postal: '',
   email: '',
-  phone: '',
+  mobile: '',
   notes: ''
 }
 
@@ -30,12 +29,12 @@ const FORM_VALIDATION = Yup.object().shape({
   lastName: Yup.string().required('Required'),
   country: Yup.string().required('Required'),
   city: Yup.string().required('Required'),
-  street: Yup.string().required('Required'),
+  address: Yup.string().required('Required'),
   appartement: Yup.string(),
   state: Yup.string().required('Required'),
-  zip: Yup.number().required('Required'),
+  postal: Yup.number().required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
-  phone: Yup.number().integer().typeError('Please enter a valid phone number').required('Required'),
+  mobile: Yup.number().integer().typeError('Please enter a valid phone number').required('Required'),
   notes: Yup.string()
 })
 
@@ -130,7 +129,7 @@ const Checkout = () => {
                       <Typography variant="h6">
                         Street Address<span style={{color: 'red'}}>*</span>
                       </Typography>
-                      <TextField name="street"/>
+                      <TextField name="address"/>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">Appartement,suite</Typography>
@@ -146,7 +145,7 @@ const Checkout = () => {
                       <Typography variant="h6">
                         Zip<span style={{color: 'red'}}>*</span>
                       </Typography>
-                      <TextField name="zip"/>
+                      <TextField name="postal"/>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
@@ -158,7 +157,7 @@ const Checkout = () => {
                       <Typography variant="h6">
                         Phone Number<span style={{color: 'red'}}>*</span>
                       </Typography>
-                      <TextField name="phone"/>
+                      <TextField name="mobile"/>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
