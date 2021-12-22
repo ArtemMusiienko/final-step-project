@@ -14,6 +14,7 @@ import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
+import Checkout from '../Pages/Checkout'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -40,6 +41,8 @@ const App = () => {
         <Route path="shop/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
         <Route path="plant-care" element={<PlantCare />} />
+        <Route exact path="checkout" element={<Checkout />} />
+
       </Route>
     </Routes>
   )
