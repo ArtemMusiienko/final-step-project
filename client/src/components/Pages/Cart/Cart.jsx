@@ -1,5 +1,4 @@
 import React from 'react'
-import './Cart.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Tabs, Tab, Box, Container, Typography, Avatar } from '@mui/material'
 import { Backdrop } from '@mui/material/Backdrop'

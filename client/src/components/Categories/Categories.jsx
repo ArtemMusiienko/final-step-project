@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Container from '@material-ui/core/Container'
 import Slider from 'rc-slider'
 import SubCategory from './SubCategories'
@@ -7,12 +8,14 @@ import 'rc-slider/assets/index.css'
 const { createSliderWithTooltip } = Slider
 const Range = createSliderWithTooltip(Slider.Range)
 const { Handle } = Slider
-export const Categories = ({ data, handleChange, currentValue, setValue, handleFilterButton }) => {
+
+export const Categories = ({ handleChange, currentValue, setValue, handleFilterButton }) => {
+  const { catalog } = useSelector(state => state.catalog)
   const [currentCategory, setCurrentCategory] = useState()
   const handleSlider = value => {
     setValue(value)
   }
-  const categoriesFiltered = data.filter(item => item.level === 0)
+  const categoriesFiltered = catalog.filter(item => item.level === 0)
 
   return (
     <Container style={{ marginRight: '30px', maxWidth: '310px', marginLeft: '0' }}>
@@ -26,7 +29,7 @@ export const Categories = ({ data, handleChange, currentValue, setValue, handleF
               key={item.id}
               handleChange={handleChange}
               item={item}
-              data={data}
+              data={catalog}
             />
           ))}
         </ul>

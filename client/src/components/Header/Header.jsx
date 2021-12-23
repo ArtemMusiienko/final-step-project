@@ -44,7 +44,7 @@ const Header = () => {
       sx={{
         boxShadow: 'none',
         zIndex: theme => theme.zIndex.drawer + 1,
-        position: { xs: 'fixed', md: 'static' }
+        position: { xs: 'fixed', md: 'sticky' }
       }}
     >
       <Toolbar disableGutters>

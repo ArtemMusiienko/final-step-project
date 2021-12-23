@@ -18,7 +18,7 @@ import { ReactComponent as cart } from '../../../assets/shopping1.svg'
 import { ReactComponent as heart } from '../../../assets/heart1.svg'
 import { addProduct } from '../../../store/basket/basketSlise'
 
-const Product = ({ productId }) => {
+const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -72,9 +72,9 @@ const Product = ({ productId }) => {
             sx={{
               position: 'absolute',
               top: 0,
-              width: 80,
+              minWidth: 80,
               backgroundColor: '#46a358',
-              padding: '3px 3px 3px 6px'
+              textAlign: 'center'
             }}
           >
             <Typography variant="body1" sx={{ color: 'white', fontSize: 16, fontWeight: 500 }}>
@@ -125,4 +125,4 @@ const Product = ({ productId }) => {
     </Card>
   )
 }
-export default Product
+export default ShopProduct
