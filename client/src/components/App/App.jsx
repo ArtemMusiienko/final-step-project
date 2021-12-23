@@ -13,6 +13,7 @@ import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
 import Shop from '../Pages/Shop/Shop'
+import Checkout from '../Pages/Checkout'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="shop/trees" element={<Shop />} />
         <Route path="shop/trees/:categories" element={<Shop />} /> */}
         <Route path="plant-care" element={<PlantCare />} />
+        <Route exact path="checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
