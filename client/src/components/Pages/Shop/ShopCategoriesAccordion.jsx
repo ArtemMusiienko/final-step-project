@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { styled } from '@mui/material/styles'
+import React, { useState } from 'react'
+import { styled, useTheme } from '@mui/material/styles'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 import MuiAccordion from '@mui/material/Accordion'
 import MuiAccordionSummary from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
-import { useNavigate } from 'react-router-dom'
 
 const Accordion = styled(props => <MuiAccordion disableGutters elevation={0} square {...props} />)(
   ({ theme }) => {
@@ -27,7 +26,7 @@ const AccordionSummary = styled(props => (
   />
 ))(({ theme }) => {
   return {
-    backgroundColor: '#FBFBFB',
+    backgroundColor: theme.palette.grey[100],
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
       transform: 'rotate(90deg)'
     },
@@ -40,42 +39,34 @@ const AccordionSummary = styled(props => (
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => {
   return {
     paddingLeft: theme.spacing(5),
-    backgroundColor: '#FBFBFB'
+    backgroundColor: theme.palette.grey[100]
   }
 })
 
-const ShopCategoriesAccordion = ({ expanded, handleChange, category, accordionBody }) => {
-  const [accordion, setAccordion] = useState({ parentId: '', id: '' })
-  const [isClick, setIsClick] = useState(false)
-  const navigate = useNavigate()
-  useEffect(() => {
-    const { parentId, id } = category
-    setAccordion(prevState => {
-      return {
-        ...prevState,
-        parentId,
-        id
-      }
-    })
-  }, [category])
-
-  const handleClick = () => {
-    if (isClick) {
-      navigate('/shop')
-      setIsClick(!isClick)
-      return null
-    }
-    navigate(`/shop/${category.id}`)
-    setIsClick(!isClick)
-    return null
-  }
+const ShopCategoriesAccordion = ({ expanded, handleChange, category, accordionBody, level }) => {
+  const theme = useTheme()
+  const [accordion, setAccordion] = useState({
+    id: category.id,
+    level
+  })
 
   const cheackExpanded = () =>
-    expanded.some(exp => exp.parentId === accordion.parentId && exp.id === accordion.id)
+    expanded.some(exp => exp.id === accordion.id && exp.level === accordion.level)
   return (
-    <Accordion expanded={cheackExpanded()} onChange={handleChange(accordion)} onClick={handleClick}>
+    <Accordion expanded={cheackExpanded()} onChange={handleChange(accordion)}>
       <AccordionSummary aria-controls={`${accordion.id}-content`} id={`${accordion.id}-header`}>
-        <Typography>{category.name}</Typography>
+        <Typography
+          sx={{
+            color: cheackExpanded() ? theme.palette.primary.main : theme.text.primary,
+            fontWeight: cheackExpanded() ? 700 : 400,
+            '&:hover': {
+              color: theme.palette.primary.main,
+              opacity: 1
+            }
+          }}
+        >
+          {category.name}
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>{accordionBody}</AccordionDetails>
     </Accordion>

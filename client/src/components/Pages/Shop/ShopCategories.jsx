@@ -1,88 +1,65 @@
 import React, { useEffect, useState } from 'react'
-import Typography from '@mui/material/Typography'
+import { useLocation, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useLocation, useMatch } from 'react-router-dom'
+import { Box } from '@mui/system'
 import ShopCategoriesAccordion from './ShopCategoriesAccordion'
+import ShopCategoryLink from './ShopCategoryLink'
 
-const ShopCategories = () => {
+const ShopCategories = ({ resetExpanded, onResetExpanded }) => {
   const [expanded, setExpanded] = useState([])
-  const locationArray = useLocation().pathname.split('/')
-  // useEffect(() => {
-  //   if (locationArray.some(element => element === 'house')) {
-  //     const defObj = {
-  //       parentId: 'null',
-  //       id: 'house'
-  //     }
-  //     setExpanded(defObj)
-  //   }
-  //   if (locationArray.some(element => element === 'outdoors')) {
-  //     const defObj = {
-  //       parentId: 'null',
-  //       id: 'outdoors'
-  //     }
-  //     setExpanded(defObj)
-  //   }
-  //   if (locationArray.some(element => element === 'trees')) {
-  //     const defObj = {
-  //       parentId: 'null',
-  //       id: 'trees'
-  //     }
-  //     setExpanded(defObj)
-  //   }
-  //   if (locationArray.some(element => element === 'seeds')) {
-  //     const defObj = {
-  //       parentId: 'null',
-  //       id: 'seeds'
-  //     }
-  //     setExpanded(defObj)
-  //   }
-  //   const defObj = {
-  //     parentId: '',
-  //     id: ''
-  //   }
-  //   setExpanded(defObj)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
+  const { catalog } = useSelector(state => state.catalog)
+  const params = useParams()
+  const location = useLocation()
+  const currentMatch = location.pathname.split('/').reverse()[0]
+  useEffect(() => {
+    setExpanded(prevState => [setExpandedFunc()])
+    onResetExpanded(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetExpanded])
+  useEffect(() => {
+    setExpanded(prevState => [setExpandedFunc()])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catalog, params])
+  const setExpandedFunc = () => {
+    const currentCatalog = catalog
+      .filter(category => category.id.includes('-'))
+      .filter(category => {
+        const matchParam = category.id.split('-').reverse()
+        return matchParam[0] === currentMatch
+      })
+    let currentExpanded = {}
+    if (currentCatalog.length) {
+      currentExpanded = {
+        id: currentCatalog[0].parentId,
+        level: currentCatalog[0].level - 1
+      }
+    }
+    return currentExpanded
+  }
   const handleChange = panel => (event, newExpanded) => {
-    console.log(panel)
-    console.log(expanded)
-    const { parentId, id } = panel
-    if (parentId === 'null') {
-      setExpanded([panel])
-    }
-    if (expanded.some(element => parentId === element.parentId && id === element.id)) {
-      const newState = expanded.map(element => {
-        if (parentId === element.parentId && id === element.id) {
-          const defObj = {
-            parentId: '',
-            id: ''
-          }
-          return defObj
-        }
-        return element
-      })
-      setExpanded([...newState])
+    const levelInExpanded = expanded.some(exp => exp.level === panel.level)
+    if (!levelInExpanded) {
+      setExpanded(prevState => [...prevState, panel])
       return null
     }
-    if (expanded.some(element => parentId === element.parentId)) {
-      const newState = expanded.map(element => {
-        if (parentId === element.parentId) {
-          const defObj = {
-            parentId: element.parentId,
-            id: id
-          }
-          return defObj
+    if (levelInExpanded) {
+      const matchId = expanded.some(exp => exp.id === panel.id)
+      if (matchId) {
+        const filteredExpandedById = expanded.filter(exp => exp.id !== panel.id)
+        setExpanded(filteredExpandedById)
+        return null
+      }
+      const changeIdInExpanded = expanded.map(exp => {
+        if (exp.level === panel.level) {
+          const { id } = panel
+          return { ...exp, id }
         }
-        return element
+        return exp
       })
-      setExpanded([...newState])
-      return null
+      setExpanded(changeIdInExpanded)
     }
-    setExpanded([...expanded, panel])
     return null
   }
-  const { catalog } = useSelector(state => state.catalog)
   const maxLevel = Math.max(...[...new Set(catalog.map(category => category.level))])
   const createCatalog = (
     level = 0,
@@ -99,10 +76,9 @@ const ShopCategories = () => {
           const cheackChilds = currentCatalog.some(element => element.parentId === category.id)
           if (!cheackChilds) {
             return (
-              <div key={category.id}>
-                <Typography>{category.name}</Typography>
-                {/* <HeaderNavMobLink category={category} handleDrawerToggle={handleDrawerToggle} /> */}
-              </div>
+              <Box key={category.id} sx={{ margin: '10px 0' }}>
+                <ShopCategoryLink category={category} />
+              </Box>
             )
           }
           return (
@@ -112,6 +88,7 @@ const ShopCategories = () => {
                 handleChange={handleChange}
                 accordionBody={createCatalog(currentLevel, category.id)}
                 category={category}
+                level={level}
               />
             </div>
           )

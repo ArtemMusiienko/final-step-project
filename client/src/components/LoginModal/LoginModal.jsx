@@ -7,7 +7,7 @@ import { Divider, SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material
 import CloseIcon from '@mui/icons-material/Close'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
-import { ReactComponent as Login } from '../../assets/Login.svg'
+import { ReactComponent as Login } from '../../assets/login.svg'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import { clearMessage } from '../../store/message/reducer'

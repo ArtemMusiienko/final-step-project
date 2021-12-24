@@ -35,13 +35,10 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
+        <Route path="shop/cart" element={<Cart />} />
+        <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
         <Route path="shop" element={<Shop />}>
-          <Route path=":categories" element={<Shop />}>
-            <Route path=":subCategories" element={<Shop />}>
-              <Route path=":productUrl" element={<ProductCard />} />
-            </Route>
-          </Route>
-          <Route path="cart" element={<Cart />} />
+          <Route path=":categories" element={<Shop />} />
         </Route>
         {/* <Route path="shop/sale" element={<Shop />} />
         <Route path="shop/house" element={<Shop />} />

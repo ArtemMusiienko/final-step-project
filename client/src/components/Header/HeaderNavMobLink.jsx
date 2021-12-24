@@ -4,9 +4,9 @@ import { Link } from '@mui/material'
 
 const HeaderNavMobLink = ({ category, handleDrawerToggle }) => {
   const path = () => {
-    const startPath = ['/shop']
     const pathArray = category.id.split('-')
-    return [...startPath, ...pathArray].join('/')
+    const path1 = pathArray.reverse()[0]
+    return `/shop/${path1}`
   }
   const handleClick = () => {
     handleDrawerToggle()
