@@ -44,7 +44,7 @@ const Header = () => {
       sx={{
         boxShadow: 'none',
         zIndex: theme => theme.zIndex.drawer + 1,
-        position: { xs: 'fixed', md: 'static' }
+        position: { xs: 'fixed', md: 'sticky' }
       }}
     >
       <Toolbar disableGutters>
@@ -75,7 +75,11 @@ const Header = () => {
                 timeout: 400
               }}
               sx={{
-                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: { xs: '100%', sm: '70%' } }
+                '& .MuiDrawer-paper': {
+                  boxSizing: 'border-box',
+                  width: { xs: '100%', sm: '70%' },
+                  overflow: 'hidden'
+                }
               }}
             >
               <Container>
@@ -84,7 +88,9 @@ const Header = () => {
                   handleDrawerToggle={handleDrawerToggle}
                 />
                 <Divider sx={{ margin: '15px 0' }} />
-                {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+                <Box sx={{ marginLeft: '5px' }}>
+                  {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+                </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {pages.map(page => (
                     <Link

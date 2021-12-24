@@ -6,14 +6,13 @@ import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
 import ProductCard from '../Pages/ProductCard/ProductCard'
 import NotFound from '../Pages/NotFound'
-import './App.scss'
 import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
-import ProductsAll from '../Pages/Products/ProductsAll'
+import Shop from '../Pages/Shop/Shop'
 import Checkout from '../Pages/Checkout'
 
 const App = () => {
@@ -34,15 +33,24 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="" element={<Main />} />
+        <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="shop" element={<ProductsAll />} />
-        <Route path="shop/:productUrl" element={<ProductCard />} />
         <Route path="shop/cart" element={<Cart />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
+        <Route path="shop" element={<Shop />}>
+          <Route path=":categories" element={<Shop />} />
+        </Route>
+        {/* <Route path="shop/sale" element={<Shop />} />
+        <Route path="shop/house" element={<Shop />} />
+        <Route path="shop/house/:categories" element={<Shop />} />
+        <Route path="shop/outdoors" element={<Shop />} />
+        <Route path="shop/seeds" element={<Shop />} />
+        <Route path="shop/seeds/:categories" element={<Shop />} />
+        <Route path="shop/trees" element={<Shop />} />
+        <Route path="shop/trees/:categories" element={<Shop />} /> */}
         <Route path="plant-care" element={<PlantCare />} />
         <Route exact path="checkout" element={<Checkout />} />
-
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

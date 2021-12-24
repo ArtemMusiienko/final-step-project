@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import './Products.scss'
 import {
   Card,
   CardActionArea,
@@ -14,11 +13,11 @@ import {
 } from '@mui/material'
 import Box from '@mui/material/Box'
 import { ReactComponent as frame } from '../../../assets/frame.svg'
-import { ReactComponent as cart } from '../../../assets/shopping1.svg'
-import { ReactComponent as heart } from '../../../assets/heart1.svg'
+import { ReactComponent as cart } from '../../../assets/cart.svg'
+import { ReactComponent as heart } from '../../../assets/heart.svg'
 import { addProduct } from '../../../store/basket/basketSlise'
 
-const Product = ({ productId }) => {
+const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -26,8 +25,12 @@ const Product = ({ productId }) => {
     // eslint-disable-next-line no-underscore-dangle
     products.filter(productData => productData._id === productId)
   )
+  const createPath = () => {
+    const parseId = product[0].categories.split('-').reverse()
+    return `${parseId[0]}${product[0].productUrl}`
+  }
   const handleClick = () => {
-    navigate(`/shop${product[0].productUrl}`)
+    navigate(createPath())
   }
   const addProductToCartClick = () => {
     const data = {
@@ -43,7 +46,7 @@ const Product = ({ productId }) => {
   return (
     <Card
       sx={{
-        maxWidth: 250,
+        maxWidth: { xs: '100%', sm: '100%', md: 250 },
         maxHeight: 500,
         position: 'relative',
         height: '100%',
@@ -72,9 +75,9 @@ const Product = ({ productId }) => {
             sx={{
               position: 'absolute',
               top: 0,
-              width: 80,
+              minWidth: 80,
               backgroundColor: '#46a358',
-              padding: '3px 3px 3px 6px'
+              textAlign: 'center'
             }}
           >
             <Typography variant="body1" sx={{ color: 'white', fontSize: 16, fontWeight: 500 }}>
@@ -125,4 +128,4 @@ const Product = ({ productId }) => {
     </Card>
   )
 }
-export default Product
+export default ShopProduct

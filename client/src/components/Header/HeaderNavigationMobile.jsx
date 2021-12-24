@@ -43,21 +43,23 @@ const HeaderNavigationMobile = ({ mobileOpen, handleDrawerToggle }) => {
     return null
   }
   return (
-    <>
+    <Box
+      sx={{
+        position: 'relative',
+        bgcolor: theme => (theme.palette.mode === 'light' ? 'grey.100' : 'grey.900')
+      }}
+    >
       <Toolbar />
       <Box
         sx={{
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          position: 'relative',
-          bgcolor: theme => (theme.palette.mode === 'light' ? 'grey.100' : 'grey.900'),
-          overflowX: 'clip'
+          position: 'absolute'
         }}
-      >
-        {createCatalog()}
-      </Box>
-    </>
+      />
+      {createCatalog()}
+    </Box>
   )
 }
 
