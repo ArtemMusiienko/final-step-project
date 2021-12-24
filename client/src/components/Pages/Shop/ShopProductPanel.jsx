@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Zoom from '@mui/material/Zoom'
 import ShopProduct from './ShopProduct'
 import usePagination from './Pagination'
 
@@ -17,6 +19,13 @@ const ShopProductPanel = () => {
   const params = useParams()
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: -100
+  })
+  const handleClick = event => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setPage(1)
@@ -55,6 +64,7 @@ const ShopProductPanel = () => {
   const paginationPages = () => Math.ceil(productList.length / productsOnPage)
   const productsPerPages = usePagination(productList, productsOnPage)
   const handleChange = (e, p) => {
+    handleClick()
     setPage(p)
     productsPerPages.jump(p)
   }
@@ -66,14 +76,16 @@ const ShopProductPanel = () => {
         </Grid>
       ))}
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }} mt={2}>
-        <Pagination
-          count={paginationPages()}
-          defaultPage={1}
-          page={page}
-          variant="outlined"
-          shape="rounded"
-          onChange={handleChange}
-        />
+        <Zoom in={trigger}>
+          <Pagination
+            count={paginationPages()}
+            defaultPage={1}
+            page={page}
+            variant="outlined"
+            shape="rounded"
+            onChange={handleChange}
+          />
+        </Zoom>
       </Grid>
     </Grid>
   )

@@ -1,13 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react'
-import { Link, useLocation, useMatch } from 'react-router-dom'
+import { Link as RouterLink, useLocation, useMatch } from 'react-router-dom'
 import { styled, useTheme } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
-import { Tabs, Toolbar, Typography } from '@mui/material'
+import { Tabs, Typography } from '@mui/material'
 import ShopCategories from './ShopCategories'
 import ShopProductPanel from './ShopProductPanel'
+import BreadcrumbsComponent from '../../BreadcrumbsComponent/BreadcrumbsComponent'
 
 const StyledTabs = styled(Tabs)(({ theme }) => {
   return {
@@ -41,6 +42,7 @@ const StyledTab = styled(props => <Tab disableRipple {...props} />)(({ theme }) 
 
 export const Shop = () => {
   const theme = useTheme()
+  const location = useLocation()
   const [isResetExpanded, setIsResetExpanded] = useState(true)
   const match = useMatch(useLocation().pathname)
   const activeTab = () => {
@@ -60,7 +62,7 @@ export const Shop = () => {
   }
   return (
     <div>
-      <Toolbar sx={{ display: { xs: 'none', md: 'block' } }} />
+      <BreadcrumbsComponent location={location} />
       <Grid container columnSpacing={5}>
         <Grid
           item
@@ -87,14 +89,14 @@ export const Shop = () => {
                 label="All products"
                 value="/shop"
                 to="/shop"
-                component={Link}
+                component={RouterLink}
                 onClick={() => onResetExpandedClick(true)}
               />
               <StyledTab
                 label="Sale"
                 value="/shop/sale"
                 to="sale"
-                component={Link}
+                component={RouterLink}
                 onClick={() => onResetExpandedClick(true)}
               />
             </StyledTabs>
