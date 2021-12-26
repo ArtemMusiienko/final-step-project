@@ -52,7 +52,10 @@ const BreadcrumbsComponent = ({ location }) => {
         return nameOfLink[0].name
       }
       const productLink = products.filter(product => product.productUrl === `/${pathName}`)
-      return productLink[0].name
+      if (productLink.length) {
+        return productLink[0].name
+      }
+      return pathName
     }
     return null
   }
