@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Box } from '@mui/system'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Zoom from '@mui/material/Zoom'
 import ShopCategoriesAccordion from './ShopCategoriesAccordion'
 import ShopCategoryLink from './ShopCategoryLink'
 
@@ -35,6 +37,14 @@ const ShopCategories = ({ resetExpanded, onResetExpanded }) => {
       }
     }
     return currentExpanded
+  }
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: -100
+  })
+
+  const handleClick = event => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
   const handleChange = panel => (event, newExpanded) => {
     const levelInExpanded = expanded.some(exp => exp.level === panel.level)
@@ -76,7 +86,7 @@ const ShopCategories = ({ resetExpanded, onResetExpanded }) => {
           const cheackChilds = currentCatalog.some(element => element.parentId === category.id)
           if (!cheackChilds) {
             return (
-              <Box key={category.id} sx={{ margin: '10px 0' }}>
+              <Box key={category.id} sx={{ margin: '10px 0' }} onClick={handleClick}>
                 <ShopCategoryLink category={category} />
               </Box>
             )
@@ -97,7 +107,11 @@ const ShopCategories = ({ resetExpanded, onResetExpanded }) => {
     return null
   }
 
-  return <div>{createCatalog()}</div>
+  return (
+    <Zoom in={trigger}>
+      <div>{createCatalog()}</div>
+    </Zoom>
+  )
 }
 
 export default ShopCategories

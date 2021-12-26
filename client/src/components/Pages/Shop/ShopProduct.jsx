@@ -12,6 +12,8 @@ import {
   Typography
 } from '@mui/material'
 import Box from '@mui/material/Box'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frame.svg'
 import { ReactComponent as cart } from '../../../assets/cart.svg'
 import { ReactComponent as heart } from '../../../assets/heart.svg'
@@ -64,11 +66,13 @@ const ShopProduct = ({ productId }) => {
           alignItems: 'flex-start'
         }}
       >
-        <CardMedia
-          component="img"
-          height="140"
-          image={product[0].imageUrls[0]}
-          alt="green iguana"
+        <Image
+          src={product[0].imageUrls[0]}
+          style={{ width: '100%', color: '#46A358' }}
+          cover
+          imageStyle={{ width: 'inherit', height: '100%' }}
+          color="#f5f5f5"
+          loading={<CircularProgress color="inherit" />}
         />
         {product[0].previousPrice && (
           <Box
