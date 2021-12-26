@@ -2,9 +2,9 @@ import React from 'react'
 import { AppBar, SvgIcon, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Logo from '../Logo'
-import { ReactComponent as Location } from '../../assets/location.svg'
-import { ReactComponent as Message } from '../../assets/message.svg'
-import { ReactComponent as Calling } from '../../assets/calling.svg'
+import { ReactComponent as Location } from '../../assets/locationIcon.svg'
+import { ReactComponent as Message } from '../../assets/messageIcon.svg'
+import { ReactComponent as Calling } from '../../assets/callingIcon.svg'
 
 const FooterMiddle = () => (
   <Box>

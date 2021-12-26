@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, ButtonGroup, Divider, SvgIcon, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { ReactComponent as CactusFirst } from '../../assets/cactusfirst.svg'
-import { ReactComponent as CactusSecond } from '../../assets/cactussecond.svg'
-import { ReactComponent as CactusThird } from '../../assets/cactusthird.svg'
+import { ReactComponent as CactusFirst } from '../../assets/cactusFirstIcon.svg'
+import { ReactComponent as CactusSecond } from '../../assets/cactusSecondIcon.svg'
+import { ReactComponent as CactusThird } from '../../assets/cactusThirdIcon.svg'
 
 const FooterTop = () => (
   <Box
