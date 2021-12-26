@@ -6,7 +6,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   IconButton,
   SvgIcon,
   Typography
@@ -14,9 +13,9 @@ import {
 import Box from '@mui/material/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Image from 'material-ui-image'
-import { ReactComponent as frame } from '../../../assets/frame.svg'
-import { ReactComponent as cart } from '../../../assets/cart.svg'
-import { ReactComponent as heart } from '../../../assets/heart.svg'
+import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
+import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
+import { ReactComponent as heart } from '../../../assets/heartIcon.svg'
 import { addProduct } from '../../../store/basket/basketSlise'
 
 const ShopProduct = ({ productId }) => {

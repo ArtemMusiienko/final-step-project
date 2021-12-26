@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import Backdrop from '@mui/material/Backdrop'
 import Button from '@mui/material/Button'
 import { Dialog, DialogActions, DialogContent, DialogContentText, SvgIcon } from '@mui/material'
-import { ReactComponent as Login } from '../../assets/login.svg'
+import { ReactComponent as Login } from '../../assets/loginIcon.svg'
 import { userLogout } from '../../store/auth/actions'
 
 const LogoutModal = () => {
