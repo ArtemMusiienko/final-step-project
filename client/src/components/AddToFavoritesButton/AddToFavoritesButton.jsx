@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IconButton } from '@mui/material'
+import {
+  Backdrop,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  IconButton
+} from '@mui/material'
+import { Box } from '@mui/system'
 import { useTheme } from '@mui/material/styles'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { updateWishlist } from '../../store/wishlist/actions'
+import { setWishlist, updateWishlist } from '../../store/wishlist/actions'
+import LoginModal from '../LoginModal'
 
 const AddToFavoritesButton = ({ id }) => {
   const wishlist = useSelector(state => state.wishlist)
   const theme = useTheme()
+  const [isOpenedDialog, setIsOpenedDialog] = useState(false)
   const findFavoriteIcon = () => {
     if (!wishlist.products) {
       return false
@@ -20,17 +31,61 @@ const AddToFavoritesButton = ({ id }) => {
     return false
   }
   const dispatch = useDispatch()
-  const handleClick = () => {
-    dispatch(updateWishlist({ id }))
+  const handleClick = async () => {
+    dispatch(setWishlist())
+      .then(response => {
+        if (response.error) {
+          throw new Error(true)
+        }
+        dispatch(updateWishlist({ id }))
+      })
+      .catch(error => {
+        const open = Boolean(error.message)
+        setIsOpenedDialog(open)
+      })
   }
+  const handleClose = () => {
+    setIsOpenedDialog(false)
+  }
+  const descriptionElementRef = useRef(null)
+  useEffect(() => {
+    if (isOpenedDialog) {
+      const { current: descriptionElement } = descriptionElementRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [isOpenedDialog])
   return (
-    <IconButton onClick={handleClick}>
-      {findFavoriteIcon() ? (
-        <FavoriteIcon sx={{ color: theme.palette.primary.main }} />
-      ) : (
-        <FavoriteBorderIcon sx={{ color: theme.text.primary }} />
-      )}
-    </IconButton>
+    <>
+      <IconButton onClick={handleClick}>
+        {findFavoriteIcon() ? (
+          <FavoriteIcon sx={{ color: theme.palette.primary.main }} />
+        ) : (
+          <FavoriteBorderIcon sx={{ color: theme.text.primary }} />
+        )}
+      </IconButton>
+      <Dialog
+        open={isOpenedDialog}
+        onClose={handleClose}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+            Add products to wishlist available only for registed users.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Ok</Button>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 
