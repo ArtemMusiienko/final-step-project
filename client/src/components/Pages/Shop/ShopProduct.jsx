@@ -15,8 +15,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
 import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
-import { ReactComponent as heart } from '../../../assets/heartIcon.svg'
 import { addProduct } from '../../../store/basket/basketSlise'
+import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton'
 
 const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
@@ -124,9 +124,7 @@ const ShopProduct = ({ productId }) => {
         <IconButton onClick={addProductToCartClick}>
           <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
-        <IconButton>
-          <SvgIcon component={heart} viewBox="0 0 20 20" fontSize="small" />
-        </IconButton>
+        <AddToFavoritesButton id={productId} />
       </CardActions>
     </Card>
   )
