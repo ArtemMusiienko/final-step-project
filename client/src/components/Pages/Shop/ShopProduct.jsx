@@ -16,7 +16,7 @@ import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
 import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
 import { ReactComponent as heart } from '../../../assets/heartIcon.svg'
-import { addProduct } from '../../../store/basket/basketSlise'
+import { addToCart } from '../../../store/cart/basketSlise'
 
 const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
@@ -33,17 +33,12 @@ const ShopProduct = ({ productId }) => {
   const handleClick = () => {
     navigate(createPath())
   }
-  const addProductToCartClick = () => {
-    const data = {
-      // eslint-disable-next-line no-underscore-dangle
-      product: product[0]._id,
-      cartQuantity: 1
-    }
-    dispatch(addProduct(data))
-  }
   const discount = Math.floor(
     ((product[0].previousPrice - product[0].currentPrice) / product[0].previousPrice) * 100
   )
+  const addProductToCartClick = props => {
+    dispatch(addToCart(product))
+  }
   return (
     <Card
       sx={{
@@ -121,7 +116,7 @@ const ShopProduct = ({ productId }) => {
         <IconButton onClick={handleClick}>
           <SvgIcon component={frame} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
-        <IconButton onClick={addProductToCartClick}>
+        <IconButton onClick={() => addProductToCartClick(product)}>
           <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
         <IconButton>
