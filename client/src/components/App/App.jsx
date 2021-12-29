@@ -15,10 +15,12 @@ import { setProducts } from '../../store/products/actions'
 import Shop from '../Pages/Shop/Shop'
 import Checkout from '../Pages/Checkout'
 import { removeWishlist } from '../../store/wishlist/reducer'
+import { setAllReviews } from '../../store/reviews/actions'
+import { setWishlist } from '../../store/wishlist/actions'
 
 const App = () => {
   const dispatch = useDispatch()
-  const { user } = useSelector(state => state.auth)
+  const { user, isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   useEffect(() => {
     if (user && checkTerminationToken(user)) {
@@ -28,8 +30,15 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
   useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(setWishlist())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn])
+  useEffect(() => {
     dispatch(setCatalog())
     dispatch(setProducts())
+    dispatch(setAllReviews())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
@@ -42,14 +51,6 @@ const App = () => {
         <Route path="shop" element={<Shop />}>
           <Route path=":categories" element={<Shop />} />
         </Route>
-        {/* <Route path="shop/sale" element={<Shop />} />
-        <Route path="shop/house" element={<Shop />} />
-        <Route path="shop/house/:categories" element={<Shop />} />
-        <Route path="shop/outdoors" element={<Shop />} />
-        <Route path="shop/seeds" element={<Shop />} />
-        <Route path="shop/seeds/:categories" element={<Shop />} />
-        <Route path="shop/trees" element={<Shop />} />
-        <Route path="shop/trees/:categories" element={<Shop />} /> */}
         <Route path="plant-care" element={<PlantCare />} />
         <Route exact path="checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />

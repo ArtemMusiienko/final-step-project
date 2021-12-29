@@ -6,15 +6,14 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  IconButton
+  DialogContentText
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { setWishlist, updateWishlist } from '../../store/wishlist/actions'
 
-const AddToFavoritesButton = ({ id }) => {
+const AddToFavoritesButtonProductCard = ({ id }) => {
   const wishlist = useSelector(state => state.wishlist)
   const theme = useTheme()
   const [isOpenedDialog, setIsOpenedDialog] = useState(false)
@@ -56,13 +55,24 @@ const AddToFavoritesButton = ({ id }) => {
   }, [isOpenedDialog])
   return (
     <>
-      <IconButton onClick={handleClick}>
+      <Button
+        onClick={handleClick}
+        variant="outlined"
+        color="primary"
+        sx={{
+          boxShadow: 'none',
+          fontWeight: 'bold',
+          padding: '5px',
+          minWidth: '165px'
+        }}
+      >
         {findFavoriteIcon() ? (
           <FavoriteIcon sx={{ color: theme.palette.primary.main }} />
         ) : (
-          <FavoriteBorderIcon sx={{ color: theme.text.primary }} />
+          <FavoriteBorderIcon sx={{ color: theme.palette.primary.main }} />
         )}
-      </IconButton>
+        {findFavoriteIcon() ? 'Remove From Wishlist' : 'Add To Wishlist'}
+      </Button>
       <Dialog
         open={isOpenedDialog}
         onClose={handleClose}
@@ -87,4 +97,4 @@ const AddToFavoritesButton = ({ id }) => {
   )
 }
 
-export default AddToFavoritesButton
+export default AddToFavoritesButtonProductCard
