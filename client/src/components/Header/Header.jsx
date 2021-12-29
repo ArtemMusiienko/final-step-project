@@ -89,7 +89,11 @@ const Header = () => {
                 />
                 <Divider sx={{ margin: '15px 0' }} />
                 <Box sx={{ marginLeft: '5px' }}>
-                  {isLoggedIn ? <LogoutModal /> : <LoginModal />}
+                  {isLoggedIn ? (
+                    <LogoutModal handleDrawerToggle={handleDrawerToggle} />
+                  ) : (
+                    <LoginModal handleDrawerToggle={handleDrawerToggle} />
+                  )}
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {pages.map(page => (

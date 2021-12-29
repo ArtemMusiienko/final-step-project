@@ -5,8 +5,9 @@ import Button from '@mui/material/Button'
 import { Dialog, DialogActions, DialogContent, DialogContentText, SvgIcon } from '@mui/material'
 import { ReactComponent as Login } from '../../assets/loginIcon.svg'
 import { userLogout } from '../../store/auth/actions'
+import { removeWishlist } from '../../store/wishlist/reducer'
 
-const LogoutModal = () => {
+const LogoutModal = ({ handleDrawerToggle }) => {
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -20,7 +21,13 @@ const LogoutModal = () => {
 
   const handleSubmit = () => {
     dispatch(userLogout())
+    dispatch(removeWishlist())
     setOpen(false)
+    if (!handleDrawerToggle) {
+      return null
+    }
+    handleDrawerToggle()
+    return null
   }
 
   const descriptionElementRef = useRef(null)

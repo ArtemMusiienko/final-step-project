@@ -47,7 +47,7 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => {
   }
 })
 
-const LoginModal = () => {
+const LoginModal = ({ handleDrawerToggle }) => {
   const [open, setOpen] = useState(false)
   const [alignment, setAlignment] = useState('login')
   const dispatch = useDispatch()
@@ -70,7 +70,14 @@ const LoginModal = () => {
     setAlignment('login')
     setOpen(true)
   }
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    if (!handleDrawerToggle) {
+      return null
+    }
+    handleDrawerToggle()
+    return null
+  }
   const handleAlignment = (event, newAlignment) => {
     if (!newAlignment) {
       return

@@ -17,6 +17,8 @@ import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
 import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
 import { ReactComponent as heart } from '../../../assets/heartIcon.svg'
 import { addToCart } from '../../../store/cart/basketSlise'
+import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton'
+
 
 const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
@@ -119,9 +121,7 @@ const ShopProduct = ({ productId }) => {
         <IconButton onClick={() => addProductToCartClick(product)}>
           <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
-        <IconButton>
-          <SvgIcon component={heart} viewBox="0 0 20 20" fontSize="small" />
-        </IconButton>
+        <AddToFavoritesButton id={productId} />
       </CardActions>
     </Card>
   )
