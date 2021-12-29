@@ -17,7 +17,6 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
 import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
-import { ReactComponent as heart } from '../../../assets/heartIcon.svg'
 import { addToCart } from '../../../store/cart/basketSlise'
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton'
 
