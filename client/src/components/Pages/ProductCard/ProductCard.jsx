@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-underscore-dangle */
+import React, { useRef, useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useLocation } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Grid from '@mui/material/Grid'
@@ -11,7 +13,6 @@ import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import StarIcon from '@mui/icons-material/Star'
 import AddIcon from '@mui/icons-material/Add'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import RemoveIcon from '@mui/icons-material/Remove'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -20,7 +21,11 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import './image-gallery.scss'
 import { Box } from '@mui/system'
+import Link from '@mui/material/Link'
 import BreadcrumbsComponent from '../../BreadcrumbsComponent/BreadcrumbsComponent'
+import AddToFavoritesButtonProductCard from '../../AddToFavoritesButton/AddToFavoritesButtonProductCard'
+import ProductCardReviews from './ProductCardReviews'
+import { setProductReviews } from '../../../store/reviews/actions'
 
 const StyledTab = styled(Tab)(({ theme }) => {
   return {
@@ -30,19 +35,46 @@ const StyledTab = styled(Tab)(({ theme }) => {
   }
 })
 
-const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
+const ProductCard = props => {
   const { products } = useSelector(state => state.products)
+  const { productReviews } = useSelector(state => state.reviews)
+  const reviewRef = useRef(null)
   const location = useLocation()
   const params = useParams()
+  // const reviewTarget = createRef()
   const [product, setProduct] = useState(
     // eslint-disable-next-line no-underscore-dangle
     products.filter(productData => productData.productUrl === `/${params.productUrl}`)
   )
+  const dispatch = useDispatch()
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
   const [quantity, setQuantity] = useState(1)
   const [value, setValue] = useState('1')
-  const valueStars = 3.5
+  const [valueStars, setValueStars] = useState(0)
+  const [isDisabled, setIsDisabled] = useState(false)
+  useEffect(() => {
+    if (product[0].quantity <= 0) {
+      setIsDisabled(!isDisabled)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product])
+  useEffect(() => {
+    setValueStars(countRating())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productReviews])
+  useEffect(() => {
+    const productId = product[0]._id
+    dispatch(setProductReviews({ productId }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products])
+  const countRating = () => {
+    const totalRating = productReviews.reduce(
+      (accum, currentValue) => accum + currentValue.rating,
+      0
+    )
+    return totalRating / productReviews.length
+  }
   const images = product[0].imageUrls.map(image => {
     const imgObject = {
       original: `${image}`,
@@ -64,6 +96,10 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
 
   const increaseHandleClick = () => {
     setQuantity(quantity + 1)
+  }
+  const reviewsHandlClick = () => {
+    setValue('2')
+    reviewRef.current.scrollIntoView({ behavior: 'smooth' })
   }
   return (
     <Box>
@@ -108,8 +144,8 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
             >
               {product[0].subTitle}
             </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <Box>
                 <Typography
                   variant="body2"
                   sx={{ fontWeight: 'bold', fontSize: '1.4rem', color: '#46A358' }}
@@ -129,11 +165,12 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                     {`$${product[0].previousPrice.toFixed(2)}`}
                   </Typography>
                 )}
-              </div>
+              </Box>
               <Box
                 sx={{
                   display: 'flex',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  flexDirection: 'column'
                 }}
               >
                 <Rating
@@ -143,7 +180,11 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                   precision={0.5}
                   emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                 />
-                <Box sx={{ ml: 2 }}>19 Customer Review</Box>
+                <Box>
+                  <Link component="button" onClick={reviewsHandlClick}>
+                    {`${productReviews.length} Customer Reviews`}
+                  </Link>
+                </Box>
               </Box>
             </Box>
             <Divider light />
@@ -172,6 +213,7 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                   aria-label="add"
                   sx={{ boxShadow: 'none' }}
                   onClick={decreaseHandleClick}
+                  disabled={isDisabled}
                 >
                   <RemoveIcon />
                 </Fab>
@@ -188,6 +230,7 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                   aria-label="add"
                   sx={{ boxShadow: 'none' }}
                   onClick={increaseHandleClick}
+                  disabled={isDisabled}
                 >
                   <AddIcon />
                 </Fab>
@@ -197,6 +240,7 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                   variant="contained"
                   color="primary"
                   sx={{ boxShadow: 'none', fontWeight: 'bold' }}
+                  disabled={isDisabled}
                 >
                   Buy Now
                 </Button>
@@ -204,26 +248,21 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                   variant="outlined"
                   color="primary"
                   sx={{ marginLeft: '5px', boxShadow: 'none', fontWeight: 'bold' }}
+                  disabled={isDisabled}
                 >
                   Add to cart
                 </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{
-                    marginLeft: '5px',
-                    boxShadow: 'none',
-                    fontWeight: 'bold',
-                    padding: '5px',
-                    minWidth: '40px'
-                  }}
-                >
-                  <FavoriteBorderIcon />
-                </Button>
+              </Grid>
+              <Grid item>
+                <AddToFavoritesButtonProductCard id={product[0]._id} />
               </Grid>
             </Grid>
             <Box sx={{ display: 'flex' }} mb={1}>
-              <Typography variant="body2" sx={{ color: '#A5A5A5', marginRight: '5px' }}>
+              <Typography
+                variant="body2"
+                sx={{ color: '#A5A5A5', marginRight: '5px' }}
+                ref={reviewRef}
+              >
                 SKU:
               </Typography>
               <Typography variant="body2">{product[0].itemNo}</Typography>
@@ -281,7 +320,7 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
                   <StyledTab label="Product Description" value="1" />
-                  <StyledTab label="Reviews(19)" value="2" />
+                  <StyledTab label={`Reviews(${productReviews.length})`} value="2" />
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -297,7 +336,9 @@ const ProductCard = ({ productId = '61b3a05853200b15dc1f7fcb' }, props) => {
                     </Typography>
                   ))}
               </TabPanel>
-              <TabPanel value="2">Reviews</TabPanel>
+              <TabPanel value="2" sx={{ paddingLeft: 0, paddingRight: 0 }}>
+                <ProductCardReviews />
+              </TabPanel>
             </TabContext>
           </Box>
         </Grid>
