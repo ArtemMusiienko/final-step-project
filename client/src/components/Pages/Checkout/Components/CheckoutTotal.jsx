@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import Box from "@mui/material/Box";
-import {makeStyles} from "@mui/styles";
-import {Typography} from "@mui/material";
+import React, { useState } from 'react'
+import Box from '@mui/material/Box'
+import { makeStyles } from '@mui/styles'
+import { Typography } from '@mui/material'
 
 const useStyle = makeStyles(theme => {
   return {
@@ -10,30 +10,29 @@ const useStyle = makeStyles(theme => {
       justifyContent: 'space-between',
       alignItems: 'center',
       marginBottom: '16px',
-      width:'321px',
-      marginLeft:'157px'
+      width: '321px',
+      marginLeft: '157px'
     },
-    normalText:{
+    normalText: {
       fontWeight: 500,
       fontSize: '18px',
-      color:'#3D3D3D'
+      color: '#3D3D3D'
     },
-    thinText:{
+    thinText: {
       fontWeight: 'normal',
       fontSize: '15px',
-      color:'#3D3D3D'
+      color: '#3D3D3D'
     },
-    boldText:{
+    boldText: {
       fontWeight: 'bold',
       fontSize: '16px',
-      color:'#3D3D3D'
+      color: '#3D3D3D'
     }
-
   }
 })
 const CheckoutTotal = () => {
   const classes = useStyle()
-  const [totalAmount,setTotalAmount] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0)
 
   return (
     <>
@@ -51,7 +50,9 @@ const CheckoutTotal = () => {
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.boldText}>Total</Typography>
-        <Typography style={{color:'#46A358'}} className={classes.boldText} >order total</Typography>
+        <Typography style={{ color: '#46A358' }} className={classes.boldText}>
+          order total
+        </Typography>
       </Box>
     </>
   )

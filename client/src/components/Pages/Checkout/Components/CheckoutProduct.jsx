@@ -1,11 +1,12 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import {Typography} from "@mui/material";
-import {makeStyles} from "@mui/styles";
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React from 'react'
+import Box from '@mui/material/Box'
+import { Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 const useStyle = makeStyles(theme => {
-  return{
-    container:{
+  return {
+    container: {
       display: 'grid',
       gridTemplateColumns: 'auto 30px 40px',
       columnGap: '7px',
@@ -13,12 +14,12 @@ const useStyle = makeStyles(theme => {
       marginBottom: '10px',
       paddingRight: '10px',
       paddingLeft: '10px',
-      backgroundColor:'#FBFBFB'
+      backgroundColor: '#FBFBFB'
     },
-    image:{
+    image: {
       marginRight: '10px'
     },
-    itemName:{
+    itemName: {
       marginBottom: '8px',
       color: '#3D3D3D',
       fontWeight: 500,
@@ -27,37 +28,33 @@ const useStyle = makeStyles(theme => {
       display: '-webkit-box',
       webkitLineClamp: '2',
       webkitBoxOrient: 'vertical',
-      overflow: 'hidden',
+      overflow: 'hidden'
     },
-    itemNumber:{
+    itemNumber: {
       fontWeight: 400,
       fontSize: '14px',
-      color:'#727272'
+      color: '#727272'
     },
-    itemPrice:{
+    itemPrice: {
       fontWeight: 700,
       fontSize: '18px',
-      color:'#46A358'
+      color: '#46A358'
     }
-
-
   }
 })
 
-const CheckoutProduct = ({url,name,itemNo,cartQuantity,currentPrice})=>{
+const CheckoutProduct = ({ url, name, itemNo, cartQuantity, currentPrice }) => {
   const classes = useStyle()
-  return(
+  return (
     <Box className={classes.container} key={itemNo}>
-      <img className={classes.image} width='70' height='70' src={url} alt='flower image'/>
-      <Typography className={classes.itemName} >{name}</Typography>
+      <img className={classes.image} width="70" height="70" src={url} alt="flower image" />
+      <Typography className={classes.itemName}>{name}</Typography>
       <Typography className={classes.itemNumber}>
-        <Typography style={{color:'#A5A5A5'}}>SKU</Typography>
+        <Typography style={{ color: '#A5A5A5' }}>SKU</Typography>
         {itemNo}
       </Typography>
       <Typography className={classes.itemNumber}>(x{cartQuantity})</Typography>
       <Typography className={classes.itemPrice}>{currentPrice * cartQuantity}</Typography>
-
-
     </Box>
   )
 }

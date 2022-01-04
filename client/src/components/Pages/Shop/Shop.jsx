@@ -61,26 +61,31 @@ export const Shop = () => {
     })
   }
   return (
-    <div>
+    <>
       <BreadcrumbsComponent location={location} />
       <Grid container columnSpacing={5}>
         <Grid
           item
-          container
           md={4}
           sx={{
             display: { xs: 'none', md: 'flex' },
-            flexDirection: 'column',
-            backgroundColor: theme.palette.grey[100]
+            flexDirection: 'column'
           }}
         >
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: 700, fontSize: 18, color: 'text.primary', marginTop: '15px' }}
+          <Box
+            sx={{ backgroundColor: theme.palette.grey[100], height: '100%', paddingLeft: '15px' }}
           >
-            Categories
-          </Typography>
-          <ShopCategories resetExpanded={isResetExpanded} onResetExpanded={onResetExpandedClick} />
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 700, fontSize: 18, color: 'text.primary', marginTop: '15px' }}
+            >
+              Categories
+            </Typography>
+            <ShopCategories
+              resetExpanded={isResetExpanded}
+              onResetExpanded={onResetExpandedClick}
+            />
+          </Box>
         </Grid>
         <Grid item container xs={12} md={8}>
           <Box sx={{ width: '100%' }}>
@@ -104,7 +109,7 @@ export const Shop = () => {
           <ShopProductPanel />
         </Grid>
       </Grid>
-    </div>
+    </>
   )
 }
 

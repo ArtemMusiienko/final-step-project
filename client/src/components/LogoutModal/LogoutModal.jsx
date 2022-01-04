@@ -6,6 +6,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, SvgIcon } from
 import { ReactComponent as Login } from '../../assets/loginIcon.svg'
 import { userLogout } from '../../store/auth/actions'
 import { removeWishlist } from '../../store/wishlist/reducer'
+import { deleteCartFromState } from '../../store/cart/reducer'
 
 const LogoutModal = ({ handleDrawerToggle }) => {
   const [open, setOpen] = useState(false)
@@ -22,6 +23,7 @@ const LogoutModal = ({ handleDrawerToggle }) => {
   const handleSubmit = () => {
     dispatch(userLogout())
     dispatch(removeWishlist())
+    dispatch(deleteCartFromState())
     setOpen(false)
     if (!handleDrawerToggle) {
       return null

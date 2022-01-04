@@ -10,6 +10,7 @@ const HeaderNavMobLink = ({ category, handleDrawerToggle }) => {
   }
   const handleClick = () => {
     handleDrawerToggle()
+    window.scrollTo({ top: 0 })
   }
   return (
     <Link

@@ -52,6 +52,7 @@ const HeaderTabs = ({ pages }) => {
             value={page.path}
             to={page.path}
             component={Link}
+            onClick={() => window.scrollTo({ top: 0 })}
           />
         ))}
       </DefaultTabs>
