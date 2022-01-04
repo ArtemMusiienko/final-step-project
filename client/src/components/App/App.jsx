@@ -51,7 +51,7 @@ const App = () => {
         <Route path="shop/trees" element={<Shop />} />
         <Route path="shop/trees/:categories" element={<Shop />} /> */}
         <Route path="plant-care" element={<PlantCare />} />
-        <Route exact path="checkout" element={<Checkout />} />
+        <Route path="shop/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
