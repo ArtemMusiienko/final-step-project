@@ -9,10 +9,8 @@ export const updateCart = cart =>
     })
     .then(response => response.data)
 
-export const addProductToCart = productId => {
-  console.log(productId)
-  return axios.put(`/cart/${productId}`).then(response => response.data)
-}
+export const addProductToCart = productId =>
+  axios.put(`/cart/${productId}`).then(response => response.data)
 
 export const deleteProductFromCart = productId =>
   axios.delete(`/cart/${productId}`).then(response => response.data)

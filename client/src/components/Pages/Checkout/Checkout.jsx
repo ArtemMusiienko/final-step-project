@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Button, Paper, SvgIcon, Typography, Grid } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Button, Paper, SvgIcon, Typography, Grid, List } from '@mui/material'
+import axios from 'axios'
 import { Formik, Form } from 'formik'
 import { makeStyles } from '@mui/styles'
 import * as Yup from 'yup'
@@ -9,6 +10,9 @@ import Box from '@mui/material/Box'
 import { ReactComponent as Payments } from '../../../assets/image/payment-method.svg'
 import TextField from '../../FormsUi/Textfield/index'
 import CheckoutModal from './CheckoutModal'
+import { getCart } from '../../../api/cart'
+import CheckoutProduct from './Components/CheckoutProduct'
+import CheckoutTotal from './Components/CheckoutTotal'
 
 const INITIAL_FORM_STATE = {
   firstName: '',
@@ -66,10 +70,22 @@ const useStyle = makeStyles(theme => {
     },
     iconRoot: {
       textAlign: 'center'
+    },
+    OrderTitle: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '16px'
     }
   }
 })
 const Checkout = () => {
+  const [cart, setCart] = useState()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const cart1 = await getCart()
+    console.log(cart1)
+  }, [])
   const classes = useStyle()
   const [modalActive, setModalActive] = useState(false)
   return (
@@ -187,11 +203,19 @@ const Checkout = () => {
           </Grid>
           <Grid item xs={12} md={4} className={classes.OrderPart}>
             <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
-              Your Your Order
+              Your Order
             </Typography>
-            <Paper style={{ boxShadow: 'unset' }}>
+            <Box className={classes.OrderTitle}>
+              <Typography style={{ fontWeight: 700, fontSize: '16px' }}>Products</Typography>
+              <Typography style={{ fontWeight: 500, fontSize: '16px' }}>Subtotal</Typography>
+            </Box>
+            <List>
+              <CheckoutProduct />
+            </List>
+            <CheckoutTotal />
+            <Paper style={{ boxShadow: 'unset', marginLeft: '157px' }}>
               <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
-                Payment Payment Method
+                Payment Method
               </Typography>
               <FormControl component="fieldset" style={{ marginLeft: '11px' }}>
                 <RadioGroup defaultValue="paypal" name="radio-buttons-group">
