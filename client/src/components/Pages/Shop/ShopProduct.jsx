@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
   Card,
@@ -16,15 +16,13 @@ import Box from '@mui/material/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
-import { ReactComponent as cart } from '../../../assets/cartIcon.svg'
-import { addToCart } from '../../../store/cart/basketSlise'
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton'
+import ShopProductCart from '../../AddToCartButtonIcon/ShopProductCart'
 
 const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
   const { allReviews } = useSelector(state => state.reviews)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const [product, setProduct] = useState(
     // eslint-disable-next-line no-underscore-dangle
     products.filter(productData => productData._id === productId)
@@ -53,9 +51,6 @@ const ShopProduct = ({ productId }) => {
   const discount = Math.floor(
     ((product[0].previousPrice - product[0].currentPrice) / product[0].previousPrice) * 100
   )
-  const addProductToCartClick = props => {
-    dispatch(addToCart(product))
-  }
   return (
     <Card
       sx={{
@@ -180,9 +175,7 @@ const ShopProduct = ({ productId }) => {
         <IconButton onClick={handleClick}>
           <SvgIcon component={frame} viewBox="0 0 20 20" fontSize="small" />
         </IconButton>
-        <IconButton onClick={() => addProductToCartClick(product)}>
-          <SvgIcon component={cart} viewBox="0 0 20 20" fontSize="small" />
-        </IconButton>
+        <ShopProductCart product={product[0]} />
         <AddToFavoritesButton id={productId} />
       </CardActions>
     </Card>

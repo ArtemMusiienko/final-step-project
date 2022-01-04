@@ -44,7 +44,8 @@ const Header = () => {
       sx={{
         boxShadow: 'none',
         zIndex: theme => theme.zIndex.drawer + 1,
-        position: { xs: 'fixed', md: 'sticky' }
+        position: { xs: 'fixed', md: 'sticky' },
+        '&.MuiPaper-root&.MuiAppBar-root': { paddingRight: '0 !important' }
       }}
     >
       <Toolbar disableGutters>

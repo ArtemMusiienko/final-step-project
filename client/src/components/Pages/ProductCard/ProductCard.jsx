@@ -7,13 +7,11 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Grid from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
-import { Divider, Button, Fab, Rating, Tab } from '@mui/material'
+import { Divider, Button, Rating, Tab } from '@mui/material'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import StarIcon from '@mui/icons-material/Star'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import ImageGallery from 'react-image-gallery'
@@ -26,6 +24,7 @@ import BreadcrumbsComponent from '../../BreadcrumbsComponent/BreadcrumbsComponen
 import AddToFavoritesButtonProductCard from '../../AddToFavoritesButton/AddToFavoritesButtonProductCard'
 import ProductCardReviews from './ProductCardReviews'
 import { setProductReviews } from '../../../store/reviews/actions'
+import ProductCardCartNavigation from './ProductCardCartNavigation'
 
 const StyledTab = styled(Tab)(({ theme }) => {
   return {
@@ -49,7 +48,6 @@ const ProductCard = props => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
-  const [quantity, setQuantity] = useState(1)
   const [value, setValue] = useState('1')
   const [valueStars, setValueStars] = useState(0)
   const [isDisabled, setIsDisabled] = useState(false)
@@ -86,17 +84,6 @@ const ProductCard = props => {
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-
-  const decreaseHandleClick = () => {
-    if (quantity === 1) {
-      return
-    }
-    setQuantity(quantity - 1)
-  }
-
-  const increaseHandleClick = () => {
-    setQuantity(quantity + 1)
-  }
   const reviewsHandlClick = () => {
     setValue('2')
     reviewRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -104,7 +91,13 @@ const ProductCard = props => {
   return (
     <Box>
       <BreadcrumbsComponent location={location} />
-      <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }} columns={16} mt={2}>
+      <Grid
+        container
+        columnSpacing={{ xs: 1, sm: 3, md: 5 }}
+        rowSpacing={{ xs: 1, sm: 0 }}
+        columns={16}
+        mt={2}
+      >
         <Grid item container xs={16} md={8}>
           <ImageGallery
             items={images}
@@ -205,57 +198,8 @@ const ProductCard = props => {
               </ul>
             </Box>
             <Divider light />
-            <Grid item container spacing={2} mt={1} mb={3}>
-              <Grid item>
-                <Fab
-                  color="primary"
-                  size="small"
-                  aria-label="add"
-                  sx={{ boxShadow: 'none' }}
-                  onClick={decreaseHandleClick}
-                  disabled={isDisabled}
-                >
-                  <RemoveIcon />
-                </Fab>
-                <Typography
-                  variant="body2"
-                  color="initial"
-                  sx={{ fontSize: '20px', margin: '0 15px' }}
-                >
-                  {quantity}
-                </Typography>
-                <Fab
-                  color="primary"
-                  size="small"
-                  aria-label="add"
-                  sx={{ boxShadow: 'none' }}
-                  onClick={increaseHandleClick}
-                  disabled={isDisabled}
-                >
-                  <AddIcon />
-                </Fab>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ boxShadow: 'none', fontWeight: 'bold' }}
-                  disabled={isDisabled}
-                >
-                  Buy Now
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{ marginLeft: '5px', boxShadow: 'none', fontWeight: 'bold' }}
-                  disabled={isDisabled}
-                >
-                  Add to cart
-                </Button>
-              </Grid>
-              <Grid item>
-                <AddToFavoritesButtonProductCard id={product[0]._id} />
-              </Grid>
+            <Grid item container mt={2} mb={2} spacing={1} direction="column">
+              <ProductCardCartNavigation currentProduct={product[0]} />
             </Grid>
             <Box sx={{ display: 'flex' }} mb={1}>
               <Typography
@@ -312,6 +256,9 @@ const ProductCard = props => {
                 </Button>
               </Grid>
             </Grid>
+            <Box mt={1}>
+              <AddToFavoritesButtonProductCard id={product[0]._id} />
+            </Box>
           </Box>
         </Grid>
         <Grid item xs={16}>

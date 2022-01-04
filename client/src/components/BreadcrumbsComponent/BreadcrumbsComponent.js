@@ -22,6 +22,7 @@ const BreadcrumbsComponent = ({ location }) => {
             }}
             component={RouterLink}
             to={`/${element}`}
+            onClick={() => window.scrollTo({ top: 0 })}
           >
             {element}
           </Link>
@@ -36,7 +37,13 @@ const BreadcrumbsComponent = ({ location }) => {
       }
       const currentPath = path.slice(0, index + 1).join('/')
       return (
-        <Link underline="hover" key={element} component={RouterLink} to={`/${currentPath}`}>
+        <Link
+          underline="hover"
+          key={element}
+          component={RouterLink}
+          to={`/${currentPath}`}
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
           {findCorrectNameOfLink(element)}
         </Link>
       )
