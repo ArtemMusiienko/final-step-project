@@ -15,6 +15,7 @@ import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
 import ProductsAll from '../Pages/Products/ProductsAll'
 import Checkout from '../Pages/Checkout'
+import Account from '../Account'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -37,12 +38,12 @@ const App = () => {
         <Route path="" element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="shop" element={<ProductsAll />} />
+        <Route path="account" element={<Account />} />
         <Route path="shop/:productUrl" element={<ProductCard />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
         <Route path="plant-care" element={<PlantCare />} />
         <Route exact path="checkout" element={<Checkout />} />
-
       </Route>
     </Routes>
   )

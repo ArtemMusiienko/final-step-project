@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { Divider, AppBar, Box, Toolbar, IconButton, Drawer, Container, Link } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import Logo from '../Logo'
 import HeaderTabs from './HeaderTabs'
 import CartBage from '../CartBage'
@@ -117,6 +118,13 @@ const Header = () => {
           <CartBage />
           {isLoggedIn ? (
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Link
+                sx={{ color: 'text.secondary', paddingTop: '10px', paddingRight: '10px' }}
+                to="/account"
+                component={RouterLink}
+              >
+                <ManageAccountsIcon />
+              </Link>
               <LogoutModal />
             </Box>
           ) : (
