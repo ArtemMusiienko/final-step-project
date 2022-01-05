@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import axios from 'axios'
 import './index.scss'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import App from './components/App'
 import { store, persistor } from './store/store'
 import theme from './theme'
@@ -31,6 +33,7 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
+            <ToastContainer />
             <App />
           </BrowserRouter>
         </ThemeProvider>
@@ -39,8 +42,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 )
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals()

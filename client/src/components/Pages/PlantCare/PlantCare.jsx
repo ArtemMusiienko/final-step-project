@@ -1,9 +1,9 @@
 import React from 'react'
 import './PlantCare.scss'
-import {Container, Typography} from '@mui/material'
-import {makeStyles} from '@mui/styles'
+import { Container, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import Box from '@mui/material/Box'
 import image from '../../../assets/image/plant-care.png'
-import Box from "@mui/material/Box"
 
 const useStyle = makeStyles(theme => {
   return {
@@ -26,14 +26,14 @@ const PlantCare = () => {
       <Box className="plant-care__title-wrapper">
         <Typography
           variant="h3"
-          style={{marginTop: '2rem', marginBottom: '2rem', color: '#46A358'}}
+          style={{ marginTop: '2rem', marginBottom: '2rem', color: '#46A358' }}
           className="plant-care__title"
         >
           Our Top 7 Plant Care Tips
         </Typography>
         <Typography
           variant="h4"
-          style={{textAlign: 'center', marginBottom: '3rem'}}
+          style={{ textAlign: 'center', marginBottom: '3rem' }}
           className="plant-care__title-description"
         >
           There are plenty of ways to care for your plant. With the help of our plant experts, we’ve
@@ -42,7 +42,7 @@ const PlantCare = () => {
         <img
           src={image}
           alt=""
-          style={{height: '100%', width: '100%'}}
+          style={{ height: '100%', width: '100%' }}
           className="plant-care__title-img"
         />
       </Box>
@@ -117,8 +117,7 @@ const PlantCare = () => {
           the dry months of winter, grouping similar plants together helps to create a more humid
         </Typography>
         <Typography className={classes.articleText}>
-          Staying true to your plant's natural environment will help your plant thrive indoors.
-          Most
+          Staying true to your plant’s natural environment will help your plant thrive indoors. Most
           tropical plants prefer high humidity and bright to moderate, indirect light. During the
           dry months of winter, grouping similar plants together helps to create a more humid
           microclimate. A humidifier can help too and it’s great for humans (find more ways to
@@ -139,8 +138,7 @@ const PlantCare = () => {
           6.Know when to skip the fertilizer
         </Typography>
         <Typography className={classes.articleText}>
-          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more
-          harm
+          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more harm
           than good. Houseplants tend to not need fertilizer as often as outdoor plants do. If you
           do choose to fertilize your plant, it’s best to do so during the growing season (early
           spring to early fall) and follow the general rule of thumb: ‘less is more’. Most
@@ -150,8 +148,7 @@ const PlantCare = () => {
           7.Shop from a reliable source{' '}
         </Typography>
         <Typography className={classes.articleText}>
-          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more
-          harm
+          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more harm
           than good. Houseplants tend to not need fertilizer as often as outdoor plants do. If you
           do choose to fertilize your plant, its best to do so during the growing season (early
           spring to early fall) and follow the general rule of thumb: ‘less is more’. Most

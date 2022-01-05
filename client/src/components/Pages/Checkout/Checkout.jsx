@@ -1,14 +1,18 @@
-import React, {useState} from 'react'
-import {Button, Paper, SvgIcon, Typography, Grid} from '@mui/material'
-import {Formik, Form} from 'formik'
-import {makeStyles} from '@mui/styles'
+import React, { useEffect, useState } from 'react'
+import { Button, Paper, SvgIcon, Typography, Grid, List } from '@mui/material'
+import axios from 'axios'
+import { Formik, Form } from 'formik'
+import { makeStyles } from '@mui/styles'
 import * as Yup from 'yup'
 import Radio from '@material-ui/core/Radio'
-import {FormControl, FormControlLabel, RadioGroup} from '@material-ui/core'
+import { FormControl, FormControlLabel, RadioGroup } from '@material-ui/core'
 import Box from '@mui/material/Box'
-import {ReactComponent as Payments} from '../../../assets/image/payment-method.svg'
+import { ReactComponent as Payments } from '../../../assets/image/payment-method.svg'
 import TextField from '../../FormsUi/Textfield/index'
 import CheckoutModal from './CheckoutModal'
+import { getCart } from '../../../api/cart'
+import CheckoutProduct from './Components/CheckoutProduct'
+import CheckoutTotal from './Components/CheckoutTotal'
 
 const INITIAL_FORM_STATE = {
   firstName: '',
@@ -34,13 +38,16 @@ const FORM_VALIDATION = Yup.object().shape({
   state: Yup.string().required('Required'),
   postal: Yup.number().required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
-  mobile: Yup.number().integer().typeError('Please enter a valid phone number').required('Required'),
+  mobile: Yup.number()
+    .integer()
+    .typeError('Please enter a valid phone number')
+    .required('Required'),
   notes: Yup.string()
 })
 
 const useStyle = makeStyles(theme => {
   return {
-    root: {flexGrow: 1},
+    root: { flexGrow: 1 },
     gridPage: {
       backgroundColor: '#fffff',
       paddingTop: '36px'
@@ -63,107 +70,118 @@ const useStyle = makeStyles(theme => {
     },
     iconRoot: {
       textAlign: 'center'
+    },
+    OrderTitle: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '16px'
     }
   }
 })
 const Checkout = () => {
+  const [cart, setCart] = useState()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const cart1 = await getCart()
+    console.log(cart1)
+  }, [])
   const classes = useStyle()
   const [modalActive, setModalActive] = useState(false)
   return (
-    <Formik initialValues={{...INITIAL_FORM_STATE}}
-            validationSchema={FORM_VALIDATION}
-            onSubmit={async (values) => {
-              try {
-                setModalActive(true)
-                console.log(values)
-                const newOrder = await fetch('http://localhost:5000/api/orders',
-                  {
-                    method: "POST",
-                    body: JSON.stringify({...values}),
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                  }).then(d=>d.json())
-                console.log(newOrder)
-
-              } catch (err) {
-                console.log(err)
-              }
-
-            }}>
+    <Formik
+      initialValues={{ ...INITIAL_FORM_STATE }}
+      validationSchema={FORM_VALIDATION}
+      onSubmit={async values => {
+        try {
+          setModalActive(true)
+          console.log(values)
+          const newOrder = await fetch('http://localhost:5000/api/orders', {
+            method: 'POST',
+            body: JSON.stringify({ ...values }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(d => d.json())
+          console.log(newOrder)
+        } catch (err) {
+          console.log(err)
+        }
+      }}
+    >
       <Form>
         <Grid container spacing={2} className={classes.gridPage}>
           <Grid item xs={12} md={8} className={classes.billingPart}>
-            <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
+            <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
               Billing Billing Address
             </Typography>
-            <Paper style={{boxShadow: 'unset'}}>
+            <Paper style={{ boxShadow: 'unset' }}>
               <Box>
                 <Box className={classes.form}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        First Name<span style={{color: 'red'}}>*</span>
+                        First Name<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="firstName"/>
+                      <TextField name="firstName" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Last Name<span style={{color: 'red'}}>*</span>
+                        Last Name<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="lastName"/>
+                      <TextField name="lastName" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Country / Region<span style={{color: 'red'}}>*</span>
+                        Country / Region<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="country"/>
+                      <TextField name="country" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Town / City<span style={{color: 'red'}}>*</span>
+                        Town / City<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="city"/>
+                      <TextField name="city" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Street Address<span style={{color: 'red'}}>*</span>
+                        Street Address<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="address"/>
+                      <TextField name="address" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">Appartement,suite</Typography>
-                      <TextField name="appartement"/>
+                      <TextField name="appartement" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        State<span style={{color: 'red'}}>*</span>
+                        State<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="state"/>
+                      <TextField name="state" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Zip<span style={{color: 'red'}}>*</span>
+                        Zip<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="postal"/>
+                      <TextField name="postal" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Email address<span style={{color: 'red'}}>*</span>
+                        Email address<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="email"/>
+                      <TextField name="email" />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Typography variant="h6">
-                        Phone Number<span style={{color: 'red'}}>*</span>
+                        Phone Number<span style={{ color: 'red' }}>*</span>
                       </Typography>
-                      <TextField name="mobile"/>
+                      <TextField name="mobile" />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                       <FormControlLabel
                         value="ship"
-                        control={<Radio style={{color: '#46A358'}}/>}
+                        control={<Radio style={{ color: '#46A358' }} />}
                         label="Ship to a different address?"
                       />
                     </Grid>
@@ -172,11 +190,11 @@ const Checkout = () => {
                     <Grid item xs={12} md={6}>
                       <Typography
                         variant="h6"
-                        style={{marginTop: '54px', position: 'relative', left: '0'}}
+                        style={{ marginTop: '54px', position: 'relative', left: '0' }}
                       >
                         Order notes(optional)
                       </Typography>
-                      <TextField name="notes" multiline rows={6}/>
+                      <TextField name="notes" multiline rows={6} />
                     </Grid>
                   </Grid>
                 </Box>
@@ -184,22 +202,30 @@ const Checkout = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} md={4} className={classes.OrderPart}>
-            <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
-              Your Your Order
+            <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
+              Your Order
             </Typography>
-            <Paper style={{boxShadow: 'unset'}}>
-              <Typography variant="h6" style={{fontWeight: 'bold', marginBottom: '20px'}}>
-                Payment Payment Method
+            <Box className={classes.OrderTitle}>
+              <Typography style={{ fontWeight: 700, fontSize: '16px' }}>Products</Typography>
+              <Typography style={{ fontWeight: 500, fontSize: '16px' }}>Subtotal</Typography>
+            </Box>
+            <List>
+              <CheckoutProduct />
+            </List>
+            <CheckoutTotal />
+            <Paper style={{ boxShadow: 'unset', marginLeft: '157px' }}>
+              <Typography variant="h6" style={{ fontWeight: 'bold', marginBottom: '20px' }}>
+                Payment Method
               </Typography>
-              <FormControl component="fieldset" style={{marginLeft: '11px'}}>
+              <FormControl component="fieldset" style={{ marginLeft: '11px' }}>
                 <RadioGroup defaultValue="paypal" name="radio-buttons-group">
                   <FormControlLabel
                     value="paypal"
-                    control={<Radio style={{color: '#46A358'}}/>}
+                    control={<Radio style={{ color: '#46A358' }} />}
                     label={
                       <Box>
                         <SvgIcon
-                          style={{width: '100%', height: '100%'}}
+                          style={{ width: '100%', height: '100%' }}
                           viewBox="0 0 224 26"
                           component={Payments}
                         />
@@ -209,37 +235,38 @@ const Checkout = () => {
                   />
                   <FormControlLabel
                     value="Direct bank transfer"
-                    control={<Radio style={{color: '#46A358'}}/>}
+                    control={<Radio style={{ color: '#46A358' }} />}
                     label="Direct bank transfer"
                     className={classes.formControl}
                   />
                   <FormControlLabel
                     value="Cash on delivery"
-                    control={<Radio style={{color: '#46A358'}}/>}
+                    control={<Radio style={{ color: '#46A358' }} />}
                     label="Cash on delivery"
                     className={classes.formControl}
                   />
                 </RadioGroup>
               </FormControl>
-              <Button type='submit'
-                      variant="contained"
-                      style={{
-                        backgroundColor: '#46A358',
-                        color: '#ffffff',
-                        width: '321px',
-                        height: '50px',
-                        fontWeight: 'bold',
-                        textTransform: 'initial',
-                        marginTop: '50px',
-                        borderRadius: '3px'
-                      }}
+              <Button
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: '#46A358',
+                  color: '#ffffff',
+                  width: '321px',
+                  height: '50px',
+                  fontWeight: 'bold',
+                  textTransform: 'initial',
+                  marginTop: '50px',
+                  borderRadius: '3px'
+                }}
               >
                 Place Order
               </Button>
             </Paper>
           </Grid>
         </Grid>
-        <CheckoutModal active={modalActive} setActive={setModalActive}/>
+        <CheckoutModal active={modalActive} setActive={setModalActive} />
       </Form>
     </Formik>
   )

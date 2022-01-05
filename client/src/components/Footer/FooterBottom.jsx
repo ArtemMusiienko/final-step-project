@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button, SvgIcon, Typography, Divider } from '@mui/material'
 import { Box } from '@mui/system'
-import { ReactComponent as Facebook } from '../../assets/Facebook.svg'
-import { ReactComponent as Instagram } from '../../assets/Instagram.svg'
-import { ReactComponent as Twitter } from '../../assets/Twitter.svg'
-import { ReactComponent as Linkedin } from '../../assets/Linkedin.svg'
-import { ReactComponent as Union } from '../../assets/Union.svg'
-import { ReactComponent as Payment } from '../../assets/payment.svg'
+import { ReactComponent as Facebook } from '../../assets/facebookIcon.svg'
+import { ReactComponent as Instagram } from '../../assets/instagramIcon.svg'
+import { ReactComponent as Twitter } from '../../assets/twitterIcon.svg'
+import { ReactComponent as Linkedin } from '../../assets/linkedinIcon.svg'
+import { ReactComponent as Union } from '../../assets/unionIcon.svg'
+import { ReactComponent as Payment } from '../../assets/paymentIcon.svg'
 import FooterShortMenu from './FooterShortMenu'
 
 const FooterBottom = () => {

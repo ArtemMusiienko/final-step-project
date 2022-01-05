@@ -4,8 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { Toolbar } from '@mui/material'
 import Header from '../Header'
 import Footer from '../Footer'
-import './Layout.scss'
-import ScrollTop from '../ScrollTop'
+import ScrollTop from '../ScrollTop/ScrollTop'
 
 const Layout = () => (
   <Container maxWidth="xl">

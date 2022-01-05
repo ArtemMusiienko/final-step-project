@@ -6,44 +6,60 @@ import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
 import ProductCard from '../Pages/ProductCard/ProductCard'
 import NotFound from '../Pages/NotFound'
-import './App.scss'
 import Main from '../Pages/Main'
 import PlantCare from '../Pages/PlantCare'
 import checkTerminationToken from '../../services/checkTerminationToken'
 import { userLogout } from '../../store/auth/actions'
 import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
-import ProductsAll from '../Pages/Products/ProductsAll'
+import Shop from '../Pages/Shop/Shop'
 import Checkout from '../Pages/Checkout'
 import Account from '../Account'
+import { removeWishlist } from '../../store/wishlist/reducer'
+import { setAllReviews } from '../../store/reviews/actions'
+import { setWishlist } from '../../store/wishlist/actions'
 
 const App = () => {
   const dispatch = useDispatch()
-  const { user } = useSelector(state => state.auth)
+  const { user, isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   useEffect(() => {
     if (user && checkTerminationToken(user)) {
       dispatch(userLogout())
+      dispatch(removeWishlist())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
   useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(setWishlist())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn])
+  useEffect(() => {
     dispatch(setCatalog())
     dispatch(setProducts())
+    dispatch(setAllReviews())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="" element={<Main />} />
+        <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
+
         <Route path="shop" element={<ProductsAll />} />
         <Route path="account" element={<Account />} />
         <Route path="shop/:productUrl" element={<ProductCard />} />
         <Route path="shop/cart" element={<Cart />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
+        <Route path="shop" element={<Shop />}>
+          <Route path=":categories" element={<Shop />} />
+        </Route>
         <Route path="plant-care" element={<PlantCare />} />
         <Route exact path="checkout" element={<Checkout />} />
+        <Route path="shop/checkout" element={<Checkout />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
