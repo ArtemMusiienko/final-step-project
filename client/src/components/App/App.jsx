@@ -14,6 +14,7 @@ import { setCatalog } from '../../store/catalog/actions'
 import { setProducts } from '../../store/products/actions'
 import Shop from '../Pages/Shop/Shop'
 import Checkout from '../Pages/Checkout'
+import Account from '../Account'
 import { removeWishlist } from '../../store/wishlist/reducer'
 import { setAllReviews } from '../../store/reviews/actions'
 import { setWishlist } from '../../store/wishlist/actions'
@@ -46,12 +47,17 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
+
+        <Route path="shop" element={<ProductsAll />} />
+        <Route path="account" element={<Account />} />
+        <Route path="shop/:productUrl" element={<ProductCard />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
         <Route path="shop" element={<Shop />}>
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
+        <Route exact path="checkout" element={<Checkout />} />
         <Route path="shop/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>
