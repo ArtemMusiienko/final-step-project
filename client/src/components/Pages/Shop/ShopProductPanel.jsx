@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Grid, Pagination } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -11,14 +11,17 @@ import ShopProduct from './ShopProduct'
 import usePagination from './Pagination'
 
 const ShopProductPanel = () => {
+  const [value, setValue] = useState('')
+  // const [filteredProducts, setFilteredProducts]= useState([])
   const { products } = useSelector(state => state.products)
-  const [productList, setProductList] = useState([])
+  const [productList, setProductList] = useState(products)
   const [productsOnPage, setProductsOnPage] = useState(9)
   const [page, setPage] = useState(1)
   const location = useLocation()
   const params = useParams()
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
+
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: -100
@@ -42,18 +45,28 @@ const ShopProductPanel = () => {
   }, [matches])
   useEffect(() => {
     if (location.pathname === '/shop') {
-      setProductList(products)
+      if (value) {
+        const filteredPlants = products.filter(plant =>
+          plant.name.toLowerCase().includes(value.toLowerCase())
+        )
+        setProductList(filteredPlants)
+        console.log('hi')
+        return
+      }
+      setProductList(productList)
+      console.log('ddddd')
+      return
     }
     if (params.categories) {
       if (params.categories === 'sale') {
-        const dataProduct = products.filter(product => product.previousPrice)
+        const dataProduct = products.filter(product => product.previousPricec)
         setProductList(dataProduct)
         return
       }
       setProductList(filteredProducts())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, products])
+  }, [location, products, value])
   const filteredProducts = () => {
     const category = params.categories
     return products.filter(product => {
@@ -76,6 +89,12 @@ const ShopProductPanel = () => {
         </Grid>
       ))}
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }} mt={2}>
+        <input
+          placeholder="Find Plants ..."
+          onChange={event => {
+            setValue(event.target.value)
+          }}
+        />
         <Zoom in={trigger}>
           <Pagination
             count={paginationPages()}
