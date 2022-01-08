@@ -17,6 +17,7 @@ import Checkout from '../Pages/Checkout'
 import { removeWishlist } from '../../store/wishlist/reducer'
 import { setAllReviews } from '../../store/reviews/actions'
 import { setWishlist } from '../../store/wishlist/actions'
+import { deleteCartFromState } from '../../store/cart/reducer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const App = () => {
     if (user && checkTerminationToken(user)) {
       dispatch(userLogout())
       dispatch(removeWishlist())
+      dispatch(deleteCartFromState())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])

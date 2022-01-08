@@ -1,11 +1,20 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled, useTheme } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import { IconButton, TextField, Button } from '@mui/material'
+import {
+  IconButton,
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText
+} from '@mui/material'
+import Backdrop from '@mui/material/Backdrop'
 import Badge from '@mui/material/Badge'
 import Zoom from '@mui/material/Zoom'
 import Menu from '@mui/material/Menu'
@@ -39,6 +48,21 @@ const BageProductCart = ({ product, quantityInCart }) => {
   const [quantity, setQuantity] = useState(() => quantityInCart)
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [message, setMessage] = useState('')
+  const handleClose = () => {
+    setOpenDialog(false)
+    setMessage('')
+  }
+  const descriptionElementRef = useRef(null)
+  useEffect(() => {
+    if (openDialog) {
+      const { current: descriptionElement } = descriptionElementRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [openDialog])
   const open = Boolean(anchorEl)
   useEffect(() => {
     setQuantity(quantityInCart)
@@ -89,10 +113,9 @@ const BageProductCart = ({ product, quantityInCart }) => {
   const handleChange = event => {
     const { name, value } = event.target
     if (value > product.quantity) {
-      const error = {
-        cartQuantity: `Sorry, on stock only ${product.quantity} pcs`
-      }
-      formik.setErrors(error)
+      setMessage(`Sorry, on stock only ${product.quantity} pcs`)
+      setOpenDialog(true)
+      formik.setFieldValue(name, product.quantity)
     }
     if (value >= 0 && value <= product.quantity) {
       formik.setFieldValue(name, +value)
@@ -161,6 +184,26 @@ const BageProductCart = ({ product, quantityInCart }) => {
           </form>
         </MenuItem>
       </Menu>
+      <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+            {`${message}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Ok</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
