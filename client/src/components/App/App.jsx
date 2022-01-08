@@ -49,17 +49,13 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
-
-        <Route path="shop" element={<ProductsAll />} />
         <Route path="account" element={<Account />} />
-        <Route path="shop/:productUrl" element={<ProductCard />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
         <Route path="shop" element={<Shop />}>
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route exact path="checkout" element={<Checkout />} />
         <Route path="shop/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>

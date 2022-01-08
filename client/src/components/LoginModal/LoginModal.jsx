@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { Divider, SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import Dialog from '@mui/material/Dialog'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import DialogContent from '@mui/material/DialogContent'
 import { ReactComponent as Login } from '../../assets/loginIcon.svg'
 import LoginForm from './LoginForm'
@@ -49,6 +51,8 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => {
 
 const LoginModal = ({ handleDrawerToggle }) => {
   const [open, setOpen] = useState(false)
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
   const [alignment, setAlignment] = useState('login')
   const dispatch = useDispatch()
   useEffect(() => {
@@ -104,13 +108,17 @@ const LoginModal = ({ handleDrawerToggle }) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        scroll="body"
+        fullScreen={fullScreen}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
         <DialogContent
           ref={descriptionElementRef}
-          sx={{ borderBottom: '10px solid #46A358', padding: '50px 50px' }}
+          sx={{
+            borderBottom: '10px solid #46A358',
+            padding: { sm: '50px 50px' },
+            height: '100%'
+          }}
         >
           <Button
             onClick={handleClose}
