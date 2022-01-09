@@ -35,7 +35,11 @@ const HeaderTabs = ({ pages }) => {
   const matches = useMediaQuery(theme.breakpoints.up('md'))
   const useCheackPath = () => {
     const path = useLocation().pathname.split('/')
-    return `/${path[1]}/*`
+    const isValidPage = pages.some(page => page.path === `/${path[1]}`)
+    if (isValidPage) {
+      return `/${path[1]}/*`
+    }
+    return '/*'
   }
   const match = useMatch(useCheackPath())
   let currentTab = false

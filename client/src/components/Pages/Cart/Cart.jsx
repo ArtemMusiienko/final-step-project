@@ -1,9 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react'
-import { useLocation, Link as RouterLink } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useLocation, Link as RouterLink, useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { Box, Button, Divider, Link } from '@mui/material'
+import {
+  Box,
+  Button,
+  Divider,
+  Link,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText
+} from '@mui/material'
+import Backdrop from '@mui/material/Backdrop'
 import BreadcrumbsComponent from '../../BreadcrumbsComponent/BreadcrumbsComponent'
 import CartCard from './CartCard'
 import {
@@ -16,16 +27,78 @@ import {
   deleteProductFromBasket,
   increaseProductFromBasket
 } from '../../../store/cart/actions'
+import { setProducts } from '../../../store/products/actions'
 
 const Cart = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const theme = useTheme()
   const { products: productsAll } = useSelector(state => state.products)
   const { products } = useSelector(state => state.cart)
   const { isLoggedIn } = useSelector(state => state.auth)
   const [totalAmount, setTotalAmount] = useState(0)
-  const [errorMessage, setErrorMessage] = useState({ id: '', message: '' })
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+  const [message, setMessage] = useState('')
+  const [idForDelete, setIdForDelete] = useState('')
   const dispatch = useDispatch()
+  const handleClose = () => {
+    setOpen(false)
+    setMessage('')
+  }
+  const handleDeleteClose = () => {
+    setOpenDeleteDialog(false)
+    setIdForDelete('')
+  }
+  const handleDeleteConfirm = () => {
+    setOpenDeleteDialog(false)
+    if (!isLoggedIn) {
+      const currentProduct = products.find(
+        productInCart => productInCart.product._id === idForDelete
+      )
+      const { product } = currentProduct
+      dispatch(deleteProductFromCartForLocalStorage({ product }))
+      return
+    }
+    const productId = idForDelete
+    dispatch(deleteProductFromBasket({ productId }))
+  }
+  const descriptionElementRef = useRef(null)
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [open])
+  const descriptionDeleteRef = useRef(null)
+  useEffect(() => {
+    if (openDeleteDialog) {
+      const { current: descriptionElement } = descriptionDeleteRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [openDeleteDialog])
+  useEffect(() => {
+    dispatch(setProducts())
+  }, [])
+  useEffect(() => {
+    const someMatchDifQuantities = products.some(productInCart => {
+      const productInStock = productsAll.find(
+        productOnStock => productOnStock._id === productInCart.product._id
+      )
+      return productInStock.quantity < productInCart.cartQuantity
+    })
+    if (someMatchDifQuantities) {
+      setIsDisabled(true)
+      return null
+    }
+    setIsDisabled(false)
+    return null
+  }, [productsAll])
   useEffect(() => {
     const amount = products.reduce(
       (accum, currentValue) =>
@@ -33,13 +106,21 @@ const Cart = () => {
       0
     )
     setTotalAmount(amount)
+    const someMatchDifQuantities = products.some(productInCart => {
+      const productInStock = productsAll.find(
+        productOnStock => productOnStock._id === productInCart.product._id
+      )
+      return productInStock.quantity < productInCart.cartQuantity
+    })
+    if (someMatchDifQuantities) {
+      setIsDisabled(true)
+      return null
+    }
+    setIsDisabled(false)
+    return null
   }, [products])
   const decreaseHandleClick = id => {
     if (!isLoggedIn) {
-      setErrorMessage({
-        id: '',
-        message: ''
-      })
       const product = products.find(productInCart => productInCart.product._id === id)
       if (product.cartQuantity - 1 === 0) {
         return
@@ -47,10 +128,6 @@ const Cart = () => {
       dispatch(decreaseQuantityOfProductInCartForLocalstorage({ product }))
       return
     }
-    setErrorMessage({
-      id: '',
-      message: ''
-    })
     const product = products.find(productInCart => productInCart.product._id === id)
     if (product.cartQuantity - 1 === 0) {
       return
@@ -63,16 +140,8 @@ const Cart = () => {
       const product = products.find(productInCart => productInCart.product._id === id)
       const currentProductInStock = productsAll.find(productOnStock => productOnStock._id === id)
       if (product.cartQuantity + 1 > currentProductInStock.quantity) {
-        setErrorMessage({
-          id: `${id}`,
-          message: `Sorry on stock available only ${currentProductInStock.quantity} pcs`
-        })
-        setTimeout(() => {
-          setErrorMessage({
-            id: '',
-            message: ''
-          })
-        }, 2500)
+        setOpen(true)
+        setMessage(`Sorry on stock available only ${currentProductInStock.quantity} pcs`)
         return
       }
       dispatch(increaseQuantityOfProductInCartForLocalstorage({ product }))
@@ -80,33 +149,20 @@ const Cart = () => {
     const product = products.find(productInCart => productInCart.product._id === id)
     const currentProductInStock = productsAll.find(productOnStock => productOnStock._id === id)
     if (product.cartQuantity + 1 > currentProductInStock.quantity) {
-      setErrorMessage({
-        id: `${id}`,
-        message: `Sorry on stock available only ${currentProductInStock.quantity} pcs`
-      })
-      setTimeout(() => {
-        setErrorMessage({
-          id: '',
-          message: ''
-        })
-      }, 2500)
+      setOpen(true)
+      setMessage(`Sorry on stock available only ${currentProductInStock.quantity} pcs`)
       return
     }
     const productId = id
     dispatch(increaseProductFromBasket({ productId }))
   }
   const handleDeleteIconClick = id => {
-    if (!isLoggedIn) {
-      const currentProduct = products.find(productInCart => productInCart.product._id === id)
-      const { product } = currentProduct
-      dispatch(deleteProductFromCartForLocalStorage({ product }))
-      return
-    }
-    const productId = id
-    dispatch(deleteProductFromBasket({ productId }))
+    setOpenDeleteDialog(true)
+    setIdForDelete(id)
   }
   const handleCheckoutClick = () => {
-    console.log('click')
+    window.scrollTo({ top: 0 })
+    navigate('/shop/checkout')
   }
   const handleLinkShoppingClick = () => {
     window.scrollTo({ top: 0 })
@@ -114,6 +170,47 @@ const Cart = () => {
 
   return (
     <Box>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+            {`${message}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Ok</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleDeleteClose}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="dialog-description" ref={descriptionDeleteRef} tabIndex={-1}>
+            Are you sure, you want to delete this item?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteConfirm}>Ok</Button>
+          <Button onClick={handleDeleteClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
       <BreadcrumbsComponent location={location} />
       <Box
         sx={{
@@ -158,7 +255,6 @@ const Cart = () => {
                 decreaseHandleClick={decreaseHandleClick}
                 increaseHandleClick={increaseHandleClick}
                 handleDeleteIconClick={handleDeleteIconClick}
-                errorMessage={errorMessage}
               />
             ))
           ) : (
@@ -219,6 +315,7 @@ const Cart = () => {
               variant="contained"
               sx={{ textTransform: 'capitalize', boxShadow: 'none', width: '100%' }}
               onClick={handleCheckoutClick}
+              disabled={isDisabled}
             >
               Proceed To Checkout
             </Button>
