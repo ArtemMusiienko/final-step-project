@@ -1,10 +1,6 @@
-import React, { useSelector } from 'react'
+import React from 'react'
 import Slider from '../../Slider/Slider'
 
-const Main = () => (
-  <div>
-    <Slider />
-  </div>
-)
+const Main = () => <Slider />
 
 export default Main

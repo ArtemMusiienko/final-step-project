@@ -6,6 +6,7 @@ import cartReducer from './cart/reducer'
 import productReducer from './products/reducer'
 import wishlistReducer from './wishlist/reducer'
 import reviewsReducer from './reviews/reducer'
+import sliderReducer from './slider/reducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   products: productReducer,
   wishlist: wishlistReducer,
-  reviews: reviewsReducer
+  reviews: reviewsReducer,
+  slider: sliderReducer
 })
 
 export default rootReducer
