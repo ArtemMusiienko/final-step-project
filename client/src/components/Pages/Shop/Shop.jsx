@@ -14,7 +14,7 @@ const StyledTabs = styled(Tabs)(({ theme }) => {
   return {
     fontSize: 15,
     marginBottom: 10,
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: '#FBFBFB',
     '& .MuiTabs-indicator': {
       height: 2
     }
@@ -63,7 +63,7 @@ export const Shop = () => {
   return (
     <>
       <BreadcrumbsComponent location={location} />
-      <Grid container columnSpacing={5}>
+      <Grid container columnSpacing={5} sx={{ marginBottom: '30px' }}>
         <Grid
           item
           md={4}
@@ -72,9 +72,7 @@ export const Shop = () => {
             flexDirection: 'column'
           }}
         >
-          <Box
-            sx={{ backgroundColor: theme.palette.grey[100], height: '100%', paddingLeft: '15px' }}
-          >
+          <Box sx={{ backgroundColor: '#FBFBFB', height: '100%', paddingLeft: '15px' }}>
             <Typography
               variant="h6"
               sx={{ fontWeight: 700, fontSize: 18, color: 'text.primary', marginTop: '15px' }}

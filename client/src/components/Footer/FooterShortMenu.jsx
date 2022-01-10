@@ -95,9 +95,9 @@ const FooterShortMenu = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>House Plants</Typography>
-          <Typography>Potter Plants</Typography>
-          <Typography>Seeds</Typography>
-          <Typography>Small Plants</Typography>
+          <Typography>Outdoor Plants</Typography>
+          <Typography>Seeds & Bulbs</Typography>
+          <Typography>Trees</Typography>
           <Typography>Accessories</Typography>
         </AccordionDetails>
       </Accordion>

@@ -35,7 +35,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => {
 const StyledToggleButton = styled(ToggleButton)(({ theme }) => {
   return {
     textTransform: 'capitalize',
-    fontSize: '20px',
+    fontSize: '18px',
     fontWeight: 500,
     color: theme.palette.text.primary,
     '&.Mui-selected': {
@@ -64,7 +64,7 @@ const LoginModal = ({ handleDrawerToggle }) => {
   }, [open, alignment])
   useEffect(() => {
     if (open) {
-      const { current: descriptionElement } = descriptionElementRef
+      const { current: descriptionElement } = descriptionElementRef1
       if (descriptionElement !== null) {
         descriptionElement.focus()
       }
@@ -88,7 +88,7 @@ const LoginModal = ({ handleDrawerToggle }) => {
     }
     setAlignment(newAlignment)
   }
-  const descriptionElementRef = React.useRef(null)
+  const descriptionElementRef1 = React.useRef(null)
   return (
     <div>
       <Button
@@ -113,10 +113,10 @@ const LoginModal = ({ handleDrawerToggle }) => {
         aria-describedby="scroll-dialog-description"
       >
         <DialogContent
-          ref={descriptionElementRef}
+          ref={descriptionElementRef1}
           sx={{
             borderBottom: '10px solid #46A358',
-            padding: { sm: '50px 50px' },
+            padding: { sm: '10px 30px' },
             height: '100%'
           }}
         >

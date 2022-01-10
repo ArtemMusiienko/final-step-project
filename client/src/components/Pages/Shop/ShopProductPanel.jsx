@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Grid, Pagination } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -45,7 +45,6 @@ const ShopProductPanel = () => {
   }, [matches])
   useEffect(() => {
     if (location.pathname === '/shop') {
-
       if (search) {
         const filteredPlants = products.filter(plant =>
           plant.name.toLowerCase().includes(search.toLowerCase())
@@ -72,9 +71,7 @@ const ShopProductPanel = () => {
       setProductList(filteredProducts())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
   }, [location, products, search])
- 
   const filteredProducts = () => {
     const category = params.categories
     return products.filter(product => {
@@ -101,12 +98,6 @@ const ShopProductPanel = () => {
         <span>not found</span>
       )}
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }} mt={2}>
-        <input
-          placeholder="Find Plants ..."
-          onChange={event => {
-            setValue(event.target.value)
-          }}
-        />
         <Zoom in={trigger}>
           <Pagination
             count={paginationPages()}

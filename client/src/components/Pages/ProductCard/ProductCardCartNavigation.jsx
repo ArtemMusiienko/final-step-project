@@ -185,14 +185,14 @@ const ProductCardCartNavigation = ({ currentProduct }) => {
               {quantityInCart === 0 ? 'Remove Product' : 'Update Cart'}
             </Button>
           )}
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             sx={{ boxShadow: 'none', fontWeight: 'bold', marginLeft: '5px' }}
             disabled={isDisabled}
           >
             Buy Now
-          </Button>
+          </Button> */}
         </Grid>
         {errorMessage && (
           <Grid item sx={{ color: theme.palette.error.main }}>

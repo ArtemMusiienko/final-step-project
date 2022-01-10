@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, ButtonGroup, Divider, SvgIcon, TextField, Typography } from '@mui/material'
+import { Divider, SvgIcon, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import FooterSubscribe from './FooterSubscribe'
 import { ReactComponent as CactusFirst } from '../../assets/cactusFirstIcon.svg'
 import { ReactComponent as CactusSecond } from '../../assets/cactusSecondIcon.svg'
 import { ReactComponent as CactusThird } from '../../assets/cactusThirdIcon.svg'
@@ -105,47 +106,7 @@ const FooterTop = () => (
         </Typography>
       </Box>
     </Box>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '0 23px'
-      }}
-    >
-      <Typography variant="h6" sx={{ fontSize: '18px', fontWeight: 'bold' }}>
-        Would you like to join newsletters?
-      </Typography>
-      <ButtonGroup disableElevation variant="contained">
-        <TextField
-          id="outlined-basic"
-          label="enter your email address..."
-          variant="outlined"
-          sx={{ flexGrow: 1, backgroundColor: 'white' }}
-        />
-        <Button
-          sx={{
-            flexGrow: 0,
-            fontSize: '18px',
-            fontWeight: 'bold',
-            textTransform: 'capitalize',
-            padding: '0 26px'
-          }}
-        >
-          Join
-        </Button>
-      </ButtonGroup>
-      <Typography
-        sx={{
-          fontSize: '13px',
-          color: '#727272'
-        }}
-      >
-        We usually post offers and challenges in newsletter. We’re your online houseplant
-        destination. We offer a wide range of houseplants and accessories shipped directly from
-        (green)house to yours!
-      </Typography>
-    </Box>
+    <FooterSubscribe />
   </Box>
 )
 

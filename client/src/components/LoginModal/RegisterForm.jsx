@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   loginForm: {
     display: 'flex',
     flexDirection: 'column',
-    rowGap: 10,
+    rowGap: 7,
     width: '100%'
   }
 })
@@ -84,7 +84,6 @@ const RegisterForm = ({ onClose, props }) => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        marginTop: '5px',
         rowGap: 1
       }}
     >
