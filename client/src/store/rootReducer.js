@@ -6,6 +6,8 @@ import cartReducer from './cart/reducer'
 import productReducer from './products/reducer'
 import wishlistReducer from './wishlist/reducer'
 import reviewsReducer from './reviews/reducer'
+
+import searchSlice from './serch/searchSlice'
 import sliderReducer from './slider/reducer'
 
 const rootReducer = combineReducers({
@@ -16,6 +18,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   wishlist: wishlistReducer,
   reviews: reviewsReducer,
+  search: searchSlice,
   slider: sliderReducer
 })
 

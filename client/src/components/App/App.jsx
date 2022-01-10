@@ -58,7 +58,7 @@ const App = () => {
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route path="shop/checkout" element={<Checkout />} />
+        <Route exact path="checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

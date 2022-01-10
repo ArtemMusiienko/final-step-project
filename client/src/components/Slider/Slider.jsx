@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Box, height } from '@mui/system'
+import { Typography, Button, CardMedia, Avatar } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { makeStyles, createStyles } from '@mui/styles'
 import { useTheme } from '@mui/material/styles'
@@ -8,6 +11,7 @@ import Image from 'material-ui-image'
 import { Typography, Button } from '@mui/material'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Carousel from 'react-material-ui-carousel'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme =>
   createStyles({
