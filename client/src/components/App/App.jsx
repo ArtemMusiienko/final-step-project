@@ -55,11 +55,11 @@ const App = () => {
         <Route path="account" element={<Account />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
+        <Route path="shop/checkout" element={<Checkout />} />
         <Route path="shop" element={<Shop />}>
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route path="shop/checkout" element={<Checkout />} />
         <Route path="newsInfo" element={<News />} />
         <Route path="*" element={<NotFound />} />
       </Route>
