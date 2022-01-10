@@ -60,8 +60,8 @@ const App = () => {
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route path="newsInfo" element={<News />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="newsInfo" element={<News />} />
       </Route>
     </Routes>
   )
