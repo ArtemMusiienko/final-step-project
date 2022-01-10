@@ -7,12 +7,12 @@ import { useLocation, useParams } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Zoom from '@mui/material/Zoom'
+import { isEmpty } from 'lodash'
 import ShopProduct from './ShopProduct'
 import usePagination from './Pagination'
 
 const ShopProductPanel = () => {
-  const [value, setValue] = useState('')
-  // const [filteredProducts, setFilteredProducts]= useState([])
+  const search = useSelector(state => state.search.search)
   const { products } = useSelector(state => state.products)
   const [productList, setProductList] = useState(products)
   const [productsOnPage, setProductsOnPage] = useState(9)
@@ -45,28 +45,33 @@ const ShopProductPanel = () => {
   }, [matches])
   useEffect(() => {
     if (location.pathname === '/shop') {
-      if (value) {
+      if (search) {
         const filteredPlants = products.filter(plant =>
-          plant.name.toLowerCase().includes(value.toLowerCase())
+          plant.name.toLowerCase().includes(search.toLowerCase())
         )
         setProductList(filteredPlants)
-        console.log('hi')
         return
       }
       setProductList(productList)
-      console.log('ddddd')
       return
     }
     if (params.categories) {
       if (params.categories === 'sale') {
-        const dataProduct = products.filter(product => product.previousPricec)
+        const dataProduct = products.filter(product => product.previousPrice)
+        if (search) {
+          const apdatePlants = dataProduct.filter(plant =>
+            plant.name.toLowerCase().includes(search.toLowerCase())
+          )
+          setProductList(apdatePlants)
+          return
+        }
         setProductList(dataProduct)
         return
       }
       setProductList(filteredProducts())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, products, value])
+  }, [location, products, search])
   const filteredProducts = () => {
     const category = params.categories
     return products.filter(product => {
@@ -83,18 +88,16 @@ const ShopProductPanel = () => {
   }
   return (
     <Grid item container spacing={{ xs: 2, md: 2 }}>
-      {productsPerPages.currentData().map(product => (
-        <Grid key={product._id} item xs={6} sm={4} md={4}>
-          <ShopProduct productId={product._id} />
-        </Grid>
-      ))}
+      {!isEmpty(productsPerPages) ? (
+        productsPerPages.currentData().map(product => (
+          <Grid key={product._id} item xs={6} sm={4} md={4}>
+            <ShopProduct productId={product._id} />
+          </Grid>
+        ))
+      ) : (
+        <span>not found</span>
+      )}
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }} mt={2}>
-        <input
-          placeholder="Find Plants ..."
-          onChange={event => {
-            setValue(event.target.value)
-          }}
-        />
         <Zoom in={trigger}>
           <Pagination
             count={paginationPages()}
