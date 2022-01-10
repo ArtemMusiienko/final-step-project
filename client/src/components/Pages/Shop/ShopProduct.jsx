@@ -18,6 +18,7 @@ import Image from 'material-ui-image'
 import { ReactComponent as frame } from '../../../assets/frameIcon.svg'
 import AddToFavoritesButton from '../../AddToFavoritesButton/AddToFavoritesButton'
 import ShopProductCart from '../../AddToCartButtonIcon/ShopProductCart'
+import ShopZoomImagesIcon from './ShopZoomImagesIcon'
 
 const ShopProduct = ({ productId }) => {
   const { products } = useSelector(state => state.products)
@@ -46,6 +47,7 @@ const ShopProduct = ({ productId }) => {
     return `${parseId[0]}${product[0].productUrl}`
   }
   const handleClick = () => {
+    window.scrollTo({ top: 0 })
     navigate(createPath())
   }
   const discount = Math.floor(
@@ -172,9 +174,7 @@ const ShopProduct = ({ productId }) => {
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ justifyContent: 'center' }}>
-        <IconButton onClick={handleClick}>
-          <SvgIcon component={frame} viewBox="0 0 20 20" fontSize="small" />
-        </IconButton>
+        <ShopZoomImagesIcon product={product[0]} />
         <ShopProductCart product={product[0]} />
         <AddToFavoritesButton id={productId} />
       </CardActions>

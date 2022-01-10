@@ -86,7 +86,7 @@ const AddToFavoritesButtonProductCard = ({ id }) => {
       >
         <DialogContent>
           <DialogContentText id="dialog-description" ref={descriptionElementRef} tabIndex={-1}>
-            Add products to wishlist available only for registed users.
+            Add products to wishlist available only for registered users.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
