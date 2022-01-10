@@ -31,7 +31,7 @@ const LoginSchema = Yup.object().shape({
     .min(3, 'Login must be between 3 and 10 characters')
     .max(10, 'Login must be between 3 and 10 characters')
     .required('Login is required field'),
-  email: Yup.string().email().required('Email is required.'),
+  email: Yup.string().email().required('Email is required'),
   password: Yup.string()
     .password()
     .minSymbols(0)

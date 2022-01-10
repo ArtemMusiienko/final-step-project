@@ -74,7 +74,12 @@ const cartSlice = createSlice({
     [deleteProductFromBasket.fulfilled]: (state, action) => action.payload,
     [increaseProductFromBasket.fulfilled]: (state, action) => action.payload,
     [decreaseProductFromBasket.fulfilled]: (state, action) => action.payload,
-    [deleteBasket.fulfilled]: (state, action) => action.payload,
+    [deleteBasket.fulfilled]: (state, action) => {
+      const newState = {
+        products: []
+      }
+      return newState
+    },
     [getBasket.fulfilled]: (state, action) => action.payload
   }
 })

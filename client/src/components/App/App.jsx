@@ -18,6 +18,8 @@ import Account from '../Account'
 import { removeWishlist } from '../../store/wishlist/reducer'
 import { setAllReviews } from '../../store/reviews/actions'
 import { setWishlist } from '../../store/wishlist/actions'
+import { setSlider } from '../../store/slider/actions'
+import { deleteCartFromState } from '../../store/cart/reducer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -27,6 +29,7 @@ const App = () => {
     if (user && checkTerminationToken(user)) {
       dispatch(userLogout())
       dispatch(removeWishlist())
+      dispatch(deleteCartFromState())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
@@ -40,6 +43,7 @@ const App = () => {
     dispatch(setCatalog())
     dispatch(setProducts())
     dispatch(setAllReviews())
+    dispatch(setSlider())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (

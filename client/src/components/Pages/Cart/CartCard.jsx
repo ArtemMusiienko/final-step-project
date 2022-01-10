@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useTheme } from '@mui/material/styles'
 import Image from 'material-ui-image'
 import { Box, Fab, IconButton, SvgIcon } from '@mui/material'
@@ -12,13 +14,32 @@ const CartCard = ({
   productFromCart,
   decreaseHandleClick,
   increaseHandleClick,
-  handleDeleteIconClick,
-  errorMessage
+  handleDeleteIconClick
 }) => {
   const theme = useTheme()
   const [product, setProduct] = useState(productFromCart)
+  const { products: productsAll } = useSelector(state => state.products)
+  const [errorMessage, setErrorMessage] = useState('')
+  useEffect(() => {
+    const currentProduct = productsAll.find(
+      productOnStock => productOnStock._id === productFromCart.product._id
+    )
+    if (productFromCart.cartQuantity > currentProduct.quantity) {
+      setErrorMessage(`Sorry on stock available only ${currentProduct.quantity} pcs`)
+    }
+  }, [productsAll])
   useEffect(() => {
     setProduct(productFromCart)
+    const currentProduct = productsAll.find(
+      productOnStock => productOnStock._id === productFromCart.product._id
+    )
+    if (productFromCart.cartQuantity > currentProduct.quantity) {
+      setErrorMessage(`Sorry on stock available only ${currentProduct.quantity} pcs`)
+      return null
+    }
+    setErrorMessage('')
+    return null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productFromCart])
   return (
     <>
@@ -148,7 +169,7 @@ const CartCard = ({
           </Box>
         </Box>
       </Box>
-      {errorMessage.id === product.product._id && (
+      {errorMessage && (
         <Box
           sx={{
             color: theme.palette.error.main,
@@ -157,7 +178,7 @@ const CartCard = ({
             textAlign: 'center'
           }}
         >
-          {errorMessage.message}
+          {errorMessage}
         </Box>
       )}
     </>
