@@ -24,15 +24,10 @@ const FORM_VALIDATION = Yup.object().shape({
     .min(2, 'First Name must be between 2 and 25 characters.')
     .max(25, 'First Name must be between 2 and 25 characters.')
     .required('Last Name is required.'),
-  country: Yup.string().required('Country is required.'),
-  city: Yup.string().required('City is required.'),
-  address: Yup.string().required('Address is required.'),
-  postal: Yup.string().min(5, 'Zip code must be 5 characters').required('Zip code is required.'),
   email: Yup.string().email('Invalid email').required('Email is required.'),
   mobile: Yup.string()
     .min(10, 'Phone number must be 10 characters')
     .required('Phone number is required.'),
-  notes: Yup.string(),
   password: Yup.string()
     .password()
     .minSymbols(0)
@@ -113,15 +108,19 @@ export const AccountPersonal = () => {
 
   const formik = useFormik({
     initialValues: {
+      login: '',
+      password: '',
       firstName: '',
       lastName: '',
+      country: '',
+      city: '',
+      address: '',
+      postal: '',
       email: '',
-      login: '',
-      password: '123',
-      passwordConf: '123',
-      mobile: ''
+      mobile: '',
+      passwordConf: ''
     },
-    // validationSchema: FORM_VALIDATION,
+    validationSchema: FORM_VALIDATION,
 
     onSubmit: values => {
       const {
