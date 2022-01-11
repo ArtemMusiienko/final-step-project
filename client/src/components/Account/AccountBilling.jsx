@@ -127,9 +127,7 @@ export const AccountBilling = () => {
     },
     validationSchema: FORM_VALIDATION,
     onSubmit: values => {
-      const { firstName, lastName, country, city, address, postal, email } = values
-      const login = 'pruvladik'
-      const password = 'sdf012zqwE'
+      const { login, password, firstName, lastName, country, city, address, postal, email } = values
       authPersonalUpdate(
         login,
         password,
