@@ -110,4 +110,4 @@ const ShopProductPanel = () => {
   )
 }
 
-export default ShopProductPanel
+export default React.memo(ShopProductPanel)

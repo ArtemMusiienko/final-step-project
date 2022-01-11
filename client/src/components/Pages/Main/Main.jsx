@@ -3,4 +3,4 @@ import Slider from '../../Slider/Slider'
 
 const Main = () => <Slider />
 
-export default Main
+export default React.memo(Main)

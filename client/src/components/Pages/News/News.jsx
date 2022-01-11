@@ -52,4 +52,4 @@ const News = () => (
   </Grid>
 )
 
-export default News
+export default React.memo(News)

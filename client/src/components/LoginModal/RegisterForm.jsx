@@ -196,4 +196,4 @@ const RegisterForm = ({ onClose, props }) => {
   )
 }
 
-export default RegisterForm
+export default React.memo(RegisterForm)

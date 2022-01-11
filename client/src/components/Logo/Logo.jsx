@@ -29,4 +29,4 @@ const Logo = () => (
   </div>
 )
 
-export default Logo
+export default React.memo(Logo)

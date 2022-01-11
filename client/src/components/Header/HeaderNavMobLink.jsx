@@ -24,4 +24,4 @@ const HeaderNavMobLink = ({ category, handleDrawerToggle }) => {
   )
 }
 
-export default HeaderNavMobLink
+export default React.memo(HeaderNavMobLink)

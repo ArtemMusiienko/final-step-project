@@ -39,4 +39,4 @@ const ShopCategoryLink = ({ category }) => {
   )
 }
 
-export default ShopCategoryLink
+export default React.memo(ShopCategoryLink)

@@ -335,4 +335,4 @@ const Cart = () => {
     </Box>
   )
 }
-export default Cart
+export default React.memo(Cart)

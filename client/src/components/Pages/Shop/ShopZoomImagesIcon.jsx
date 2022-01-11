@@ -75,4 +75,4 @@ const ShopZoomImagesIcon = ({ product }) => {
   )
 }
 
-export default ShopZoomImagesIcon
+export default React.memo(ShopZoomImagesIcon)

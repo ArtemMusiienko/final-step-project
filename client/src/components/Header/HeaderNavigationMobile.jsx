@@ -64,4 +64,4 @@ const HeaderNavigationMobile = ({ mobileOpen, handleDrawerToggle }) => {
   )
 }
 
-export default HeaderNavigationMobile
+export default React.memo(HeaderNavigationMobile)

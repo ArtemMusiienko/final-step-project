@@ -158,4 +158,4 @@ const SearchButton = () => {
     </Search>
   )
 }
-export default SearchButton
+export default React.memo(SearchButton)

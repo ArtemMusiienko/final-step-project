@@ -105,4 +105,4 @@ const FooterShortMenu = () => {
   )
 }
 
-export default FooterShortMenu
+export default React.memo(FooterShortMenu)
