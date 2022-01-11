@@ -49,6 +49,7 @@ const HeaderNavigationMobile = ({ mobileOpen, handleDrawerToggle }) => {
         bgcolor: theme => (theme.palette.mode === 'light' ? 'grey.100' : 'grey.900')
       }}
     >
+      <Toolbar sx={{ display: { sm: 'none' } }} />
       <Toolbar />
       <Box
         sx={{

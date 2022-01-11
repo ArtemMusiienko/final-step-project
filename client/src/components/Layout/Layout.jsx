@@ -9,6 +9,7 @@ import ScrollTop from '../ScrollTop/ScrollTop'
 const Layout = () => (
   <Container maxWidth="xl">
     <Header />
+    <Toolbar sx={{ display: { sm: 'none' } }} />
     <Toolbar sx={{ display: { md: 'none' } }} />
     <Outlet />
     <Footer />

@@ -49,7 +49,16 @@ const Header = () => {
         '&.MuiPaper-root&.MuiAppBar-root': { paddingRight: '0 !important' }
       }}
     >
-      <Toolbar disableGutters>
+      <Toolbar
+        disableGutters
+        sx={{
+          display: { xs: 'flex', sm: 'none' },
+          justifyContent: 'center'
+        }}
+      >
+        <Logo />
+      </Toolbar>
+      <Toolbar disableGutters sx={{ padding: { xs: '0 16px', sm: '0 24px', md: 0 } }}>
         <Box sx={{ flex: '0 0 20%', display: { xs: 'none', md: 'flex' } }}>
           <Logo />
         </Box>
@@ -71,7 +80,7 @@ const Header = () => {
               open={mobileOpen}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true
               }}
               SlideProps={{
                 timeout: 400
@@ -114,14 +123,20 @@ const Header = () => {
             </Drawer>
           </Box>
         </Box>
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', justifyContent: 'center' } }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: { xs: 'none', sm: 'flex', md: 'none', justifyContent: 'center' }
+          }}
+        >
           <Logo />
         </Box>
         <HeaderTabs pages={pages} />
         <Box
           sx={{
-            flex: { xs: '0 0 30%', md: '0 0 22%' },
-            justifyContent: { xs: 'space-evenly', md: 'space-between' },
+            flex: { md: '0 0 22%' },
+            flexGrow: { xs: 1, sm: 0 },
+            justifyContent: 'space-between',
             display: 'flex'
           }}
         >
