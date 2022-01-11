@@ -3,30 +3,15 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import Select from 'react-select'
-import {
-  Button,
-  SvgIcon,
-  Typography,
-  Grid,
-  TextField,
-  LinearProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText
-} from '@mui/material'
+import { Button, Typography, Grid, TextField } from '@mui/material'
 import { Formik, Form, useFormik } from 'formik'
 import { useTheme } from '@mui/styles'
 import * as Yup from 'yup'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
-import Backdrop from '@mui/material/Backdrop'
 import MenuItem from '@mui/material/MenuItem'
 import Box from '@mui/material/Box'
-import { ReactComponent as Payments } from '../../assets/image/payment-method.svg'
+import { userLogin, userRegister } from '../../store/auth/actions'
+import { authPersonalUpdate } from '../../api/auth'
+import { getCustomer } from '../../api/customer'
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
@@ -43,11 +28,7 @@ const FORM_VALIDATION = Yup.object().shape({
   city: Yup.string().required('City is required.'),
   address: Yup.string().required('Address is required.'),
   postal: Yup.string().min(5, 'Zip code must be 5 characters').required('Zip code is required.'),
-  email: Yup.string().email('Invalid email').required('Email is required.'),
-  mobile: Yup.string()
-    .min(10, 'Phone number must be 10 characters')
-    .required('Phone number is required.'),
-  notes: Yup.string()
+  email: Yup.string().email('Invalid email').required('Email is required.')
 })
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
@@ -131,6 +112,7 @@ export const AccountBilling = () => {
   const dispatch = useDispatch()
   const [message, setMessage] = useState('')
   const theme = useTheme()
+  const [submiting, setSubmitting] = useState(false)
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -140,12 +122,57 @@ export const AccountBilling = () => {
       address: '',
       postal: '',
       email: '',
-      mobile: ''
+      login: '',
+      password: ''
     },
     validationSchema: FORM_VALIDATION,
-    onSubmit: async value => {}
+    onSubmit: values => {
+      const { firstName, lastName, country, city, address, postal, email } = values
+      const login = 'pruvladik'
+      const password = 'sdf012zqwE'
+      authPersonalUpdate(
+        login,
+        password,
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        postal,
+        email
+      )
+    }
   })
+  useEffect(() => {
+    async function fetchData() {
+      const {
+        email: loggedInUserEmail,
+        password,
+        postal,
+        address,
+        city,
+        country,
+        firstName,
+        lastName,
+        login
+      } = await getCustomer()
+      formik.setFieldValue('email', loggedInUserEmail)
+      formik.setFieldValue('password', password)
+      formik.setFieldValue('postal', postal)
+      formik.setFieldValue('address', address)
+      formik.setFieldValue('city', city)
+      formik.setFieldValue('country', country)
+      formik.setFieldValue('firstName', firstName)
+      formik.setFieldValue('lastName', lastName)
+      formik.setFieldValue('login', login)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
+    // / eslint-disable-next-line react-hooks/exhaustive-deps
     <form onSubmit={formik.handleSubmit}>
       <Box
         sx={{
@@ -168,62 +195,6 @@ export const AccountBilling = () => {
             Billing Address
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="First Name"
-                type="firstName"
-                id="firstName"
-                name="firstName"
-                placeholder="Name"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                fullWidth
-                required
-                size="small"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.errors.firstName) && formik.touched.firstName}
-                helperText={formik.touched.firstName && formik.errors.firstName}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&:hover fieldset': { borderColor: theme.palette.primary.main }
-                  },
-                  '& .MuiFormLabel-asterisk': {
-                    color: theme.palette.error.main
-                  }
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Last Name"
-                type="lastName"
-                id="lastName"
-                name="lastName"
-                placeholder="Surname"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                fullWidth
-                required
-                size="small"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.errors.lastName) && formik.touched.lastName}
-                helperText={formik.touched.lastName && formik.errors.lastName}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&:hover fieldset': { borderColor: theme.palette.primary.main }
-                  },
-                  '& .MuiFormLabel-asterisk': {
-                    color: theme.palette.error.main
-                  }
-                }}
-              />
-            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Country"
@@ -347,33 +318,16 @@ export const AccountBilling = () => {
                 }}
               />
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <TextField
-                label="Email address"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="example@gmail.com"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                fullWidth
-                required
-                size="small"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.errors.email) && formik.touched.email}
-                helperText={formik.touched.email && formik.errors.email}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&:hover fieldset': { borderColor: theme.palette.primary.main }
-                  },
-                  '& .MuiFormLabel-asterisk': {
-                    color: theme.palette.error.main
-                  }
-                }}
-              />
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ display: 'block', textTransform: 'capitalize' }}
+              >
+                Save Change
+              </Button>
             </Grid>
           </Grid>
         </Box>

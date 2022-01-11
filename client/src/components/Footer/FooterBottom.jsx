@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, SvgIcon, Typography, Divider } from '@mui/material'
+import { Button, SvgIcon, Typography, Divider, Link } from '@mui/material'
 import { Box } from '@mui/system'
+import { Link as RouterLink } from 'react-router-dom'
 import { ReactComponent as Facebook } from '../../assets/facebookIcon.svg'
 import { ReactComponent as Instagram } from '../../assets/instagramIcon.svg'
 import { ReactComponent as Twitter } from '../../assets/twitterIcon.svg'
@@ -32,7 +33,15 @@ const FooterBottom = () => {
         <Typography sx={{ fontSize: '18px', fontWeight: 'bold', color: 'text.primary' }}>
           My Account
         </Typography>
-        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>My Account</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>
+          <Link
+            sx={{ color: 'text.secondary', paddingTop: '10px', paddingRight: '10px' }}
+            to="/account"
+            component={RouterLink}
+          >
+            My Account
+          </Link>
+        </Typography>
         <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Our stores</Typography>
         <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Contact us</Typography>
         <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Career</Typography>

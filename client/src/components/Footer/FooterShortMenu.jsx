@@ -5,6 +5,8 @@ import MuiAccordion from '@mui/material/Accordion'
 import MuiAccordionSummary from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
+import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@mui/material'
 
 const Accordion = styled(props => <MuiAccordion disableGutters elevation={0} square {...props} />)(
   ({ theme }) => {
@@ -70,7 +72,13 @@ const FooterShortMenu = () => {
           <Typography>My Account</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>My Account</Typography>
+          <Link
+            sx={{ color: 'text.secondary', paddingTop: '10px', paddingRight: '10px' }}
+            to="/account"
+            component={RouterLink}
+          >
+            My Account
+          </Link>
           <Typography>Our stores</Typography>
           <Typography>Contact us</Typography>
           <Typography>Career</Typography>

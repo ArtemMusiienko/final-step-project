@@ -10,6 +10,8 @@ import * as Yup from 'yup'
 import Box from '@mui/material/Box'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { authPersonalUpdate, authNewPassword } from '../../api/auth'
+import { getCustomer } from '../../api/customer'
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
@@ -31,8 +33,13 @@ const FORM_VALIDATION = Yup.object().shape({
     .min(10, 'Phone number must be 10 characters')
     .required('Phone number is required.'),
   notes: Yup.string(),
-  password: Yup.string(),
-  passwordConf: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
+  password: Yup.string()
+    .password()
+    .minSymbols(0)
+    .min(7, 'Password must be between 7 and 30 characters')
+    .max(30, 'Password must be between 7 and 30 characters')
+    .minLowercase(5)
+    .required('Password is required field')
 })
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
@@ -108,16 +115,73 @@ export const AccountPersonal = () => {
     initialValues: {
       firstName: '',
       lastName: '',
-      country: 'Ukraine',
-      city: 'Kyiv',
-      address: '',
-      postal: '',
       email: '',
+      login: '',
+      password: '123',
+      passwordConf: '123',
       mobile: ''
     },
-    validationSchema: FORM_VALIDATION,
-    onSubmit: async value => {}
+    // validationSchema: FORM_VALIDATION,
+
+    onSubmit: values => {
+      const {
+        login,
+        password,
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        postal,
+        email,
+        mobile,
+        passwordConf
+      } = values
+      if (passwordConf.length > 0) {
+        authNewPassword(password, passwordConf)
+      }
+      authPersonalUpdate(
+        login,
+        password,
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        postal,
+        email,
+        mobile
+      )
+    }
   })
+  useEffect(() => {
+    async function fetchData() {
+      const {
+        email: loggedInUserEmail,
+        password,
+        postal,
+        address,
+        city,
+        country,
+        firstName,
+        lastName,
+        login,
+        mobile
+      } = await getCustomer()
+      formik.setFieldValue('email', loggedInUserEmail)
+      formik.setFieldValue('password', password)
+      formik.setFieldValue('postal', postal)
+      formik.setFieldValue('address', address)
+      formik.setFieldValue('city', city)
+      formik.setFieldValue('country', country)
+      formik.setFieldValue('firstName', firstName)
+      formik.setFieldValue('lastName', lastName)
+      formik.setFieldValue('login', login)
+      formik.setFieldValue('mobile', mobile)
+    }
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box
@@ -202,7 +266,6 @@ export const AccountPersonal = () => {
               <TextField
                 label="Email address"
                 type="email"
-                id="email"
                 name="email"
                 placeholder="example@gmail.com"
                 InputLabelProps={{
@@ -263,6 +326,7 @@ export const AccountPersonal = () => {
                 name="password"
                 size="small"
                 color="primary"
+                value={formik.values.password}
                 style={{ width: '100%', marginBottom: '15px' }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -286,7 +350,7 @@ export const AccountPersonal = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 type={isShowPassword ? 'text' : 'password'}
-                label="Confirm Password"
+                label="New Password (optional)"
                 name="passwordConf"
                 size="small"
                 color="primary"
@@ -311,14 +375,16 @@ export const AccountPersonal = () => {
                 }}
               />
             </Grid>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={formik.handleSubmit}
-              sx={{ display: 'block', textTransform: 'capitalize' }}
-            >
-              Save Change
-            </Button>
+            <Grid item xs={12} sm={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ display: 'block', textTransform: 'capitalize' }}
+              >
+                Save Change
+              </Button>
+            </Grid>
           </Grid>
         </Box>
       </Box>
