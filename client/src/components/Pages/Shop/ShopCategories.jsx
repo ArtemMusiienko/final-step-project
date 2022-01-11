@@ -114,4 +114,4 @@ const ShopCategories = ({ resetExpanded, onResetExpanded }) => {
   )
 }
 
-export default ShopCategories
+export default React.memo(ShopCategories)

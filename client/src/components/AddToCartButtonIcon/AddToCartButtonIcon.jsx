@@ -134,4 +134,4 @@ const AddToCartButtonIcon = ({ product }) => {
   )
 }
 
-export default AddToCartButtonIcon
+export default React.memo(AddToCartButtonIcon)

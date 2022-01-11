@@ -79,4 +79,4 @@ const BreadcrumbsComponent = ({ location }) => {
   )
 }
 
-export default BreadcrumbsComponent
+export default React.memo(BreadcrumbsComponent)

@@ -315,7 +315,7 @@ const Cart = () => {
               variant="contained"
               sx={{ textTransform: 'capitalize', boxShadow: 'none', width: '100%' }}
               onClick={handleCheckoutClick}
-              disabled={isDisabled}
+              disabled={isDisabled || !products.length}
             >
               Proceed To Checkout
             </Button>
@@ -335,4 +335,4 @@ const Cart = () => {
     </Box>
   )
 }
-export default Cart
+export default React.memo(Cart)

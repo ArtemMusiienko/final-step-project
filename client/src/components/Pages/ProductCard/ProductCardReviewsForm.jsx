@@ -228,4 +228,4 @@ const ProductCardReviewForm = ({ isEdited, setIsEdited, review }, props) => {
   )
 }
 
-export default ProductCardReviewForm
+export default React.memo(ProductCardReviewForm)

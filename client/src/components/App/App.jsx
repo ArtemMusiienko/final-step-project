@@ -66,4 +66,4 @@ const App = () => {
     </Routes>
   )
 }
-export default App
+export default React.memo(App)

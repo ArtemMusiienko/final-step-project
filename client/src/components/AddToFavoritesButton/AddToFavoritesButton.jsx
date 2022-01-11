@@ -87,4 +87,4 @@ const AddToFavoritesButton = ({ id }) => {
   )
 }
 
-export default AddToFavoritesButton
+export default React.memo(AddToFavoritesButton)

@@ -41,6 +41,14 @@ const CartBage = () => {
     setTotalQuantitiesInCart(quantity)
     setTotalAmount(amount)
   }, [products])
+  useEffect(() => {
+    if (open) {
+      document.body.onwheel = handleCloseMenuClick
+    }
+    return () => {
+      document.body.onwheel = undefined
+    }
+  }, [open])
   const handleOpenMenuClick = event => {
     setAnchorEl(event.currentTarget)
   }
@@ -60,6 +68,7 @@ const CartBage = () => {
         aria-haspopup="true"
         id="zoom-cart-button"
         aria-controls={open ? 'zoom-cart-menu' : undefined}
+        sx={{ marginRight: { md: '10px' } }}
       >
         <StyledBadge badgeContent={totalQuantitiesInCart} color="primary">
           <CartIcon viewBox="0 0 24 24" />
@@ -181,4 +190,4 @@ const CartBage = () => {
   )
 }
 
-export default CartBage
+export default React.memo(CartBage)

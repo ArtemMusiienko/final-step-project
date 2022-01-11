@@ -84,3 +84,5 @@ export const Account = () => {
     </Grid>
   )
 }
+
+export default React.memo(Account)

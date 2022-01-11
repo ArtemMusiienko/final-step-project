@@ -110,4 +110,4 @@ const FooterTop = () => (
   </Box>
 )
 
-export default FooterTop
+export default React.memo(FooterTop)

@@ -63,4 +63,4 @@ const HeaderSlide = ({ slideHeader, mobileOpen, slideBody, category }) => {
   )
 }
 
-export default HeaderSlide
+export default React.memo(HeaderSlide)

@@ -100,4 +100,4 @@ const ProductCardReview = ({ oneReview }) => {
     </Box>
   )
 }
-export default ProductCardReview
+export default React.memo(ProductCardReview)

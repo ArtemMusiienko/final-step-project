@@ -25,4 +25,4 @@ const ShopProductCart = ({ product }) => {
   )
 }
 
-export default ShopProductCart
+export default React.memo(ShopProductCart)

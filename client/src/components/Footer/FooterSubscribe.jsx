@@ -244,4 +244,4 @@ const FooterSubscribe = () => {
     </>
   )
 }
-export default FooterSubscribe
+export default React.memo(FooterSubscribe)
