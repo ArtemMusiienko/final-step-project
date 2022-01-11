@@ -65,9 +65,9 @@ const FooterBottom = () => {
           Categories
         </Typography>
         <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>House Plants</Typography>
-        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Potter Plants</Typography>
-        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Seeds</Typography>
-        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Small Plants</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Outdoor Plants</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Seeds & Bulbs</Typography>
+        <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Trees</Typography>
         <Typography sx={{ fontSize: '14px', color: 'text.primary' }}>Accessories</Typography>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

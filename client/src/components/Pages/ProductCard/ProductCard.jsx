@@ -17,7 +17,6 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import ImageGallery from 'react-image-gallery'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import './image-gallery.scss'
 import { Box } from '@mui/system'
 import Link from '@mui/material/Link'
 import BreadcrumbsComponent from '../../BreadcrumbsComponent/BreadcrumbsComponent'
@@ -76,8 +75,7 @@ const ProductCard = props => {
   const images = product[0].imageUrls.map(image => {
     const imgObject = {
       original: `${image}`,
-      thumbnail: `${image}`,
-      thumbnailLabel: ' '
+      thumbnail: `${image}`
     }
     return imgObject
   })
@@ -98,7 +96,28 @@ const ProductCard = props => {
         columns={16}
         mt={2}
       >
-        <Grid item container xs={16} md={8}>
+        <Grid
+          item
+          container
+          xs={16}
+          md={8}
+          sx={{
+            justifyContent: 'center',
+            '& .image-gallery-thumbnail': { border: '2px solid transparent' },
+            '& .image-gallery-thumbnail.active': {
+              border: '2px solid',
+              borderColor: theme.palette.primary.main
+            },
+            '& .image-gallery-thumbnail:focus': {
+              border: '2px solid',
+              borderColor: theme.palette.primary.main
+            },
+            '& .image-gallery-thumbnail:hover': {
+              border: '2px solid',
+              borderColor: theme.palette.primary.main
+            }
+          }}
+        >
           <ImageGallery
             items={images}
             thumbnailPosition={matches ? 'left' : 'bottom'}

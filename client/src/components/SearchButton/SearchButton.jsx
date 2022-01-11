@@ -4,7 +4,7 @@ import { IconButton, Box } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import SearchIcon from './SearchIcon'
 import ShopProductPanel from '../Pages/Shop/ShopProductPanel'
-import { addSearch, deleteSearch } from '../../store/serch/searchSlice'
+import { addSearch, deleteSearch } from '../../store/search/searchSlice'
 
 const SearchButton = () => {
   const [value, setValue] = useState('')

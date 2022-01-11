@@ -20,6 +20,7 @@ import { setAllReviews } from '../../store/reviews/actions'
 import { setWishlist } from '../../store/wishlist/actions'
 import { setSlider } from '../../store/slider/actions'
 import { deleteCartFromState } from '../../store/cart/reducer'
+import News from '../Pages/News'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -54,12 +55,13 @@ const App = () => {
         <Route path="account" element={<Account />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
+        <Route path="shop/checkout" element={<Checkout />} />
         <Route path="shop" element={<Shop />}>
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route exact path="checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="newsInfo" element={<News />} />
       </Route>
     </Routes>
   )

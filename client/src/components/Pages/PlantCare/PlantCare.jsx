@@ -1,5 +1,4 @@
 import React from 'react'
-import './PlantCare.scss'
 import { Container, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
@@ -7,6 +6,13 @@ import image from '../../../assets/image/plant-care.png'
 
 const useStyle = makeStyles(theme => {
   return {
+    title: {
+      marginTop: '24px',
+      textAlign: 'center'
+    },
+    articleWrapper: {
+      padding: '0 30%'
+    },
     articleTitle: {
       textAlign: 'center',
       marginTop: '4rem',
@@ -22,31 +28,26 @@ const PlantCare = () => {
   const classes = useStyle()
 
   return (
-    <Container className="plant-care">
-      <Box className="plant-care__title-wrapper">
+    <Container>
+      <Box>
         <Typography
           variant="h3"
           style={{ marginTop: '2rem', marginBottom: '2rem', color: '#46A358' }}
-          className="plant-care__title"
+          className={classes.title}
         >
           Our Top 7 Plant Care Tips
         </Typography>
         <Typography
           variant="h4"
           style={{ textAlign: 'center', marginBottom: '3rem' }}
-          className="plant-care__title-description"
+          className={classes.title}
         >
           There are plenty of ways to care for your plant. With the help of our plant experts, we’ve
-          weeded out the top 10 tips for healthy, happy plants.
+          weeded out the top 7 tips for healthy, happy plants.
         </Typography>
-        <img
-          src={image}
-          alt=""
-          style={{ height: '100%', width: '100%' }}
-          className="plant-care__title-img"
-        />
+        <img src={image} alt="" style={{ height: '100%', width: '100%' }} />
       </Box>
-      <Box className="plant-care__article-wrapper">
+      <Box className={classes.articleWrapper}>
         <Typography variant="h5" className={classes.articleTitle}>
           1.Choose plants based on your light{' '}
         </Typography>

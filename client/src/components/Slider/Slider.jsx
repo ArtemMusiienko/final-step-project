@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Box, height } from '@mui/system'
-import { Typography, Button, CardMedia, Avatar } from '@mui/material'
-import { useNavigate, Link } from 'react-router-dom'
+import { Typography, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { makeStyles, createStyles } from '@mui/styles'
 import { useTheme } from '@mui/material/styles'
 import { useSelector } from 'react-redux'
 import Image from 'material-ui-image'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Carousel from 'react-material-ui-carousel'
+import { Box } from '@mui/system'
 
 const useStyles = makeStyles(theme =>
   createStyles({

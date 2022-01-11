@@ -15,6 +15,7 @@ import { Box } from '@mui/system'
 import { userLogin } from '../../store/auth/actions'
 import { setWishlist } from '../../store/wishlist/actions'
 import { setBasket } from '../../store/cart/actions'
+import { setSubscriber } from '../../store/subscribe/actions'
 
 YupPassword(Yup)
 const LoginSchema = Yup.object().shape({
@@ -53,6 +54,7 @@ const LoginForm = ({ onClose, props }) => {
       }
       dispatch(setBasket())
       dispatch(setWishlist())
+      dispatch(setSubscriber())
       setSubmitting(false)
       resetForm({})
       onClose()
