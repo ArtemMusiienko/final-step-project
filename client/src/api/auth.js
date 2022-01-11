@@ -21,27 +21,4 @@ export const authNewPassword = (password, newPassword) =>
     password,
     newPassword
   })
-export const authPersonalUpdate = (
-  login,
-  password,
-  firstName,
-  lastName,
-  country,
-  city,
-  address,
-  postal,
-  email,
-  mobile
-) =>
-  axios.put('/customers', {
-    login,
-    password,
-    firstName,
-    lastName,
-    country,
-    city,
-    address,
-    postal,
-    email,
-    mobile
-  })
+export const authPersonalUpdate = newData => axios.put('/customers', newData)
