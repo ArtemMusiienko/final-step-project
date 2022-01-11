@@ -204,4 +204,4 @@ const ProductCardCartNavigation = ({ currentProduct }) => {
   )
 }
 
-export default ProductCardCartNavigation
+export default React.memo(ProductCardCartNavigation)

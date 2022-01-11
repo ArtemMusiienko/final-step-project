@@ -29,4 +29,4 @@ const ScrollTop = () => {
   )
 }
 
-export default ScrollTop
+export default React.memo(ScrollTop)

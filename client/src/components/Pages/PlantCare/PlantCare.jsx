@@ -159,4 +159,4 @@ const PlantCare = () => {
     </Container>
   )
 }
-export default PlantCare
+export default React.memo(PlantCare)

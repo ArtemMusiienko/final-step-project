@@ -86,4 +86,4 @@ const FooterMiddle = () => (
   </Box>
 )
 
-export default FooterMiddle
+export default React.memo(FooterMiddle)

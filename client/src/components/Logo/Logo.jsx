@@ -22,10 +22,11 @@ const Logo = () => (
       component={LinkBehavior}
       startIcon={<LogoIcon color="primary" viewBox="0 0 35 35" />}
       sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+      onClick={() => window.scrollTo({ top: 0 })}
     >
       GREENSHOP
     </LogoButton>
   </div>
 )
 
-export default Logo
+export default React.memo(Logo)

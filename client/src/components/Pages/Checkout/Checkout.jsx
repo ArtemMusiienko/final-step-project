@@ -568,4 +568,4 @@ const Checkout = () => {
   )
 }
 
-export default Checkout
+export default React.memo(Checkout)

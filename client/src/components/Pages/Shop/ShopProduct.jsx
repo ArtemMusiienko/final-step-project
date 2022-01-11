@@ -181,4 +181,4 @@ const ShopProduct = ({ productId }) => {
     </Card>
   )
 }
-export default ShopProduct
+export default React.memo(ShopProduct)

@@ -73,4 +73,4 @@ const ShopCategoriesAccordion = ({ expanded, handleChange, category, accordionBo
   )
 }
 
-export default ShopCategoriesAccordion
+export default React.memo(ShopCategoriesAccordion)

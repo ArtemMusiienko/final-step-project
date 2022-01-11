@@ -185,4 +185,4 @@ const CartCard = ({
   )
 }
 
-export default CartCard
+export default React.memo(CartCard)

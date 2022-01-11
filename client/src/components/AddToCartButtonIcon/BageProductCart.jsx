@@ -208,4 +208,4 @@ const BageProductCart = ({ product, quantityInCart }) => {
   )
 }
 
-export default BageProductCart
+export default React.memo(BageProductCart)

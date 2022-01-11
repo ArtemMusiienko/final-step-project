@@ -42,4 +42,4 @@ const ProductCardAllReviews = () => {
     </Box>
   )
 }
-export default ProductCardAllReviews
+export default React.memo(ProductCardAllReviews)

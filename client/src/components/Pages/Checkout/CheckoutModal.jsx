@@ -280,4 +280,4 @@ const CheckoutModal = ({ orderReceived }) => {
   )
 }
 
-export default CheckoutModal
+export default React.memo(CheckoutModal)
