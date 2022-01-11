@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Layout from '../Layout'
 import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
@@ -52,7 +52,7 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="account" element={isLoggedIn ? <Account /> : <Navigate to="/" />} />
+        <Route path="account" element={<Account />} />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
         <Route path="shop/checkout" element={<Checkout />} />
