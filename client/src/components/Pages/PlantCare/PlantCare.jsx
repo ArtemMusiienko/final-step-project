@@ -1,161 +1,209 @@
 import React from 'react'
 import './PlantCare.scss'
-import { Container, Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { Avatar, Button, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
-import image from '../../../assets/image/plant-care.png'
-
-const useStyle = makeStyles(theme => {
-  return {
-    articleTitle: {
-      textAlign: 'center',
-      marginTop: '4rem',
-      color: '#46A358'
-    },
-    articleText: {
-      marginTop: '15px'
-    }
-  }
-})
+import { useNavigate } from 'react-router-dom'
+import lightCare from '../../../assets/image/light_plant_care.jpeg'
+import WaterCare from '../../../assets/image/water_plants.jpg'
+import HumidityCare from '../../../assets/image/humudity_care.webp'
+import FertilizeCare from '../../../assets/image/fertilizeCare.jpg'
+import PestsCare from '../../../assets/image/pests_care.jpeg'
+import MoreTipsCare from '../../../assets/image/more_tips_care.jpeg'
 
 const PlantCare = () => {
-  const classes = useStyle()
+  const navigate = useNavigate()
+  const handleCheckoutClick = () => {
+    window.scrollTo({ top: 0 })
+    navigate('/shop')
+  }
 
   return (
-    <Container className="plant-care">
-      <Box className="plant-care__title-wrapper">
-        <Typography
-          variant="h3"
-          style={{ marginTop: '2rem', marginBottom: '2rem', color: '#46A358' }}
-          className="plant-care__title"
-        >
-          Our Top 7 Plant Care Tips
-        </Typography>
-        <Typography
-          variant="h4"
-          style={{ textAlign: 'center', marginBottom: '3rem' }}
-          className="plant-care__title-description"
-        >
-          There are plenty of ways to care for your plant. With the help of our plant experts, we’ve
-          weeded out the top 10 tips for healthy, happy plants.
-        </Typography>
-        <img
-          src={image}
-          alt=""
-          style={{ height: '100%', width: '100%' }}
-          className="plant-care__title-img"
-        />
-      </Box>
-      <Box className="plant-care__article-wrapper">
-        <Typography variant="h5" className={classes.articleTitle}>
-          1.Choose plants based on your light{' '}
-        </Typography>
-        <Typography className={classes.articleText}>
-          Are the plants you love the ones you can have? Our #1 rule of (green) thumb is to
-          determine the amount of natural light your space receives, and to choose your plant
-          accordingly. If you’re not sure just by looking, start by figuring out which direction
-          your windows face.
-        </Typography>
-        <Typography className={classes.articleText}>
-          Generally speaking, south-facing windows give bright light, east & west-facing windows
-          give moderate light, and north-facing windows give low light. If there’s something outside
-          your window—for example, a large tree or building—that could obstruct sunlight, make sure
-          to take that into consideration, too. Most houseplants prefer bright, indirect sunlight,
-          but many can tolerate lower light levels (like low light tolerant snake plants and ZZ
-          plants).
-        </Typography>
-        <Typography className={classes.articleText}>
-          If the sun is intense through your windows, you may want to add a sheer curtain to diffuse
-          the light. Cacti and some succulents like aloe can handle brighter, direct sunlight. You
-          don’t want to overexpose or underexpose any plant so keep an eye on them if they&aposs;re
-          very bright or very low light.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          2. Pick plants that work with your schedule{' '}
-        </Typography>
-        <Typography className={classes.articleText}>
-          New to plant parenthood? A busy work schedule, social life, and general forgetfulness can
-          lead to unintentional plant neglect. It’s okay. Some plants can handle that kind of
-          lifestyle. A jet-setter like yourself will enjoy the resilience of low-maintenance and
-          drought-tolerant succulents, ZZ plants, or snake plants, all pretty low key, as long as
-          they have enough light (bright and low light respectively). These should keep looking
-          their best when you return from your next trip.
-        </Typography>
-        <Typography className={classes.articleText}>
-          If you’ve got more time, you can try a few attention-loving air plants, orchids, or ferns.
-          Like a mist for the face, an extra spritz of filtered water daily between waterings keeps
-          humidity levels nice and balanced for these delicate plants.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          3.Be mindful when watering
-        </Typography>
-        <Typography className={classes.articleText}>
-          Its better to under water your plants than to overwater. Too much water can lead to root
-          rot. Ditch your watering schedule and water your plant only when it needs it. Check the
-          potting mix or soil first to make sure it’s dry at least 2 inches deep below the surface.
-          If your soil looks dark in color, feels moist, and sticks to your finger, your plant has
-          enough water to do its thing for now.
-        </Typography>
-        <Typography className={classes.articleText}>
-          How often you water will also change throughout the year. Plants need less water in the
-          winter months, when they’re growing slower, the days are shorter and sunlight is less
-          intense. If the heat is on and their soil is drying out quicker, they may need a bit more
-          water. Wilting leaves or soil that looks pulled away from the sides of the planter are
-          signs of a thirsty plant.
-        </Typography>
-        <Typography className={classes.articleText}>
-          Always use warm water because it absorbs best. Pour water directly on the soil around the
-          base of the plant, because plants absorb water from their roots. The only exception here
-          is Epiphytes, like air plants, who absorb water through their leaves.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          4.Raise humidity levels when needed{' '}
-        </Typography>
-        <Typography className={classes.articleText}>
-          Staying true to your plant&aposs; natural environment will help your plant thrive indoors.
-          Most tropical plants prefer high humidity and bright to moderate, indirect light. During
-          the dry months of winter, grouping similar plants together helps to create a more humid
-        </Typography>
-        <Typography className={classes.articleText}>
-          Staying true to your plant’s natural environment will help your plant thrive indoors. Most
-          tropical plants prefer high humidity and bright to moderate, indirect light. During the
-          dry months of winter, grouping similar plants together helps to create a more humid
-          microclimate. A humidifier can help too and it’s great for humans (find more ways to
-          increase humidity levels here). On the other hand, most desert dwellers like cacti and
-          succulents prefer dry air and bright, direct light with no shade at all. They don’t much
-          care for humidity.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          5.Always keep temperatures stable{' '}
-        </Typography>
-        <Typography className={classes.articleText}>
-          Keep your plant’s home environment as stable as possible. Extreme changes can stress
-          plants out. Keep the temperature between 65 and 85 degrees F, and avoid placing your
-          plants near radiators, A/C units, and forced-air vents, which can create hot or cold
-          drafts.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          6.Know when to skip the fertilizer
-        </Typography>
-        <Typography className={classes.articleText}>
-          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more harm
-          than good. Houseplants tend to not need fertilizer as often as outdoor plants do. If you
-          do choose to fertilize your plant, it’s best to do so during the growing season (early
-          spring to early fall) and follow the general rule of thumb: ‘less is more’. Most
-          store-bought fertilizers should be diluted with water before use.
-        </Typography>
-        <Typography variant="h5" className={classes.articleTitle}>
-          7.Shop from a reliable source{' '}
-        </Typography>
-        <Typography className={classes.articleText}>
-          Be mindful when using fertilizer on your houseplants. Too much fertilizer can do more harm
-          than good. Houseplants tend to not need fertilizer as often as outdoor plants do. If you
-          do choose to fertilize your plant, its best to do so during the growing season (early
-          spring to early fall) and follow the general rule of thumb: ‘less is more’. Most
-          store-bought fertilizers should be diluted with water before use.
+    <Box
+      sx={{
+        background: '#FBFBFB',
+        paddingTop: 1,
+        paddingBottom: 3
+      }}
+    >
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography sx={{ fontWeight: 'bold', fontSize: { xs: 20, sm: 30, md: 50, lg: 70 } }}>
+          Welcome to <span style={{ color: '#46A358' }}>Houseplant Growing Guides!</span>
         </Typography>
       </Box>
-    </Container>
+      <Box
+        sx={{ display: 'flex', flexWrap: 'wrap', paddingTop: 1, justifyContent: 'space-around' }}
+      >
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={lightCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>Light</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Plants</span> that can tolerate full sun and bright
+            light thrive in south-facing windows (examples are cacti, aloe vera, tropical hibiscus,
+            Lantana, and ponytail palms). Plants that like partial shade or moderate light do best
+            in east- and west-facing windows (examples are ficus, phildendrons, monstera, and
+            bromeliads).
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={WaterCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>Water</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Starting </span> in late fall, water houseplants
+            sparingly until daylight hours begin to increase in the new year. The best time of day
+            to water is in the morning, except when it is cloudy or rainy outside and there will no
+            sunlight. Avoid watering on a fixed schedule; instead, check the soil and water when
+            needed.
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={HumidityCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>Humidity</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Humidity </span> is a tough factor to perfect, as
+            most homes are fairly dry—especially in the winter. Here are some things to consider
+            about humidity: Many of the most common houseplants come from tropical regions, where
+            humidity is naturally high. They will berelative humidity is kept at 50 percent or
+            higher.
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={FertilizeCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>Fertilizer</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Most </span> houseplants respond well to feeding, but
+            be sure to follow the instructions included with whichever fertilizer you buy. Too much
+            fertilizer can be detrimental to a plant’s health, so don’t fertilize more than
+            necessary.Houseplants will be especially sensitive to overfeeding at this time of year.
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={PestsCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>Pests</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Pests</span> Pests can be a real problem. They
+            usually appear after outdoor plants are brought inside for the winter, or when a new
+            houseplant is brought home. To get rid of bugs in houseplants, push a clove of garlic
+            into the plant’s soil. If the garlic sprouts and grows, just cut it back. Spider mites
+            are apt to thrive in warm, dry houses.
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+        <Box sx={{ paddingTop: 1 }}>
+          <Avatar
+            variant="rounded"
+            src={MoreTipsCare}
+            alt="light_care"
+            sx={{ width: 300, height: 300 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: 300,
+            height: 300,
+            paddingBottom: 2
+          }}
+        >
+          <Typography sx={{ fontWeight: 'bold' }}>More Houseplant Care Tips</Typography>
+          <Typography>
+            <span style={{ color: '#46A358' }}>Even</span> Even indoors, winter conditions can be
+            tough on plants. Fewer hours of sunlight, drier air, and cooler indoor temperatures can
+            take their toll, so be prepared. In colder regions, houseplants that have been outside
+            for the summer should be brought in in August. A sudden cold spell will be too much of a
+            shock for them to survive.
+          </Typography>
+
+          <Button variant="outlined" onClick={handleCheckoutClick}>
+            Start Care
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 export default PlantCare
