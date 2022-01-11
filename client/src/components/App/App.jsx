@@ -20,6 +20,7 @@ import { setAllReviews } from '../../store/reviews/actions'
 import { setWishlist } from '../../store/wishlist/actions'
 import { setSlider } from '../../store/slider/actions'
 import { deleteCartFromState } from '../../store/cart/reducer'
+import News from '../Pages/News'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -60,8 +61,9 @@ const App = () => {
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="newsInfo" element={<News />} />
       </Route>
     </Routes>
   )
 }
-export default App
+export default React.memo(App)

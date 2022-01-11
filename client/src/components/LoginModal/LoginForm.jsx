@@ -146,4 +146,4 @@ const LoginForm = ({ onClose, props }) => {
   )
 }
 
-export default LoginForm
+export default React.memo(LoginForm)

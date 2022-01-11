@@ -84,4 +84,4 @@ const LogoutModal = ({ handleDrawerToggle }) => {
   )
 }
 
-export default LogoutModal
+export default React.memo(LogoutModal)

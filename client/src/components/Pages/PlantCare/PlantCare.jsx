@@ -10,6 +10,7 @@ import FertilizeCare from '../../../assets/image/fertilizeCare.jpg'
 import PestsCare from '../../../assets/image/pests_care.jpeg'
 import MoreTipsCare from '../../../assets/image/more_tips_care.jpeg'
 
+
 const PlantCare = () => {
   const navigate = useNavigate()
   const handleCheckoutClick = () => {
@@ -202,6 +203,7 @@ const PlantCare = () => {
             Start Care
           </Button>
         </Box>
+
       </Box>
     </Box>
   )

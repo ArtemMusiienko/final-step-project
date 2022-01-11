@@ -33,4 +33,4 @@ const ProductCardReviews = () => {
     </>
   )
 }
-export default ProductCardReviews
+export default React.memo(ProductCardReviews)

@@ -250,4 +250,4 @@ export const Account = ({ onClose, props }) => {
   )
 }
 
-export default Account
+export default React.memo(Account)

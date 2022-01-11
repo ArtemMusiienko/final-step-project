@@ -151,4 +151,4 @@ const CheckoutOrderInfo = () => {
   )
 }
 
-export default CheckoutOrderInfo
+export default React.memo(CheckoutOrderInfo)

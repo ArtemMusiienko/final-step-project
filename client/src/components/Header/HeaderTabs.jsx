@@ -64,4 +64,4 @@ const HeaderTabs = ({ pages }) => {
   )
 }
 
-export default HeaderTabs
+export default React.memo(HeaderTabs)

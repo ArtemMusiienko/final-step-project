@@ -9,6 +9,7 @@ import ScrollTop from '../ScrollTop/ScrollTop'
 const Layout = () => (
   <Container maxWidth="xl">
     <Header />
+    <Toolbar sx={{ display: { sm: 'none' } }} />
     <Toolbar sx={{ display: { md: 'none' } }} />
     <Outlet />
     <Footer />
@@ -16,4 +17,4 @@ const Layout = () => (
   </Container>
 )
 
-export default Layout
+export default React.memo(Layout)

@@ -97,4 +97,4 @@ const AddToFavoritesButtonProductCard = ({ id }) => {
   )
 }
 
-export default AddToFavoritesButtonProductCard
+export default React.memo(AddToFavoritesButtonProductCard)
