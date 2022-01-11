@@ -27,8 +27,8 @@ const pages = [
     path: '/plant-care'
   },
   {
-    linkName: 'Blogs',
-    path: '/blogs'
+    linkName: 'News',
+    path: '/newsInfo'
   }
 ]
 
