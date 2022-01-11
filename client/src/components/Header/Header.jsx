@@ -101,7 +101,17 @@ const Header = () => {
                 <Divider sx={{ margin: '15px 0' }} />
                 <Box sx={{ marginLeft: '5px' }}>
                   {isLoggedIn ? (
-                    <LogoutModal handleDrawerToggle={handleDrawerToggle} />
+                    <>
+                      <Link
+                        sx={{ color: 'text.secondary', paddingTop: '10px', paddingRight: '10px' }}
+                        to="/account"
+                        component={RouterLink}
+                        onClick={() => handleDrawerToggle()}
+                      >
+                        <ManageAccountsIcon />
+                      </Link>
+                      <LogoutModal handleDrawerToggle={handleDrawerToggle} />
+                    </>
                   ) : (
                     <LoginModal handleDrawerToggle={handleDrawerToggle} />
                   )}

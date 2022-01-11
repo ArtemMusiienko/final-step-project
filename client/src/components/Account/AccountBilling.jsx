@@ -14,21 +14,10 @@ import { authPersonalUpdate } from '../../api/auth'
 import { getCustomer } from '../../api/customer'
 
 const FORM_VALIDATION = Yup.object().shape({
-  firstName: Yup.string()
-    .matches(/^[a-zA-Zа-яА-Я]+$/, 'Allowed characters for First Name is a-z, A-Z, а-я, А-Я.')
-    .min(2, 'First Name must be between 2 and 25 characters.')
-    .max(25, 'First Name must be between 2 and 25 characters.')
-    .required('First Name is required.'),
-  lastName: Yup.string()
-    .matches(/^[a-zA-Zа-яА-Я]+$/, 'Allowed characters for Last Name is a-z, A-Z, а-я, А-Я.')
-    .min(2, 'First Name must be between 2 and 25 characters.')
-    .max(25, 'First Name must be between 2 and 25 characters.')
-    .required('Last Name is required.'),
   country: Yup.string().required('Country is required.'),
   city: Yup.string().required('City is required.'),
   address: Yup.string().required('Address is required.'),
-  postal: Yup.string().min(5, 'Zip code must be 5 characters').required('Zip code is required.'),
-  email: Yup.string().email('Invalid email').required('Email is required.')
+  postal: Yup.string().min(5, 'Zip code must be 5 characters').required('Zip code is required.')
 })
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
@@ -109,60 +98,41 @@ const SelectCustom = React.forwardRef(function SelectCustom(props, ref) {
 })
 
 export const AccountBilling = () => {
-  const dispatch = useDispatch()
-  const [message, setMessage] = useState('')
   const theme = useTheme()
-  const [submiting, setSubmitting] = useState(false)
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
       country: 'Ukraine',
       city: 'Kyiv',
       address: '',
-      postal: '',
-      email: '',
-      login: '',
-      password: ''
+      postal: ''
     },
     validationSchema: FORM_VALIDATION,
     onSubmit: values => {
-      const { login, password, firstName, lastName, country, city, address, postal, email } = values
-      authPersonalUpdate(
-        login,
-        password,
-        firstName,
-        lastName,
+      const { country, city, address, postal } = values
+      const newDataUser = {
         country,
         city,
         address,
-        postal,
-        email
-      )
+        postal
+      }
+      authPersonalUpdate(newDataUser)
     }
   })
   useEffect(() => {
     async function fetchData() {
-      const {
-        email: loggedInUserEmail,
-        password,
-        postal,
-        address,
-        city,
-        country,
-        firstName,
-        lastName,
-        login
-      } = await getCustomer()
-      formik.setFieldValue('email', loggedInUserEmail)
-      formik.setFieldValue('password', password)
-      formik.setFieldValue('postal', postal)
-      formik.setFieldValue('address', address)
-      formik.setFieldValue('city', city)
-      formik.setFieldValue('country', country)
-      formik.setFieldValue('firstName', firstName)
-      formik.setFieldValue('lastName', lastName)
-      formik.setFieldValue('login', login)
+      const { postal, address, city, country } = await getCustomer()
+      if (postal) {
+        formik.setFieldValue('postal', postal)
+      }
+      if (address) {
+        formik.setFieldValue('address', address)
+      }
+      if (city) {
+        formik.setFieldValue('city', city)
+      }
+      if (country) {
+        formik.setFieldValue('country', country)
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchData()

@@ -112,8 +112,8 @@ export const AccountPersonal = () => {
       password: '',
       firstName: '',
       lastName: '',
-      country: '',
-      city: '',
+      country: 'Ukraine',
+      city: 'Kyiv',
       address: '',
       postal: '',
       email: '',
@@ -123,34 +123,18 @@ export const AccountPersonal = () => {
     validationSchema: FORM_VALIDATION,
 
     onSubmit: values => {
-      const {
-        login,
-        password,
-        firstName,
-        lastName,
-        country,
-        city,
-        address,
-        postal,
-        email,
-        mobile,
-        passwordConf
-      } = values
+      const { password, firstName, lastName, email, mobile, passwordConf } = values
       if (passwordConf.length > 0) {
         authNewPassword(password, passwordConf)
       }
-      authPersonalUpdate(
-        login,
+      const newDataUser = {
         password,
         firstName,
         lastName,
-        country,
-        city,
-        address,
-        postal,
         email,
         mobile
-      )
+      }
+      authPersonalUpdate(newDataUser)
     }
   })
   useEffect(() => {
@@ -158,25 +142,25 @@ export const AccountPersonal = () => {
       const {
         email: loggedInUserEmail,
         password,
-        postal,
-        address,
-        city,
-        country,
         firstName,
         lastName,
-        login,
         mobile
       } = await getCustomer()
-      formik.setFieldValue('email', loggedInUserEmail)
-      formik.setFieldValue('password', password)
-      formik.setFieldValue('postal', postal)
-      formik.setFieldValue('address', address)
-      formik.setFieldValue('city', city)
-      formik.setFieldValue('country', country)
-      formik.setFieldValue('firstName', firstName)
-      formik.setFieldValue('lastName', lastName)
-      formik.setFieldValue('login', login)
-      formik.setFieldValue('mobile', mobile)
+      if (loggedInUserEmail) {
+        formik.setFieldValue('email', loggedInUserEmail)
+      }
+      if (password) {
+        formik.setFieldValue('password', password)
+      }
+      if (firstName) {
+        formik.setFieldValue('firstName', firstName)
+      }
+      if (lastName) {
+        formik.setFieldValue('lastName', lastName)
+      }
+      if (mobile) {
+        formik.setFieldValue('mobile', mobile)
+      }
     }
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
