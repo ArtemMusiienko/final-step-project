@@ -1,5 +1,4 @@
 import React from 'react'
-import './PlantCare.scss'
 import { Avatar, Button, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +8,6 @@ import HumidityCare from '../../../assets/image/humudity_care.webp'
 import FertilizeCare from '../../../assets/image/fertilizeCare.jpg'
 import PestsCare from '../../../assets/image/pests_care.jpeg'
 import MoreTipsCare from '../../../assets/image/more_tips_care.jpeg'
-
 
 const PlantCare = () => {
   const navigate = useNavigate()
@@ -203,7 +201,6 @@ const PlantCare = () => {
             Start Care
           </Button>
         </Box>
-
       </Box>
     </Box>
   )
