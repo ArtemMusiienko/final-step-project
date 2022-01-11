@@ -34,7 +34,7 @@ const NewsCard = ({ date, image, title, shortDescription, description }) => {
               size="small"
               sx={{ marginTop: '30px' }}
             >
-              Read more
+              {isOpen ? 'Close news' : 'Read more'}
             </Button>
           </CardContent>
         </Box>
@@ -47,7 +47,7 @@ const NewsCard = ({ date, image, title, shortDescription, description }) => {
 const News = () => (
   <Grid container gap="20px" sx={{ padding: '20px 30px' }}>
     {newsInfo.map((props, key) => (
-      <NewsCard key="key" {...props} />
+      <NewsCard key={props.title} {...props} />
     ))}
   </Grid>
 )

@@ -44,11 +44,9 @@ const CartBage = () => {
   useEffect(() => {
     if (open) {
       document.body.onwheel = handleCloseMenuClick
-      document.body.addEventListener('touchstart', handleCloseMenuClick, false)
     }
     return () => {
       document.body.onwheel = undefined
-      document.body.removeEventListener('touchstart', handleCloseMenuClick, false)
     }
   }, [open])
   const handleOpenMenuClick = event => {
