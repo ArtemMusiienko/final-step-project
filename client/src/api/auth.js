@@ -16,9 +16,14 @@ export const authRegister = (firstName, lastName, login, email, password) =>
     login,
     email
   })
+
 export const authNewPassword = (password, newPassword) =>
-  axios.put('/customers/password', {
-    password,
-    newPassword
-  })
-export const authPersonalUpdate = newData => axios.put('/customers', newData)
+  axios
+    .put('/customers/password', {
+      password,
+      newPassword
+    })
+    .then(response => response.data)
+
+export const authPersonalUpdate = newData =>
+  axios.put('/customers', newData).then(response => response.data)

@@ -1,15 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
 import NumberFormat from 'react-number-format'
 import Select from 'react-select'
-import { Button, Typography, Grid, TextField } from '@mui/material'
-import { Formik, Form, useFormik } from 'formik'
+import { Button, Typography, Grid, TextField, LinearProgress } from '@mui/material'
+import { useFormik } from 'formik'
 import { useTheme } from '@mui/styles'
 import * as Yup from 'yup'
 import MenuItem from '@mui/material/MenuItem'
 import Box from '@mui/material/Box'
-import { userLogin, userRegister } from '../../store/auth/actions'
 import { authPersonalUpdate } from '../../api/auth'
 import { getCustomer } from '../../api/customer'
 
@@ -20,27 +17,6 @@ const FORM_VALIDATION = Yup.object().shape({
   postal: Yup.string().min(5, 'Zip code must be 5 characters').required('Zip code is required.')
 })
 
-const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
-  const { onChange, ...other } = props
-
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={ref}
-      onValueChange={values => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value
-          }
-        })
-      }}
-      format="+38 (###) ###-####"
-      allowEmptyFormatting
-      mask="_"
-    />
-  )
-})
 const NumberFormatIndexCustom = React.forwardRef(function NumberFormatIndexCustom(props, ref) {
   const { onChange, ...other } = props
 
@@ -99,6 +75,7 @@ const SelectCustom = React.forwardRef(function SelectCustom(props, ref) {
 
 export const AccountBilling = () => {
   const theme = useTheme()
+  const [isEdited, setIsEdited] = useState(false)
   const formik = useFormik({
     initialValues: {
       country: 'Ukraine',
@@ -107,7 +84,7 @@ export const AccountBilling = () => {
       postal: ''
     },
     validationSchema: FORM_VALIDATION,
-    onSubmit: values => {
+    onSubmit: async values => {
       const { country, city, address, postal } = values
       const newDataUser = {
         country,
@@ -115,7 +92,10 @@ export const AccountBilling = () => {
         address,
         postal
       }
-      authPersonalUpdate(newDataUser)
+      await authPersonalUpdate(newDataUser).then(() => {
+        setIsEdited(false)
+        formik.setSubmitting(false)
+      })
     }
   })
   useEffect(() => {
@@ -134,13 +114,10 @@ export const AccountBilling = () => {
         formik.setFieldValue('country', country)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [])
   return (
-    // / eslint-disable-next-line react-hooks/exhaustive-deps
     <form onSubmit={formik.handleSubmit}>
       <Box
         sx={{
@@ -202,6 +179,7 @@ export const AccountBilling = () => {
                 }}
                 select
                 fullWidth
+                disabled={!isEdited}
                 required
                 size="small"
                 value={formik.values.city}
@@ -239,6 +217,7 @@ export const AccountBilling = () => {
                   shrink: true
                 }}
                 fullWidth
+                disabled={!isEdited}
                 required
                 size="small"
                 value={formik.values.address}
@@ -266,6 +245,7 @@ export const AccountBilling = () => {
                   shrink: true
                 }}
                 fullWidth
+                disabled={!isEdited}
                 required
                 size="small"
                 value={formik.values.postal}
@@ -286,17 +266,43 @@ export const AccountBilling = () => {
                 }}
               />
             </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                sx={{ display: 'block', textTransform: 'capitalize' }}
-              >
-                Save Change
-              </Button>
-            </Grid>
+            {formik.isSubmitting && <LinearProgress />}
+            {isEdited ? (
+              <>
+                <Grid item xs={12} sm={6}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    disabled={!(formik.isValid && formik.dirty)}
+                    sx={{ display: 'block', textTransform: 'capitalize' }}
+                  >
+                    Save Change
+                  </Button>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ display: 'block', textTransform: 'capitalize' }}
+                    onClick={() => setIsEdited(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </>
+            ) : (
+              <Grid item xs={12} sm={6}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ display: 'block', textTransform: 'capitalize' }}
+                  onClick={() => setIsEdited(true)}
+                >
+                  Edit
+                </Button>
+              </Grid>
+            )}
           </Grid>
         </Box>
       </Box>

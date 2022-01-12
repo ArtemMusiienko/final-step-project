@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Layout from '../Layout'
 import Favorites from '../Pages/Favorites'
 import Cart from '../Pages/Cart'
@@ -52,7 +52,14 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="account" element={<Account />} />
+        <Route
+          path="account"
+          element={
+            <RequireAuth redirectTo="/">
+              <Account />
+            </RequireAuth>
+          }
+        />
         <Route path="shop/cart" element={<Cart />} />
         <Route path="shop/:categories/:productUrl" element={<ProductCard />} />
         <Route path="shop/checkout" element={<Checkout />} />
@@ -60,10 +67,14 @@ const App = () => {
           <Route path=":categories" element={<Shop />} />
         </Route>
         <Route path="plant-care" element={<PlantCare />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="newsInfo" element={<News />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
+}
+const RequireAuth = ({ children, redirectTo }) => {
+  const { isLoggedIn } = useSelector(state => state.auth)
+  return isLoggedIn ? children : <Navigate to={redirectTo} />
 }
 export default React.memo(App)

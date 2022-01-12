@@ -34,6 +34,7 @@ import { createOrder } from './createOrder'
 import { placeOrder } from '../../../api/order'
 import { deleteCartFromState } from '../../../store/cart/reducer'
 import { deleteBasket } from '../../../store/cart/actions'
+import { getCustomer } from '../../../api/customer'
 
 const FORM_VALIDATION = Yup.object().shape({
   firstName: Yup.string()
@@ -144,6 +145,48 @@ const Checkout = () => {
   const theme = useTheme()
   const { isLoggedIn } = useSelector(state => state.auth)
   const cart = useSelector(state => state.cart)
+  useEffect(() => {
+    async function fetchData() {
+      const {
+        email: loggedInUserEmail,
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        postal,
+        mobile
+      } = await getCustomer()
+      if (firstName) {
+        formik.setFieldValue('firstName', firstName)
+      }
+      if (lastName) {
+        formik.setFieldValue('lastName', lastName)
+      }
+      if (country) {
+        formik.setFieldValue('country', country)
+      }
+      if (city) {
+        formik.setFieldValue('city', city)
+      }
+      if (address) {
+        formik.setFieldValue('address', address)
+      }
+      if (postal) {
+        formik.setFieldValue('postal', postal)
+      }
+      if (loggedInUserEmail) {
+        formik.setFieldValue('email', loggedInUserEmail)
+      }
+      if (mobile) {
+        formik.setFieldValue('mobile', mobile)
+      }
+    }
+    if (isLoggedIn) {
+      fetchData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn])
   const handleClose = () => {
     setOpen(false)
     window.scrollTo({ top: 0 })
