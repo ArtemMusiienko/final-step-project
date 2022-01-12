@@ -78,6 +78,10 @@ const SearchButton = () => {
     dispatch(setSearch(result))
   }, [products])
   useEffect(() => {
+    if (location.pathname !== '/shop' && search !== '') {
+      window.scrollTo({ top: 0 })
+      navigate('/shop')
+    }
     searchData(search)
   }, [search])
   const searchData = pattern => {
@@ -114,12 +118,6 @@ const SearchButton = () => {
       dispatch(setResult(matches))
     }
   }
-  useEffect(() => {
-    if (location.pathname !== '/shop') {
-      window.scrollTo({ top: 0 })
-      navigate('/shop')
-    }
-  }, [search])
   const handleChange = event => {
     dispatch(addSearch(event.target.value))
   }
